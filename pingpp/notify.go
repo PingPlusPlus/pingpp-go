@@ -19,11 +19,11 @@ func parseNotify(notifyJson string){
 	}
 	if identify.object == "charge" {
 		err2 := json.Unmarshal(notifyJson, &charge)
-		return charge
+		return &charge
 	}
 	else if identify.object == "refund" {
 		err2 := json.Unmarshal(notifyJson, &refund)
-		return refund
+		return &refund
 	}
 	return nil
 }
