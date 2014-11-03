@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-const defaultURL = "https://api.pinpula.com/v1/charges/"
+const defaultURL = "https://api.pingplusplus.com/v1/charges/"
 
 const apiversion = "1.0.0"
 
