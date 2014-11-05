@@ -1,4 +1,4 @@
-#pingpp-go
+#pingpp Go SDK
 -------
 
 ##简介
