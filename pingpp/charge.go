@@ -10,6 +10,7 @@ type ChargeParams struct {
 	subject   string
 	body      string
 	metadata  map[string]string
+	Extra     *Extra `json:"extra"`
 }
 
 type ChargeListParams struct {
@@ -58,6 +59,12 @@ type ChargeList struct {
 	Url      string
 	Has_more bool
 	charges  []*Charge
+}
+
+type Extra struct {
+	Result_url  string `json:"result_url"`
+	Success_url string `json:"success_url"`
+	Cancel_url  string `json:"cancel_url"`
 }
 
 // func (charge *Charge) UnmarshalJSON(data []byte) error {
