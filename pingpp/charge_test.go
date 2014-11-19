@@ -6,7 +6,7 @@ import (
 
 func TestChargeNew(t *testing.T) {
 
-	chargeClient := getChargeClient("sk_live_5WrHO8f5mvzHbrHKeTbXfTCC")
+	chargeClient := GetChargeClient("sk_live_5WrHO8f5mvzHbrHKeTbXfTCC")
 	chargeParams := &ChargeParams{
 		order_no:  "88888887",
 		appid:     "app_mHarHK4KajnDWDW9",
@@ -18,7 +18,7 @@ func TestChargeNew(t *testing.T) {
 		body:      "bodysample",
 	}
 
-	charge, err := chargeClient.new(chargeParams)
+	charge, err := chargeClient.New(chargeParams)
 	return &charge
 	if err != nil {
 		t.Error(err)
@@ -29,9 +29,9 @@ func TestChargeNew(t *testing.T) {
 
 func TestChargeList(t *testing.T) {
 	var client *ChargeClient
-	client = getChargeClient("sk_live_5WrHO8f5mvzHbrHKeTbXfTCC")
+	client = GetChargeClient("sk_live_5WrHO8f5mvzHbrHKeTbXfTCC")
 	params := &ChargeListParams{}
-	target, err := client.list(params)
+	target, err := client.List(params)
 	if err != nil {
 		t.Error(err)
 	}
@@ -39,10 +39,10 @@ func TestChargeList(t *testing.T) {
 }
 
 func TestChargeGet(t *testing.T) {
-	client := getChargeClient("sk_live_5WrHO8f5mvzHbrHKeTbXfTCC")
+	client := GetChargeClient("sk_live_5WrHO8f5mvzHbrHKeTbXfTCC")
 	var id string
 	id = "ch_n10ejHLibfzPPmf9i5u9uT4G"
-	target, err := client.get(id)
+	target, err := client.Get(id)
 	if err != nil {
 		t.Error(err)
 	}
