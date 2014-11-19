@@ -11,18 +11,18 @@ type ChargeClient struct {
 	backend Backend
 }
 
-func getChargeClient(key string) *ChargeClient {
+func GetChargeClient(key string) *ChargeClient {
 	return &ChargeClient{
 		key:     key,
 		backend: getBackend(),
 	}
 }
 
-func (chargeClient *ChargeClient) setKey(key string) {
+func (chargeClient *ChargeClient) SetKey(key string) {
 	chargeClient.key = key
 }
 
-func (chargeClient *ChargeClient) new(params *ChargeParams) (*Charge, error) {
+func (chargeClient *ChargeClient) New(params *ChargeParams) (*Charge, error) {
 	var charge Charge
 	body := &url.Values{
 		"amount": {strconv.FormatUint(params.amount, 10)},
@@ -40,7 +40,7 @@ func (chargeClient *ChargeClient) new(params *ChargeParams) (*Charge, error) {
 	return &charge, err
 }
 
-func (chargeClient *ChargeClient) get(charge_id string) (*Charge, error) {
+func (chargeClient *ChargeClient) Get(charge_id string) (*Charge, error) {
 	var charge Charge
 	body := &url.Values{}
 	resp_byte, err := chargeClient.backend.Call("GET", charge_id, chargeClient.key, body, &charge)
@@ -49,7 +49,7 @@ func (chargeClient *ChargeClient) get(charge_id string) (*Charge, error) {
 
 }
 
-func (chargeClient *ChargeClient) list(params *ChargeListParams) (*ChargeList, error) {
+func (chargeClient *ChargeClient) List(params *ChargeListParams) (*ChargeList, error) {
 	var charges ChargeList
 	body := &url.Values{}
 	if params.Limit > 100 || params.Limit <= 0 {

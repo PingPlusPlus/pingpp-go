@@ -12,18 +12,18 @@ type RefundClient struct {
 	backend Backend
 }
 
-func getRefundClient(key string) *RefundClient {
+func GetRefundClient(key string) *RefundClient {
 	return &RefundClient{
 		key:     key,
 		backend: getBackend(),
 	}
 }
 
-func (refundClient *RefundClient) setKey(key string) {
+func (refundClient *RefundClient) SetKey(key string) {
 	refundClient.key = key
 }
 
-func (refundClient *RefundClient) new(params *RefundParams, charge_id string) (*Refund, error) {
+func (refundClient *RefundClient) New(params *RefundParams, charge_id string) (*Refund, error) {
 	var refund Refund
 	body := &url.Values{}
 	if params.Amount > 0 && params.Amount <= 100 {
@@ -39,7 +39,7 @@ func (refundClient *RefundClient) new(params *RefundParams, charge_id string) (*
 	return &refund, err
 }
 
-func (refundClient *RefundClient) get(charge_id string, refund_id string) (*Refund, error) {
+func (refundClient *RefundClient) Get(charge_id string, refund_id string) (*Refund, error) {
 	var refund Refund
 	urlvalues := &url.Values{}
 	resp_byte, err := refundClient.backend.Call("GET", charge_id+"/refunds/"+refund_id, refundClient.key, urlvalues, &refund)
@@ -47,7 +47,7 @@ func (refundClient *RefundClient) get(charge_id string, refund_id string) (*Refu
 	return &refund, err
 }
 
-func (refundClient *RefundClient) list(charge_id string, limit int64, start_after string, end_before string) (*RefundList, error) {
+func (refundClient *RefundClient) List(charge_id string, limit int64, start_after string, end_before string) (*RefundList, error) {
 	var refundList RefundList
 	body := &url.Values{}
 	url := ""
