@@ -55,10 +55,10 @@ type Charge struct {
 }
 
 type ChargeList struct {
-	Object   string    `json:"object"`
-	Url      string    `json:"url"`
-	Has_more bool      `json:"has_more"`
-	charges  []*Charge `json:"charges"`
+	Object   string
+	Url      string
+	Has_more bool
+	charges  []*Charge
 }
 
 type Extra struct {

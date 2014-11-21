@@ -8,7 +8,6 @@ type ErrorCode string
 const (
 	InvalidRequest ErrorType = "invalid_request_error"
 	APIErr         ErrorType = "api_error"
-	ChannelError   ErrorType = "channel_error"
 	CardErr        ErrorType = "card_error"
 
 	IncorrectNum  ErrorCode = "incorrect_number"
