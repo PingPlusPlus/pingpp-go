@@ -3,7 +3,7 @@ package pingpp
 // import "encoding/json"
 
 type Credential struct {
-	object           string      `json:"object"`
+	Object           string      `json:"object"`
 	WxCredential     interface{} `json:"wx"`
 	AlipayCredential interface{} `json:"alipay"`
 	UpmpCredential   interface{} `json:"upmp"`
