@@ -13,7 +13,7 @@ type NotifyCharge struct {
 	Paid            bool              `facebook:"paid"`
 	Refunded        bool              `facebook:"refunded"`
 	Order_no        string            `facebook:"order_no"`
-	App             *App              `facebook:"app"`
+	App             interface{}       `facebook:"app"`
 	Channel         string            `facebook:"channel"`
 	Amount          uint64            `facebook:"amount"`
 	Amount_settle   uint64            `facebook:"amount_settle"`
@@ -50,6 +50,8 @@ func parseNotify(notifyJson string) interface{} {
 	var charge NotifyCharge
 	var refund Refund
 	var jsObject fb.Result
+	var app interface{}
+	var appDecoded App
 	err := json.Unmarshal([]byte(notifyJson), &identify)
 
 	if err != nil {
@@ -57,9 +59,17 @@ func parseNotify(notifyJson string) interface{} {
 	}
 	if identify.Object == "charge" {
 		err2 := json.Unmarshal([]byte(notifyJson), &jsObject)
+		jsObject.Decode(&charge)
+		app = jsObject.Get("app")
 		if err2 != nil {
-			decodeError := jsObject.Decode(&NotifyCharge)
-			return &NotifyCharge
+			switch app.(type) {
+			case string:
+				charge.App = &app
+			case map[string]interface{}:
+				jsObject.DecodeField("app", &appDecoded)
+				charge.App = &appDecoded
+			}
+			return &charge
 		} else {
 			return nil
 		}
