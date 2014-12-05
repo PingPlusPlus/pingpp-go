@@ -17,9 +17,9 @@ type Refund struct {
 	Object       string            `json:"object"`
 	Order_no     string            `json:"order_no"`
 	Amount       int64             `json:"amount"`
-	Created      string            `json:"created"`
+	Created      uint64            `json:"created"`
 	Succeed      bool              `json:"succeed"`
-	Time_succeed string            `json:"time_succeeded"`
+	Time_succeed uint64            `json:"time_succeeded"`
 	Description  string            `json:"description"`
 	Failure_code int64             `json:"failure_code"`
 	Failure_msg  string            `json:"failure_message"`
@@ -28,10 +28,10 @@ type Refund struct {
 }
 
 type RefundList struct {
-	Object   string    `json:"object"`
-	Url      string    `json:"url"`
-	Has_more bool      `json:"has_more"`
-	Refunds  []*Refund `json:"data"`
+	Object   string   `json:"object"`
+	Url      string   `json:"url"`
+	Has_more bool     `json:"has_more"`
+	Refunds  []Refund `json:"data"`
 }
 
 // func (refund *Refund) UnmarshalJson(data []byte) error {

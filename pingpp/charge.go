@@ -10,7 +10,7 @@ type ChargeParams struct {
 	subject   string
 	body      string
 	metadata  map[string]string
-	Extra     *Extra `json:"extra"`
+	Extra     Extra `json:"extra"`
 }
 
 type ChargeListParams struct {
@@ -29,36 +29,36 @@ type ChargeListParams struct {
 
 type Charge struct {
 	Id              string
-	Object          string            `json:"object"`
-	Created         string            `json:"created"`
-	Livemode        bool              `json:"livemode"`
-	Paid            bool              `json:"paid"`
-	Refunded        bool              `json:"refunded"`
-	Order_no        string            `json:"order_no"`
-	App             string            `json:"app"`
-	Channel         string            `json:"channel"`
-	Amount          uint64            `json:"amount"`
-	Amount_settle   uint64            `json:"amount_settle"`
-	Amount_refunded uint64            `json:"amount_refunded"`
-	Time_expire     string            `json:"time_expire"`
-	Time_settle     string            `json:"time_settle"`
-	Transaction_no  string            `json:"transaction_no"`
-	Currency        string            `json:"currency"`
-	Client_ip       string            `json:"client_ip"`
-	Subject         string            `json:"subject"`
-	Body            string            `json:"body"`
-	Failure_code    int               `json:"failure_code"`
-	Failure_msg     string            `json:"failure_msg"`
-	Metadata        map[string]string `json:"metadata"`
-	Refunds         *RefundList       `json:"refunds"`
-	Credential      *Credential       `json:"credential"`
+	Object          string `json:"object"`
+	Created         uint64 `json:"created"`
+	Livemode        bool   `json:"livemode"`
+	Paid            bool   `json:"paid"`
+	Refunded        bool   `json:"refunded"`
+	Order_no        string `json:"order_no"`
+	App             string `json:"app"`
+	Channel         string `json:"channel"`
+	Amount          int    `json:"amount"`
+	Amount_settle   uint64 `json:"amount_settle"`
+	Amount_refunded uint64 `json:"amount_refunded"`
+	Time_expire     uint64 `json:"time_expire"`
+	Time_settle     uint64 `json:"time_settle"`
+	Transaction_no  string `json:"transaction_no"`
+	Currency        string `json:"currency"`
+	Client_ip       string `json:"client_ip"`
+	Subject         string `json:"subject"`
+	Body            string `json:"body"`
+	Failure_code    int    `json:"failure_code"`
+	Failure_msg     string `json:"failure_msg"`
+	//Metadata        map[string]string `json:"metadata"`
+	Refunds    RefundList `json:"refunds"`
+	Credential Credential `json:"credential"`
 }
 
 type ChargeList struct {
-	Object   string    `json:"object"`
-	Url      string    `json:"url"`
-	Has_more bool      `json:"has_more"`
-	charges  []*Charge `json:"charges"`
+	Object   string   `json:"object"`
+	Url      string   `json:"url"`
+	Has_more bool     `json:"has_more"`
+	charges  []Charge `json:"charges"`
 }
 
 type Extra struct {

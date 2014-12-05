@@ -3,27 +3,27 @@ package pingpp
 // import "encoding/json"
 
 type Credential struct {
-	Object           string      `json:"object"`
-	WxCredential     interface{} `json:"wx"`
-	AlipayCredential interface{} `json:"alipay"`
-	UpmpCredential   interface{} `json:"upmp"`
+	Object           string           `json:"object"`
+	WxCredential     WxCredential     `json:"wx"`
+	AlipayCredential AlipayCredential `json:"alipay"`
+	UpmpCredential   UpmpCredential   `json:"upmp"`
 }
 
 type WxCredential struct {
-	appid        string `json:"appId"`
-	partnerId    string `json:"partnerId"`
-	prepayId     string `json:"prepayId"`
-	nonceStr     string `json:"nonceStr"`
-	timeStamp    int64  `json:"timeStamp"`
-	packageValue string `json:"packageValue"`
-	sign         string `json:"sign"`
+	Appid        string `json:"appId"`
+	PartnerId    string `json:"partnerId"`
+	PrepayId     string `json:"prepayId"`
+	NonceStr     string `json:"nonceStr"`
+	TimeStamp    int64  `json:"timeStamp"`
+	PackageValue string `json:"packageValue"`
+	Sign         string `json:"sign"`
 }
 
 type AlipayCredential struct {
-	alipayOrderInfo string `json:"orderInfo"`
+	AlipayOrderInfo string `json:"orderInfo"`
 }
 
 type UpmpCredential struct {
-	tn   string `json:"tn"`
-	mode string `json:"mode"`
+	Tn   string `json:"tn"`
+	Mode string `json:"mode"`
 }

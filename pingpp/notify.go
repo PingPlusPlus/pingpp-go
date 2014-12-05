@@ -58,8 +58,11 @@ func parseNotify(notifyJson string) interface{} {
 	if identify.Object == "charge" {
 		err2 := json.Unmarshal([]byte(notifyJson), &jsObject)
 		if err2 != nil {
-			decodeError := jsObject.Decode(&NotifyCharge)
-			return &NotifyCharge
+			decodeError := jsObject.Decode(&charge)
+			if decodeError == nil {
+				return &charge
+			}
+			return &charge
 		} else {
 			return nil
 		}
