@@ -28,7 +28,7 @@ type ChargeListParams struct {
 }
 
 type Charge struct {
-	Id              string
+	Id              string `json:"id"`
 	Object          string `json:"object"`
 	Created         uint64 `json:"created"`
 	Livemode        bool   `json:"livemode"`
