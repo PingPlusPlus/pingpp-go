@@ -50,8 +50,8 @@ type Charge struct {
 	Failure_code    int    `json:"failure_code"`
 	Failure_msg     string `json:"failure_msg"`
 	//Metadata        map[string]string `json:"metadata"`
-	Refunds    RefundList `json:"refunds"`
-	Credential Credential `json:"credential"`
+	Refunds    RefundList  `json:"refunds"`
+	Credential interface{} `json:"credential"`
 }
 
 type ChargeList struct {
