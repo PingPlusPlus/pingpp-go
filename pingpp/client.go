@@ -17,7 +17,7 @@ const defaultURL = "https://api.pingplusplus.com/v1/charges/"
 
 const apiversion = "1.0.0"
 
-const clientversion = "1.0.0"
+const clientversion = "1.0.1"
 
 type Backend interface {
 	Call(method, path, key string, body *url.Values, v interface{}) ([]byte, error)
@@ -111,7 +111,7 @@ func (b *InternalBackend) Call(method string, path string, key string, body *url
 	resultbytes := buf.Bytes()
 	//log.Printf("Body: %v\n", string(resultbytes))
 	if err != nil {
-		log.Printf("Parse PingPP Rrsponse Failed %v\n", err)
+		log.Printf("Parse PingPP Response Failed %v\n", err)
 		return nil, err
 	}
 	if res.StatusCode >= 400 {
