@@ -49,6 +49,7 @@ type Charge struct {
 	Body            string `json:"body"`
 	Failure_code    int    `json:"failure_code"`
 	Failure_msg     string `json:"failure_msg"`
+	Extra_data      Extra  `json:"extra"`
 	//Metadata        map[string]string `json:"metadata"`
 	Refunds    RefundList  `json:"refunds"`
 	Credential interface{} `json:"credential"`
@@ -65,6 +66,9 @@ type Extra struct {
 	Result_url  string `json:"result_url"`
 	Success_url string `json:"success_url"`
 	Cancel_url  string `json:"cancel_url"`
+	Trade_type  string `json:"trade_type"`
+	Open_id     string `json:"openid"`
+	Bfb_login   bool   `json:"bfb_login"`
 }
 
 // func (charge *Charge) UnmarshalJSON(data []byte) error {
