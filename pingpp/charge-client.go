@@ -2,6 +2,7 @@ package pingpp
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/url"
 	"strconv"
 )
@@ -25,17 +26,20 @@ func (chargeClient *ChargeClient) SetKey(key string) {
 func (chargeClient *ChargeClient) New(params *ChargeParams) (*Charge, error) {
 	var charge Charge
 	body := &url.Values{
-		"amount": {strconv.FormatUint(params.amount, 10)},
+		"amount": {strconv.FormatUint(params.Amount, 10)},
 	}
-	body.Add("order_no", params.order_no)
-	body.Add("app[id]", params.appid)
-	body.Add("body", params.body)
-	body.Add("channel", params.channel)
-	body.Add("client_ip", params.client_ip)
-	body.Add("currency", params.currency)
-	body.Add("subject", params.subject)
+	body.Add("order_no", params.Order_no)
+	appstring, _ := json.Marshal(params.App)
+	body.Add("app", string(appstring))
+	fmt.Printf("App: %s\n", string(appstring))
+	body.Add("body", params.Body)
+	body.Add("channel", params.Channel)
+	body.Add("client_ip", params.Client_ip)
+	body.Add("currency", params.Currency)
+	body.Add("subject", params.Subject)
 	// body.Add("metadata", params.metadata)
-	resp_byte, err := chargeClient.backend.Call("POST", "", chargeClient.key, body, &charge)
+	jsonstring, _ := json.Marshal(params)
+	resp_byte, err := chargeClient.backend.CallJson("POST", "", chargeClient.key, jsonstring, &charge)
 	json.Unmarshal(resp_byte, &charge)
 	return &charge, err
 }

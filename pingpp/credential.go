@@ -7,6 +7,11 @@ type Credential struct {
 	WxCredential     WxCredential     `json:"wx"`
 	AlipayCredential AlipayCredential `json:"alipay"`
 	UpmpCredential   UpmpCredential   `json:"upmp"`
+	BfbCredential    BfbCredential    `json:"bfb"`
+}
+
+type BfbCredential struct {
+	BfbOrderInfo string `json:"orderInfo"`
 }
 
 type WxCredential struct {
