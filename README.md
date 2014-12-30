@@ -17,6 +17,10 @@ Go 语言版本建议 1.3 以上
 关于如何使用 SDK 请参考 [技术文档](https://pingplusplus.com/document) 或参考 pingpp 目录下后缀为 test 的 Go 文件
 
 ## 更新日志
+### 2.0.0
+* 更改：
+新增渠道 bfb,wxpub
+
 
 ### 1.0.1
 * 更改：
