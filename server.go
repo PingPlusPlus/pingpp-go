@@ -40,7 +40,7 @@ func pay(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 	} else if r.Method == "POST" {
 		var jsonstring string
-		jsonstring = `{"order_no": "1234567890111","amount": 1,"app": {"id":"YOUR_APP_ID"},"channel": "alipay","currency": "cny","client_ip": "192.168.1.1","subject": "test-subject","body": "test-body","metadata": {"color": "red"}}`
+		jsonstring = `{"order_no": "1234567890111222","amount": 1,"app": {"id":"YourApp"},"channel": "alipay","currency": "cny","client_ip": "192.168.1.1","subject": "test-subject","body": "test-body","metadata": {"color": "red"}}`
 		var chargeParams pingpp.ChargeParams
 		var chargeParams2 pingpp.ChargeParams
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -52,7 +52,7 @@ func pay(w http.ResponseWriter, r *http.Request) {
 		json.Unmarshal(buf.Bytes(), &chargeParams2)
 		chargeParams.Amount = 1
 		chargeParams.Channel = chargeParams2.Channel
-		chargeClient := pingpp.GetChargeClient("YOUR_KEY")
+		chargeClient := pingpp.GetChargeClient("YourKey")
 		charge, _ := chargeClient.New(&chargeParams)
 		chargebytes, _ := json.Marshal(charge)
 		fmt.Fprint(w, string(chargebytes))

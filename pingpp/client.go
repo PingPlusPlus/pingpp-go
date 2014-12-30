@@ -15,9 +15,9 @@ import (
 
 const defaultURL = "https://api.pingxx.com/v1/charges/"
 
-const apiversion = "1.0.0"
+const apiversion = "2.0.0"
 
-const clientversion = "1.0.1"
+const clientversion = "2.0.0"
 
 type Backend interface {
 	Call(method, path, key string, body *url.Values, v interface{}) ([]byte, error)
