@@ -28,18 +28,32 @@ func (chargeClient *ChargeClient) New(params *ChargeParams) (*Charge, error) {
 	body := &url.Values{
 		"amount": {strconv.FormatUint(params.Amount, 10)},
 	}
+
 	body.Add("order_no", params.Order_no)
 	appstring, _ := json.Marshal(params.App)
 	body.Add("app", string(appstring))
-	fmt.Printf("App: %s\n", string(appstring))
-	body.Add("body", params.Body)
 	body.Add("channel", params.Channel)
-	body.Add("client_ip", params.Client_ip)
 	body.Add("currency", params.Currency)
 	body.Add("subject", params.Subject)
-	// body.Add("metadata", params.metadata)
-	jsonstring, _ := json.Marshal(params)
-	resp_byte, err := chargeClient.backend.CallJson("POST", "", chargeClient.key, jsonstring, &charge)
+	body.Add("body", params.Body)
+	body.Add("client_ip", params.Client_ip)
+
+	if len(params.Metadata) > 0 {
+		metastring, _ := json.Marshal(params.Metadata)
+		body.Add("metadata", string(metastring))
+	}
+
+	if params.Time_expire > 0 {
+		body.Add("time_expire", strconv.FormatUint(params.Time_expire, 10))
+	}
+
+	if len(params.Description) > 0 {
+		body.Add("description", string(params.Description))
+	}
+
+	chargestring, _ := json.Marshal(params)
+	fmt.Println(string(chargestring))
+	resp_byte, err := chargeClient.backend.CallJson("POST", "charges", chargeClient.key, chargestring, &charge)
 	json.Unmarshal(resp_byte, &charge)
 	return &charge, err
 }
@@ -47,7 +61,7 @@ func (chargeClient *ChargeClient) New(params *ChargeParams) (*Charge, error) {
 func (chargeClient *ChargeClient) Get(charge_id string) (*Charge, error) {
 	var charge Charge
 	body := &url.Values{}
-	resp_byte, err := chargeClient.backend.Call("GET", charge_id, chargeClient.key, body, &charge)
+	resp_byte, err := chargeClient.backend.Call("GET", "charges/"+charge_id, chargeClient.key, body, &charge)
 	json.Unmarshal(resp_byte, &charge)
 	return &charge, err
 
@@ -96,7 +110,7 @@ func (chargeClient *ChargeClient) List(params *ChargeListParams) (*ChargeList, e
 		body.Add("refunded", "false")
 	}
 	// body.Add("metadata", charge.metadata)
-	resp_byte, err := chargeClient.backend.Call("GET", "", chargeClient.key, body, &charges)
+	resp_byte, err := chargeClient.backend.Call("GET", "charges", chargeClient.key, body, &charges)
 	json.Unmarshal(resp_byte, &charges)
 	return &charges, err
 }

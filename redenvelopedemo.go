@@ -32,30 +32,31 @@ func Run() {
 	bind the router
 */
 func bind() {
-	mymux.HandleFunc("/pay", pay)
+	mymux.HandleFunc("/redenvelope", redenvelope)
 }
 
-func pay(w http.ResponseWriter, r *http.Request) {
+func redenvelope(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		http.NotFound(w, r)
 	} else if r.Method == "POST" {
-		var jsonstring string
-		jsonstring = `{"order_no": "1234567890111222","amount": 1,"app": {"id":"YourApp"},"channel": "alipay","currency": "cny","client_ip": "192.168.1.1","subject": "test-subject","body": "test-body","metadata": {"color": "red"}}`
-		var chargeParams pingpp.ChargeParams
-		var chargeParams2 pingpp.ChargeParams
+		// var jsonstring string
+		// jsonstring = `{"order_no": "1234567890111222","amount": 1,"app": {"id":"YourApp"},"channel": "alipay","currency": "cny","client_ip": "192.168.1.1","subject": "test-subject","body": "test-body","metadata": {"color": "red"}}`
+		var redenvelopeParams pingpp.RedEnvelopeParams
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Content-Type", "application/json")
 		buf := new(bytes.Buffer)
 		buf.ReadFrom(r.Body)
 		fmt.Println(buf.String())
-		json.Unmarshal([]byte(jsonstring), &chargeParams)
-		json.Unmarshal(buf.Bytes(), &chargeParams2)
-		chargeParams.Amount = 1
-		chargeParams.Channel = chargeParams2.Channel
-		chargeClient := pingpp.GetChargeClient("YourKey")
-		charge, _ := chargeClient.New(&chargeParams)
-		chargebytes, _ := json.Marshal(charge)
-		fmt.Fprint(w, string(chargebytes))
+		json.Unmarshal(buf.Bytes(), &redenvelopeParams)
+		redenvelopeClient := pingpp.GetRedEnvelopeClient("YOUR-KEY")
+		redenvelope, err := redenvelopeClient.New(&redenvelopeParams)
+		if err != nil {
+			errorbytes, _ := json.Marshal(err)
+			fmt.Fprint(w, string(errorbytes))
+		} else {
+			redenvelopebytes, _ := json.Marshal(redenvelope)
+			fmt.Fprint(w, string(redenvelopebytes))
+		}
 
 	}
 	return

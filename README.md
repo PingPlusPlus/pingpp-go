@@ -1,30 +1,82 @@
-Pingpp Go SDK
-=================
+# Pingpp Go SDK
+========
 
-****
 
 ## 简介
-
-pingpp 文件夹下是 Go SDK 文件。
-以 test 结尾的 Go 文件是单元测试文件，同时也可以作为参考模板
+pingpp 文件夹里是 SDK 文件，不过其中 的 `charge_test.go`、`redEnvelope_test.go`和 `refund_test.go` 作为测试代码，也可以作为调用实例的参考使用。
 
 ## 版本要求
+建议 Go 语言版本 1.3 以上 
 
-Go 语言版本建议 1.3 以上
+## 安装
+```
+// 导入 pingpp 模块
+import (pingpp "github.com/pingplusplus/pingpp-go")
+go get pingpp
+```
 
 ## 接入方法
 
-关于如何使用 SDK 请参考 [技术文档](https://pingplusplus.com/document) 或参考 pingpp 目录下后缀为 test 的 Go 文件
+### 初始化
+    
+```go    
+// 设置 API-KEY 并获取 Client
+client := getChargeClient(YourKey)
+client := getRefundClient(YourKey)
+client := GetRedEnvelopeClient(YourKey)
+```
 
-## 更新日志
-### 2.0.0
-* 更改：
-新增渠道 bfb,wxpub
+### 支付
+```go
+//获得的第一个参数即是 Charge 对象
+charge, err := client.new(&chargeParams)
+```
+
+### 查询
+```go
+//查询单个 Charge 对象
+charge, err := client.get(id)
+```
+
+```go
+//查询 Charge 列表
+charges, err := client.list(params)
+
+```
+
+### 退款
+``` go
+//charge_id为待退款的Charge的ID
+refund, err := client.new(refundParams, charge_id)
+```
+
+### 退款查询
+```go
+//查询单个Refund对象
+refund, err := client.get(charge_id, refund_id)
+```
+
+```go
+//查询Refund对象列表
+refunds, err := client.list(charge_id, limit, starting_after, ending_before)
+```
 
 
-### 1.0.1
-* 更改：
-Credential 字段不再一次解析完，而是作为一个interface{}对象，如果需要进一步解析，可以再次调用 Go 语言的 JSON 解析方法
+### 微信红包
+```go
+//获得的第一个参数即是 RedEnvelope 对象
+redenvelope, err := client.new(&redEnvelopeParams)
+```
 
-### 1.0.0
-* 初始发布版本
+### 查询
+```go
+//查询单个 RedEnvelope 对象
+redenvelope, err := client.get(RED-ID)
+```
+
+```go
+//查询 RedEnvelope 列表
+redenvelope, err := client.list(params)
+```
+
+**详细信息请参考 [API 文档](https://pingxx.com/document/api?go)。**
