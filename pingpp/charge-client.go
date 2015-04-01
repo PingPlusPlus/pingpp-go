@@ -2,7 +2,6 @@ package pingpp
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/url"
 	"strconv"
 )
@@ -52,7 +51,6 @@ func (chargeClient *ChargeClient) New(params *ChargeParams) (*Charge, error) {
 	}
 
 	chargestring, _ := json.Marshal(params)
-	fmt.Println(string(chargestring))
 	resp_byte, err := chargeClient.backend.CallJson("POST", "charges", chargeClient.key, chargestring, &charge)
 	json.Unmarshal(resp_byte, &charge)
 	return &charge, err

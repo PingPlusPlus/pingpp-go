@@ -2,7 +2,6 @@ package pingpp
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/url"
 	"strconv"
 )
@@ -31,7 +30,6 @@ func (redEnvelopeClient *RedEnvelopeClient) New(params *RedEnvelopeParams) (*Red
 	body.Add("order_no", params.Order_no)
 	appstring, _ := json.Marshal(params.App)
 	body.Add("app", string(appstring))
-	fmt.Printf("App: %s\n", string(appstring))
 	body.Add("body", params.Body)
 	body.Add("channel", params.Channel)
 	body.Add("currency", params.Currency)
@@ -41,7 +39,6 @@ func (redEnvelopeClient *RedEnvelopeClient) New(params *RedEnvelopeParams) (*Red
 	jsonstring, _ := json.Marshal(params)
 	resp_byte, err := redEnvelopeClient.backend.CallJson("POST", "red_envelopes", redEnvelopeClient.key, jsonstring, &redEnvelope)
 	json.Unmarshal(resp_byte, &redEnvelope)
-	// fmt.Println(json.Unmarshal(resp_byte, &redEnvelope))
 	return &redEnvelope, err
 }
 
@@ -81,7 +78,6 @@ func (redEnvelopeClient *RedEnvelopeClient) List(params *RedEnvelopeListParams) 
 		body.Add("created[lte]", params.Createdlte)
 	}
 
-	// body.Add("metadata", charge.metadata)
 	resp_byte, err := redEnvelopeClient.backend.Call("GET", "red_envelopes", redEnvelopeClient.key, body, &redEnvelopes)
 	json.Unmarshal(resp_byte, &redEnvelopes)
 	return &redEnvelopes, err
