@@ -77,4 +77,7 @@ redenvelope, err := redEnvelope.Get(red_id)
 redenvelope, err := redEnvelope.List(&redEnvelopeListParams)
 ```
 
+## Debug
+SDK 提供了 debug 模式。只需要更改 pingpp.go 文件中的 LogLevel 变量值，即可触发相应级别的 log，代码中对级别有注释。默认的级别是 2
+
 **详细信息请参考 [API 文档](https://pingxx.com/document/api?go)。**
