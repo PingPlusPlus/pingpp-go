@@ -2,77 +2,45 @@ package pingpp
 
 import (
 	"encoding/json"
-	fb "github.com/huandu/facebook"
+	"github.com/bitly/go-simplejson"
+	"log"
 )
 
-type NotifyCharge struct {
-	Id              string
-	Object          string                 `facebook:"object"`
-	Created         string                 `facebook:"created"`
-	Livemode        bool                   `facebook:"livemode"`
-	Paid            bool                   `facebook:"paid"`
-	Refunded        bool                   `facebook:"refunded"`
-	Order_no        string                 `facebook:"order_no"`
-	App             App                    `facebook:"app"`
-	Channel         string                 `facebook:"channel"`
-	Amount          uint64                 `facebook:"amount"`
-	Amount_settle   uint64                 `facebook:"amount_settle"`
-	Amount_refunded uint64                 `facebook:"amount_refunded"`
-	Time_expire     string                 `facebook:"time_expire"`
-	Time_settle     string                 `facebook:"time_settle"`
-	Transaction_no  string                 `facebook:"transaction_no"`
-	Currency        string                 `facebook:"currency"`
-	Client_ip       string                 `facebook:"client_ip"`
-	Subject         string                 `facebook:"subject"`
-	Body            string                 `facebook:"body"`
-	Failure_code    int                    `facebook:"failure_code"`
-	Failure_msg     string                 `facebook:"failure_msg"`
-	Metadata        map[string]interface{} `facebook:"metadata"`
-	Refunds         RefundList             `facebook:"refunds"`
-	Credential      Credential             `facebook:"credential"`
-}
-
-// type App struct {
-// 	Id                 string
-// 	Object             string
-// 	Created            uint64
-// 	Display_name       string
-// 	Notify_url         string
-// 	Goods_type         int64
-// 	Channels_supported []string
-// }
-type ObjectIndentify struct {
-	Object string `facebook:object`
-}
-
-func parseNotify(notifyJson string) interface{} {
-	var identify ObjectIndentify
-	var charge NotifyCharge
+func ParseNotify(notify []byte) (*Charge, *Refund, error) {
+	var charge Charge
 	var refund Refund
-	var jsObject fb.Result
-	err := json.Unmarshal([]byte(notifyJson), &identify)
-
+	js, err := simplejson.NewJson(notify)
 	if err != nil {
-		return nil
+		// panic("json format error")
+		return nil, nil, err
 	}
-	if identify.Object == "charge" {
-		err2 := json.Unmarshal([]byte(notifyJson), &jsObject)
-		if err2 != nil {
-			decodeError := jsObject.Decode(&charge)
-			if decodeError == nil {
-				return &charge
+
+	_, ok := js.CheckGet("object")
+	if ok {
+		object, errObject := js.Get("object").String()
+		if errObject != nil {
+			log.Printf("cannot get the value of key object: %v\n", errObject)
+		}
+		if object == "charge" {
+			errCh := json.Unmarshal(notify, &charge)
+			if errCh != nil {
+				log.Printf("cannot unmarshal to charge: %v\n", errCh)
+				return nil, nil, errCh
 			}
-			return &charge
-		} else {
-			return nil
+			return &charge, nil, nil
+
+		} else if object == "fefund" {
+			errRe := json.Unmarshal(notify, &refund)
+			if errRe != nil {
+				log.Printf("cannot unmarshal to charge: %v\n", errRe)
+				return nil, nil, errRe
+			}
+			return nil, &refund, nil
 		}
-	} else if identify.Object == "refund" {
-		err2 := json.Unmarshal([]byte(notifyJson), &refund)
-		if err2 != nil {
-			return &refund
-		} else {
-			return nil
-		}
+
+	} else {
+		log.Println("this is not a pingpp notify,because key object not exists")
+		return nil, nil, err
 	}
-	return nil
+	return nil, nil, err
 }

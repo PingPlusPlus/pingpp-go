@@ -1,7 +1,7 @@
 package pingpp
 
 type RedEnvelopeParams struct {
-	App         App              `json:"app"`
+	App         *App             `json:"app"`
 	Channel     string           `json:"channel"`
 	Order_no    string           `json:"order_no"`
 	Amount      uint64           `json:"amount"`
@@ -14,13 +14,8 @@ type RedEnvelopeParams struct {
 }
 
 type RedEnvelopeListParams struct {
-	Limit       uint64
-	Start_after string
-	End_before  string
-	Createdgt   string "created[gt]"
-	Createdgte  string "created[gte]"
-	Createdlt   string "created[lt]"
-	Createdlte  string "created[lte]"
+	ListParams
+	Created int64
 }
 
 type RedEnvelope struct {
@@ -41,10 +36,8 @@ type RedEnvelope struct {
 }
 
 type RedEnvelopeList struct {
-	Object       string        `json:"object"`
-	Url          string        `json:"url"`
-	Has_more     bool          `json:"has_more"`
-	RedEnvelopes []RedEnvelope `json:"redEnvelopes"`
+	ListMeta
+	RedEnvelopes []*RedEnvelope `json:"redEnvelopes"`
 }
 
 type RedEnvelopeExtra struct {

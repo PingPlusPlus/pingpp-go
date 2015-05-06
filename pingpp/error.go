@@ -3,28 +3,15 @@ package pingpp
 import "encoding/json"
 
 type ErrorType string
+
 type ErrorCode string
 
 const (
 	InvalidRequest ErrorType = "invalid_request_error"
 	APIErr         ErrorType = "api_error"
-	ChannelError   ErrorType = "channel_error"
-	CardErr        ErrorType = "card_error"
-
-	IncorrectNum  ErrorCode = "incorrect_number"
-	InvalidNum    ErrorCode = "invalid_number"
-	InvalidExpM   ErrorCode = "invalid_expiry_month"
-	InvalidExpY   ErrorCode = "invalid_expiry_year"
-	InvalidCvc    ErrorCode = "invalid_cvc"
-	ExpiredCard   ErrorCode = "expired_card"
-	IncorrectCvc  ErrorCode = "incorrect_cvc"
-	IncorrectZip  ErrorCode = "incorrect_zip"
-	CardDeclined  ErrorCode = "card_declined"
-	Missing       ErrorCode = "missing"
-	ProcessingErr ErrorCode = "processing_error"
-	RateLimit     ErrorCode = "rate_limit"
 )
 
+// Error is the response returned when a call is unsuccessful.
 type Error struct {
 	Type           ErrorType `json:"type"`
 	Msg            string    `json:"message"`
@@ -33,6 +20,7 @@ type Error struct {
 	HTTPStatusCode int       `json:"-"`
 }
 
+// Error serializes the Error object and prints the JSON string.
 func (e *Error) Error() string {
 	ret, _ := json.Marshal(e)
 	return string(ret)
