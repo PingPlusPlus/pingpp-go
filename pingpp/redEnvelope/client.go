@@ -2,9 +2,9 @@ package redEnvelope
 
 import (
 	"encoding/json"
+	"github.com/pingplusplus/pingpp-go/pingpp/pingpp"
 	"log"
 	"net/url"
-	"pingpp/pingpp"
 	"strconv"
 )
 

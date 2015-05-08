@@ -3,9 +3,9 @@ package charge
 import (
 	"encoding/json"
 	"github.com/bitly/go-simplejson"
+	"github.com/pingplusplus/pingpp-go/pingpp/pingpp"
 	"log"
 	"net/url"
-	"pingpp/pingpp"
 	"strconv"
 )
 

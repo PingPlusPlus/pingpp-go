@@ -3,9 +3,9 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"github.com/pingplusplus/pingpp-go/pingpp/pingpp"
 	"log"
 	"net/http"
-	"pingpp/pingpp"
 )
 
 func main() {

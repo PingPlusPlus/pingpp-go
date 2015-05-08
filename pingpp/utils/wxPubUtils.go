@@ -4,10 +4,10 @@ import (
 	"bytes"
 	"crypto/sha1"
 	"encoding/json"
+	"github.com/pingplusplus/pingpp-go/pingpp/pingpp"
 	"log"
 	"net/http"
 	"net/url"
-	"pingpp/pingpp"
 )
 
 type Token struct {
