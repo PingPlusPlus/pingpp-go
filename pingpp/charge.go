@@ -62,7 +62,6 @@ type Extra struct {
 	Result_url    string `json:"result_url,omitempty"`
 	Success_url   string `json:"success_url,omitempty"`
 	Cancel_url    string `json:"cancel_url,omitempty"`
-	Trade_type    bool   `json:"trade_type,omitempty"`
 	Open_id       string `json:"open_id,omitempty"`
 	Bfb_login     bool   `json:"bfb_login,omitempty"`
 	Payment_token string `json:"payment_token,omitempty"`
