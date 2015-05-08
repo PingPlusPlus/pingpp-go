@@ -48,16 +48,3 @@ type RedEnvelopeExtra struct {
 	Share_content string `json:"share_content,omitempty"`
 	Share_img     string `json:"share_img,omitempty"`
 }
-
-func (r *RedEnvelope) UnmarshalJSON(data []byte) error {
-	type redEnvelope RedEnvelope
-	var rr redEnvelope
-	err := json.Unmarshal(data, &rr)
-	if err == nil {
-		*r = Refund(rr)
-	} else {
-		// the id is surrounded by "\" characters, so strip them
-		r.ID = string(data[1 : len(data)-1])
-	}
-	return nil
-}
