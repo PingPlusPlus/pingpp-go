@@ -21,7 +21,7 @@ type ChargeParams struct {
 
 type ChargeListParams struct {
 	ListParams
-	Created uint64
+	Created int64
 }
 
 type Charge struct {

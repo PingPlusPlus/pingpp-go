@@ -15,7 +15,7 @@ type RedEnvelopeParams struct {
 
 type RedEnvelopeListParams struct {
 	ListParams
-	Created uint64
+	Created int64
 }
 
 type RedEnvelope struct {
