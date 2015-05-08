@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"crypto/sha1"
 	"encoding/json"
-	"github.com/pingplusplus/pingpp-go/pingpp/pingpp"
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"log"
 	"net/http"
 	"net/url"

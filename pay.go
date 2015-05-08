@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/pingplusplus/pingpp-go/pingpp/pingpp"
-	"github.com/pingplusplus/pingpp-go/pingpp/pingpp/charge"
-	"github.com/pingplusplus/pingpp-go/pingpp/pingpp/redEnvelope"
-	"github.com/pingplusplus/pingpp-go/pingpp/pingpp/refund"
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
+	"github.com/pingplusplus/pingpp-go/pingpp/charge"
+	"github.com/pingplusplus/pingpp-go/pingpp/redEnvelope"
+	"github.com/pingplusplus/pingpp-go/pingpp/refund"
 	"log"
 )
 

@@ -4,7 +4,7 @@ package refund
 import (
 	"encoding/json"
 	"fmt"
-	"ithub.com/pingplusplus/pingpp-go/pingpp/pingpp"
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"log"
 	"net/url"
 	"strconv"

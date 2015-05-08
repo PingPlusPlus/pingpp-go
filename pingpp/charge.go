@@ -21,7 +21,7 @@ type ChargeParams struct {
 
 type ChargeListParams struct {
 	ListParams
-	Created int64
+	Created uint64
 }
 
 type Charge struct {
@@ -41,9 +41,9 @@ type Charge struct {
 	Subject         string                 `json:"subject"`
 	Body            string                 `json:"body"`
 	Extra           Extra                  `json:"extra"`
-	Time_paid       int64                  `json:"time_paid"`
-	Time_expire     int64                  `json:"time_expire"`
-	Time_settle     int64                  `json:"time_settle"`
+	Time_paid       uint64                 `json:"time_paid"`
+	Time_expire     uint64                 `json:"time_expire"`
+	Time_settle     uint64                 `json:"time_settle"`
 	Transaction_no  string                 `json:"transaction_no"`
 	Refunds         *RefundList            `json:"refunds"`
 	Amount_refunded uint64                 `json:"amount_refunded"`

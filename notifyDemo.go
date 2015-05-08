@@ -3,7 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/pingplusplus/pingpp-go/pingpp/pingpp"
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"log"
 	"net/http"
 )

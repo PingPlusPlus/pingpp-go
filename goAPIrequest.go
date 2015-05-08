@@ -26,7 +26,7 @@ type Charge struct {
 	Order_no        string                 `json:"order_no"`
 	Client_ip       string                 `json:"client_ip"`
 	Amount          int                    `json:"amount"`
-	Amount_settle   uint64                 `json:"amount_settle"`
+	Amount_settle   int64                  `json:"amount_settle"`
 	Currency        string                 `json:"currency"`
 	Subject         string                 `json:"subject"`
 	Body            string                 `json:"body"`
@@ -34,10 +34,10 @@ type Charge struct {
 	Time_paid       uint64                 `json:"time_paid"`
 	Time_expire     uint64                 `json:"time_expire"`
 	Time_settle     uint64                 `json:"time_settle"`
-	Transaction_no  uint64                 `json:"transaction_no"`
+	Transaction_no  string                 `json:"transaction_no"`
 	Refunds         RefundList             `json:"refunds"`
-	Amount_refunded uint64                 `json:"amount_refunded"`
-	Failure_code    int                    `json:"failure_code"`
+	Amount_refunded int64                  `json:"amount_refunded"`
+	Failure_code    string                 `json:"failure_code"`
 	Failure_msg     string                 `json:"failure_msg"`
 	Metadata        map[string]interface{} `json:"metadata"`
 	Credential      map[string]interface{} `json:"credential"`

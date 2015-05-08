@@ -15,7 +15,7 @@ type RedEnvelopeParams struct {
 
 type RedEnvelopeListParams struct {
 	ListParams
-	Created int64
+	Created uint64
 }
 
 type RedEnvelope struct {
@@ -26,7 +26,7 @@ type RedEnvelope struct {
 	App         string                 `json:"app"`
 	Channel     string                 `json:"channel"`
 	Order_no    string                 `json:"order_no"`
-	Amount      int                    `json:"amount"`
+	Amount      uint64                 `json:"amount"`
 	Currency    string                 `json:"currency"`
 	Recipient   string                 `json:"recipient"`
 	Subject     string                 `json:"subject"`
@@ -44,6 +44,20 @@ type RedEnvelopeExtra struct {
 	Nick_name     string `json:"nick_name"`
 	Send_name     string `json:"send_name"`
 	Logo          string `json:"logo,omitempty"`
+	Share_url     string `json:"share_url.omitempty"`
 	Share_content string `json:"share_content,omitempty"`
 	Share_img     string `json:"share_img,omitempty"`
+}
+
+func (r *RedEnvelope) UnmarshalJSON(data []byte) error {
+	type redEnvelope RedEnvelope
+	var rr redEnvelope
+	err := json.Unmarshal(data, &rr)
+	if err == nil {
+		*r = Refund(rr)
+	} else {
+		// the id is surrounded by "\" characters, so strip them
+		r.ID = string(data[1 : len(data)-1])
+	}
+	return nil
 }
