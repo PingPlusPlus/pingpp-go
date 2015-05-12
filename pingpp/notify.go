@@ -29,10 +29,10 @@ func ParseNotify(notify []byte) (*Charge, *Refund, error) {
 			}
 			return &charge, nil, nil
 
-		} else if object == "fefund" {
+		} else if object == "refund" {
 			errRe := json.Unmarshal(notify, &refund)
 			if errRe != nil {
-				log.Printf("cannot unmarshal to charge: %v\n", errRe)
+				log.Printf("cannot unmarshal to refund: %v\n", errRe)
 				return nil, nil, errRe
 			}
 			return nil, &refund, nil
