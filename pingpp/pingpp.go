@@ -14,12 +14,15 @@ import (
 )
 
 const apiBase = "https://api.pingxx.com/v1"
-const apiVersion = "2015-05-06"
-const clientVersion = "2.1.0"
+const apiVersion = "2015-06-03"
 
-// defaultHTTPTimeout is the default timeout on the http.Client used by the library.
-// This is chosen to be consistent with the other pingpp language libraries and
-// to coordinate with other timeouts configured in the pingpp infrastructure.
+var AcceptLanguage string
+var Key string
+
+func Version() string {
+	return "2.1.1"
+}
+
 const defaultHTTPTimeout = 80 * time.Second
 
 const TotalBackends = 1
@@ -38,15 +41,11 @@ type SupportedBackend string
 
 const APIBackend SupportedBackend = "api"
 
-// Backends are the currently supported endpoints.
 type Backends struct {
 	API Backend
 }
 
-// Key is the pingp API key used globally in the binding.
-var Key string
-
-// LogLevel is the logging level for this library.
+// loglevel 是 debug 模式开关.
 // 0: no logging
 // 1: errors only
 // 2: errors + informational (default)
@@ -73,7 +72,6 @@ func GetBackend(backend SupportedBackend) Backend {
 	return ret
 }
 
-// SetBackend sets the backend used in the binding.
 func SetBackend(backend SupportedBackend, b Backend) {
 	switch backend {
 	case APIBackend:
@@ -122,17 +120,14 @@ func (s *BackendConfiguration) NewRequest(method, path, key, contentType string,
 		return nil, err
 	}
 
-	req.SetBasicAuth(key, "")
+	req.SetBasicAuth(Key, "")
 	req.Header.Add("Pingpp-version", apiVersion)
-	req.Header.Add("User-Agent", "pingpp/v1 GoBindings/"+clientVersion)
-	req.Header.Add("content-type", contentType)
-
+	req.Header.Add("User-Agent", "Pingpp go SDK version:"+Version())
+	req.Header.Add("Content-Type", contentType)
+	req.Header.Add("Accept-Language", AcceptLanguage)
 	return req, nil
 }
 
-// Do is used by Call to execute an API request and parse the response. It uses
-// the backend's HTTP client to execute the request and unmarshals the response
-// into v. It also handles unmarshaling errors returned by the API.
 func (s *BackendConfiguration) Do(req *http.Request, v interface{}) error {
 	if LogLevel > 1 {
 		log.Printf("Requesting %v %v%v\n", req.Method, req.URL.Host, req.URL.Path)
@@ -160,11 +155,6 @@ func (s *BackendConfiguration) Do(req *http.Request, v interface{}) error {
 	}
 
 	if res.StatusCode >= 400 {
-		// for some odd reason, the Erro structure doesn't unmarshal
-		// initially I thought it was because it's a struct inside of a struct
-		// but even after trying that, it still didn't work
-		// so unmarshalling to a map for now and parsing the results manually
-		// but should investigate later
 		var errMap map[string]interface{}
 		json.Unmarshal(resBody, &errMap)
 
@@ -203,7 +193,6 @@ func (s *BackendConfiguration) Do(req *http.Request, v interface{}) error {
 
 	if v != nil {
 		return json.Unmarshal(resBody, v)
-
 	}
 
 	return nil
