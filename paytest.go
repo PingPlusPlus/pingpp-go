@@ -50,17 +50,7 @@ func pay(w http.ResponseWriter, r *http.Request) {
 		orderno := r.Intn(999999999999999)
 		pingpp.Key = "YOUR-KEY"
 
-		// client := &http.Client{}
-		// wx_app_id := "wx95df8698f12122c7"
-		// redirect_url := "http://test.pinpula.com/wx-pub/test_sdk.php?showwxpaytitle=1"
-		// codeUrl := utils.CreateOauthUrlForCode(wx_app_id, redirect_url, false)
-		// fmt.Fprintln(w, codeUrl)
-		// req, _ := http.NewRequest("GET", "http://test.pinpula.com/wx-pub/test_go.php", nil)
-		// urlStr := "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx95df8698f12122c7&redirect_url=http%3A%2F%2Ftest.pinpula.com%2Fwx-pub%2Ftest_sdk.php%3Fshowwxpaytitle%3D1&response_type=code&scope=snsapi_base&state=STATE%23wechat_redirect"
-		// req.Header.Add("location", urlStr)
-		// resp, _ := client.Do(req)
-		// fmt.Println(req.URL)
-		// fmt.Println(resp)
+		
 		params := &pingpp.ChargeParams{
 			Order_no:  strconv.Itoa(orderno),
 			App:       pingpp.App{Id: "YOUR-APP-ID"},
