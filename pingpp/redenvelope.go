@@ -1,7 +1,7 @@
 package pingpp
 
 type RedEnvelopeParams struct {
-	App         *App             `json:"app"`
+	App         App              `json:"app"`
 	Channel     string           `json:"channel"`
 	Order_no    string           `json:"order_no"`
 	Amount      uint64           `json:"amount"`
