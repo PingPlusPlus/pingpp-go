@@ -4,8 +4,10 @@
 
 ## 示例代码文件
 pay.go 和 paytest.go 是示例代码。
+
 **注意**
-sdk 使用了 simple-json 包，需要额外导入该包。
+1. 首先你需要 go get github.com/pingplusplus/pingpp-go/pingpp 导入 pingpp SDK 。
+2. SDK 使用了 simple-json 包，如果你本身没有导入这个包，需要先 go get github.com/bitly/go-simplejson
 
 * pay.go 里面给出了所有方法的调用示例。
 * paytest.go 新建了路由去接收客户端传递的数据，然后调用了charge.New 方法。
@@ -20,13 +22,12 @@ sk_test_ 开头的字符串)。
  App:       pingpp.App{Id: "YOUR-APP-ID"}
 ```
  替换 YOUR-APP-ID 为你的应用 ID (ping++ 分配给你的以 app_ 开头的字符串)。
- 3. 如果调用的是 响应的 Get 方法，需要在里面填入享用的订单号，ch_id 就是你的交易的订单号，re_id 是指定订单的退款订单号，red_id 指的是红包订单号。
+3. 如果调用的是相应的 Get 方法，需要在里面填入享用的订单号，ch_id 就是你的交易的订单号，re_id 是指定订单的退款订单号，red_id 指的是红包订单号。
 4. 在 main 方法里调用相应的你需要调用的方法。
 5. 现在进入相应目录 go run pay.go 即可。
 
 
 ## paytest.go
-
 1. 找到设置key的地方设置Key:
 ```go
 pingpp.Key = "YOUR-KEY"
@@ -36,3 +37,7 @@ pingpp.Key = "YOUR-KEY"
 4. 进入相应目录 go run paytest.go
 5. 客户端根据指定的路由传递数据过去（demo解析的是 json 格式，这里的格式由你根据自己传递的格式以相应方式读取即可）
 4. 客户端按照定义的路由
+
+
+## goApirequest.go 
+该文件是使用 go 直接调用 API 的示例。

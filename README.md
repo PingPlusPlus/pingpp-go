@@ -11,7 +11,7 @@ pingpp 文件夹里是 SDK 文件
 ## 安装
 ```
 // 导入 pingpp 模块
-import (pingpp "github.com/pingplusplus/pingpp-go/pingpp")
+```go
 go get github.com/pingplusplus/pingpp-go/pingpp
 ```
 因为 SDK 用到了 simplejson ，所以还需要导入该库：
@@ -19,10 +19,20 @@ go get github.com/pingplusplus/pingpp-go/pingpp
 go get github.com/bitly/go-simplejson
 ```
 
+导入后，在调用的时候需要：
+```go
+import (pingpp "github.com/pingplusplus/pingpp-go/pingpp")
+```
+具体使用相应模块的话还需要
+
+```go
+import (pingpp "github.com/pingplusplus/pingpp-go/pingpp/xxx")
+```
+
 ## 接入方法
 
 ### 初始化
-    
+   
 ```go    
 // 设置 API-KEY 
 pingpp.Key= "YOUR-KEY"
@@ -81,7 +91,31 @@ redenvelope, err := redEnvelope.Get(red_id)
 redenvelope, err := redEnvelope.List(&redEnvelopeListParams)
 ```
 
+### 查询自定 event
+```go
+//查询单个 RedEnvelope 对象
+redenvelope, err := event.Get(red_id)
+```
+### 查询 Event 列表
+```go
+//查询 RedEnvelope 列表
+redenvelope, err := event.List(&redEnvelopeListParams)
+```
+
 ## Debug
 SDK 提供了 debug 模式。只需要更改 pingpp.go 文件中的 LogLevel 变量值，即可触发相应级别的 log，代码中对级别有注释。默认的级别是 2
+
+## 版本号
+调用
+```go
+pingpp.Version()
+```
+会返回 sdk 版本号
+
+## 中文报错信息
+Ping++ 支持中文和英文两种语言的报错信息。SDK 默认的 Accept-Language 是英文的，如果您想要接收到的错误提示是中文的，只需要设置一下即可：
+```go
+pingpp.AcceptLanguage = "zh-CN"
+```
 
 **详细信息请参考 [API 文档](https://pingxx.com/document/api?go)。**

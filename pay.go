@@ -5,6 +5,7 @@ import (
 	"fmt"
 	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"github.com/pingplusplus/pingpp-go/pingpp/charge"
+	"github.com/pingplusplus/pingpp-go/pingpp/event"
 	"github.com/pingplusplus/pingpp-go/pingpp/redEnvelope"
 	"github.com/pingplusplus/pingpp-go/pingpp/refund"
 	"log"
@@ -12,23 +13,27 @@ import (
 
 func init() {
 	pingpp.Key = "YOUR-KEY"
+	fmt.Println(pingpp.Version())
+	pingpp.AcceptLanguage = "zh-CN"
 }
 
 func ExampleCharge_new() {
 	metadata := make(map[string]interface{})
 	metadata["color"] = "red"
 	params := &pingpp.ChargeParams{
-		Order_no:  "sdafewdhtydr",
+		Order_no:  "sdaffsadfdfsweqrad34xg13",
 		App:       pingpp.App{Id: "YOUR-APP-ID"},
 		Amount:    100,
-		Channel:   "wx",
+		Channel:   "wx_pub",
 		Currency:  "cny",
 		Client_ip: "127.0.0.1",
 		Subject:   "Your Subject",
 		Body:      "Your Body",
+		Extra:     pingpp.Extra{Open_id: "your openid"},
 		Metadata:  metadata,
 	}
-
+	a, _ := json.Marshal(params)
+	fmt.Println(string(a))
 	//返回的第一个参数是 charge 对象，你需要将其转换成 json 给客户端，或者客户端接收后转换。
 	ch, err := charge.New(params)
 	if err != nil {
@@ -53,6 +58,7 @@ func ExampleCharge_get() {
 		log.Fatal(err)
 	}
 	chstring, _ := json.Marshal(ch)
+	fmt.Println("12343556578")
 	log.Printf("%v\n", string(chstring))
 }
 
@@ -86,7 +92,7 @@ func ExampleRefund_new() {
 }
 
 func ExampleRefund_get() {
-	re, err := refund.Get("ch_id", "re_id")
+	re, err := refund.Get("ch_id", "re_yb5KiTHqnrT8GqrTOSuv1u5S")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -111,16 +117,16 @@ func ExampleRefund_list() {
 
 func ExampleRedEnvelope_new() {
 	redenvelopeParams := &pingpp.RedEnvelopeParams{
-		App:         &pingpp.App{Id: "YOUR-APP-ID"},
+		App:         pingpp.App{Id: "YOUR-APP-ID"},
 		Channel:     "wx_pub",
 		Order_no:    "987654345",
 		Amount:      100,
 		Currency:    "cny",
-		Recipient:   "o9zpMs9jIaLynQY9N6yYcmxcZ2zc",
+		Recipient:   "your openid",
 		Subject:     "Your Subject",
 		Body:        "Your Body",
 		Description: "Your Description",
-		Extra:       pingpp.RedEnvelopeExtra{Nick_name: "Nick Name", Send_name: "Send Name"},
+		Extra:       pingpp.RedEnvelopeExtra{Nick_name: "nick name", Send_name: "nick name"},
 	}
 	redEnvelope, err := redEnvelope.New(redenvelopeParams)
 	if err != nil {
@@ -130,7 +136,7 @@ func ExampleRedEnvelope_new() {
 }
 
 func ExampleRedEnvelope_get() {
-	redEnvelope, err := redEnvelope.Get("RED_ID")
+	redEnvelope, err := redEnvelope.Get("red_id")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -148,6 +154,28 @@ func ExampleRedEnvelope_list() {
 		c := i.RedEnvelope()
 		ch, _ := json.Marshal(c)
 		fmt.Println(string(ch))
+	}
+}
+
+func ExampleEvent_get() {
+	eve, err := event.Get("evt_id")
+	if err != nil {
+		log.Fatal(err)
+	}
+	// eve, _ := json.Marshal(event)
+	// log.Printf("%v\n", string(eve))
+	fmt.Println(eve)
+}
+
+func ExampleEvent_list() {
+	params := &pingpp.EventListParams{}
+	params.Filters.AddFilter("type", "", "event_type")
+	//设置是不是只需要之前设置的 limit 这一个查询参数
+	params.Single = true
+	i := event.List(params)
+	for i.Next() {
+		c := i.Event()
+		fmt.Println(c)
 	}
 }
 
