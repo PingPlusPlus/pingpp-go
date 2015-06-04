@@ -59,13 +59,22 @@ type App struct {
 }
 
 type Extra struct {
-	Result_url    string `json:"result_url,omitempty"`
-	Success_url   string `json:"success_url,omitempty"`
-	Cancel_url    string `json:"cancel_url,omitempty"`
-	Open_id       string `json:"open_id,omitempty"`
-	Bfb_login     bool   `json:"bfb_login,omitempty"`
-	Payment_token string `json:"payment_token,omitempty"`
-	Product_id    string `json:"product_id,omitempty"`
+	Result_url       string `json:"result_url,omitempty"`
+	Success_url      string `json:"success_url,omitempty"`
+	Cancel_url       string `json:"cancel_url,omitempty"`
+	Trade_type       bool   `json:"trade_type,omitempty"`
+	Open_id          string `json:"open_id,omitempty"`
+	Bfb_login        bool   `json:"bfb_login,omitempty"`
+	Payment_token    string `json:"payment_token,omitempty"`
+	Product_id       string `json:"product_id,omitempty"`
+	Product_category string `json:"product_category,omitempty"`
+	Identity_id      string `json:"identity_id,omitempty"`
+	Identity_type    int    `json:"identity_type,omitempty"`
+	Terminal_type    int    `json:"terminal_type,omitempty"`
+	Terminal_id      string `json:"terminal_id,omitempty"`
+	User_ua          string `json:"user_ua,omitempty"`
+	Fail_url         string `json:"fail_url,omitempty"`
+	Token            string `json:"tolen,omitempty"`
 }
 
 func (c *Charge) UnmarshalJSON(data []byte) error {
