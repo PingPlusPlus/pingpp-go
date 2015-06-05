@@ -74,16 +74,6 @@ func pay(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintln(w, string(chs))
 		}
 
-		//获取 jssdk所需的签名
-		// wx_app_secret := "6c521c5a75c135e094b7d90dc5600b7a"
-		// jsTicket := utils.GetJsapiTicket(wx_app_id, wx_app_secret)
-		// urls := "http://test.pinpula.com/wx-pub/test_go.php"
-		// signatures := utils.GetSignature(ch, jsTicket, urls)
-		// maps := make(map[string]interface{})
-		// maps["charge"] = ch
-		// maps["signature"] = fmt.Sprintf("%x", signatures)
-		// a, _ := json.Marshal(maps)
-		// fmt.Fprintf(w, string(a))
 	}
 }
 
