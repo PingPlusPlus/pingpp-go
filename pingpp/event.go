@@ -50,8 +50,8 @@ type Object struct {
 	App_id            string                 `json:"app_id,omitempty"`
 	Acct_display_name string                 `json:"acct_display_name,omitempty"`
 	App_display_name  string                 `json:"app_display_name,omitempty"`
-	Summary_from      string                 `json:"summary_from,omitempty"`
-	Summary_to        string                 `json:"summary_to,omitempty"`
+	Summary_from      uint64                 `json:"summary_from,omitempty"`
+	Summary_to        uint64                 `json:"summary_to,omitempty"`
 	Charges_amount    uint64                 `json:"charges_amount,omitempty"`
 	Charges_count     uint64                 `json:"charges_count,omitempty"`
 }
