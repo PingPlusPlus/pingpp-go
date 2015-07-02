@@ -14,13 +14,13 @@ import (
 )
 
 const apiBase = "https://api.pingxx.com/v1"
-const apiVersion = "2015-06-03"
+const apiVersion = "2015-07-02"
 
 var AcceptLanguage string
 var Key string
 
 func Version() string {
-	return "2.1.1"
+	return "2.1.2"
 }
 
 const defaultHTTPTimeout = 80 * time.Second
