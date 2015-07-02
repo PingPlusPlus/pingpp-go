@@ -24,7 +24,7 @@ type Transfer struct {
 	Created         int64         `json:"created"`
 	Time_transfered int64         `json:"time_transfered"`
 	Livemode        bool          `json:"livemode"`
-	Status          bool          `json:"status"`
+	Status          string        `json:"status"`
 	App             string        `json:"app"`
 	Channel         string        `json:"channel"`
 	Order_no        string        `json:"order_no"`
