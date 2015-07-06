@@ -14,10 +14,6 @@ pingpp 文件夹里是 SDK 文件
 ```go
 go get github.com/pingplusplus/pingpp-go/pingpp
 ```
-因为 SDK 用到了 simplejson ，所以还需要导入该库：
-```go
-go get github.com/bitly/go-simplejson
-```
 
 导入后，在调用的时候需要：
 ```go

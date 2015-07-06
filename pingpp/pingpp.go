@@ -2,7 +2,6 @@ package pingpp
 
 import (
 	"bytes"
-	"encoding/json"
 	"errors"
 	"io"
 	"io/ioutil"
@@ -14,13 +13,14 @@ import (
 )
 
 const apiBase = "https://api.pingxx.com/v1"
-const apiVersion = "2015-07-02"
+const apiVersion = "2015-07-05"
 
-var AcceptLanguage string
+var AcceptLanguage = "zh-CN"
+
 var Key string
 
 func Version() string {
-	return "2.1.2"
+	return "2.1.3"
 }
 
 const defaultHTTPTimeout = 80 * time.Second
@@ -81,12 +81,16 @@ func SetBackend(backend SupportedBackend, b Backend) {
 
 func (s BackendConfiguration) Call(method, path, key string, form *url.Values, params []byte, v interface{}) error {
 	var body io.Reader
-	if form != nil && len(*form) > 0 {
-		data := form.Encode()
-		if strings.ToUpper(method) == "GET" {
+	if strings.ToUpper(method) == "POST" {
+		body = bytes.NewBuffer(params)
+	}
+
+	if strings.ToUpper(method) == "GET" {
+		if form != nil && len(*form) > 0 {
+			data := form.Encode()
 			path += "?" + data
 		} else {
-			body = bytes.NewBuffer(params)
+			panic("url.value is nil")
 		}
 	}
 
@@ -121,7 +125,7 @@ func (s *BackendConfiguration) NewRequest(method, path, key, contentType string,
 	}
 
 	req.SetBasicAuth(Key, "")
-	req.Header.Add("Pingpp-version", apiVersion)
+	req.Header.Add("Pingpluspplus-Version", apiVersion)
 	req.Header.Add("User-Agent", "Pingpp go SDK version:"+Version())
 	req.Header.Add("Content-Type", contentType)
 	req.Header.Add("Accept-Language", AcceptLanguage)
@@ -134,8 +138,8 @@ func (s *BackendConfiguration) Do(req *http.Request, v interface{}) error {
 	}
 	start := time.Now()
 	res, err := s.HTTPClient.Do(req)
-	if LogLevel > 2 {
-		log.Printf("Completed in %v\n", time.Since(start))
+	if LogLevel > 0 {
+		log.Printf("Request to pingpp completed in %v\n", time.Since(start))
 	}
 
 	if err != nil {
@@ -156,7 +160,7 @@ func (s *BackendConfiguration) Do(req *http.Request, v interface{}) error {
 
 	if res.StatusCode >= 400 {
 		var errMap map[string]interface{}
-		json.Unmarshal(resBody, &errMap)
+		JsonDecode(resBody, &errMap)
 
 		if e, found := errMap["error"]; !found {
 			err := errors.New(string(resBody))
@@ -192,7 +196,7 @@ func (s *BackendConfiguration) Do(req *http.Request, v interface{}) error {
 	}
 
 	if v != nil {
-		return json.Unmarshal(resBody, v)
+		return JsonDecode(resBody, v)
 	}
 
 	return nil

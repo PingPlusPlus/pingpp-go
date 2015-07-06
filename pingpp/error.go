@@ -1,7 +1,5 @@
 package pingpp
 
-import "encoding/json"
-
 type ErrorType string
 
 type ErrorCode string
@@ -11,7 +9,6 @@ const (
 	APIErr         ErrorType = "api_error"
 )
 
-// Error is the response returned when a call is unsuccessful.
 type Error struct {
 	Type           ErrorType `json:"type"`
 	Msg            string    `json:"message"`
@@ -20,8 +17,7 @@ type Error struct {
 	HTTPStatusCode int       `json:"-"`
 }
 
-// Error serializes the Error object and prints the JSON string.
 func (e *Error) Error() string {
-	ret, _ := json.Marshal(e)
-	return string(ret)
+	er, _ := JsonEncode(e)
+	return string(er)
 }

@@ -18,10 +18,7 @@ func New(params *pingpp.TransferParams) (*pingpp.Transfer, error) {
 }
 
 func (c Client) New(params *pingpp.TransferParams) (*pingpp.Transfer, error) {
-	body := &url.Values{
-		"amount": {strconv.FormatUint(params.Amount, 10)},
-	}
-	paramsString, errs := json.Marshal(params)
+	paramsString, errs := pingpp.JsonEncode(params)
 	if errs != nil {
 		if pingpp.LogLevel > 0 {
 			log.Printf("ChargeParams Marshall Errors is : %q/n", errs)
@@ -32,7 +29,7 @@ func (c Client) New(params *pingpp.TransferParams) (*pingpp.Transfer, error) {
 		log.Printf("params of redEnvelope request to pingpp is :\n %v\n ", string(paramsString))
 	}
 	transfer := &pingpp.Transfer{}
-	err := c.B.Call("POST", "/transfers", c.Key, body, paramsString, transfer)
+	err := c.B.Call("POST", "/transfers", c.Key, nil, paramsString, transfer)
 	return transfer, err
 }
 
@@ -86,15 +83,10 @@ func (c Client) List(params *pingpp.TransferListParams) *Iter {
 	})}
 }
 
-// Iter is an iterator for lists of redenvelope.
-// The embedded Iter carries methods with it;
-// see its documentation for details.
 type Iter struct {
 	*pingpp.Iter
 }
 
-// redenvelope returns the most recent RedEnvelope
-// visited by a call to Next.
 func (i *Iter) Transfer() *pingpp.Transfer {
 	return i.Current().(*pingpp.Transfer)
 }

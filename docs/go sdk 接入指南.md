@@ -37,10 +37,7 @@ pingpp.LogLevel = 4
 ### Step1： 下载导入
 Go SDK 支持 1.4.2 以上的 Go 语言版本，并且依赖了第三方包 simplejson。
 如果项目本身没有依赖simplejson，导入时首先要获取该包：
-```go
-go get -u github.com/bitly/go-simplejson
-```
-然后获取 SDK ：
+获取 SDK ：
 ```go
 go get -u github.com/pingplusplus/pingpp-go/pingpp
 ```
@@ -71,8 +68,14 @@ charge 模块封装了 charge 接口，供发起交易请求使用。
 charge.New 方法用于发起交易请求获取支付凭据。有两个返回值，第一个是支付凭据，也就是 Charge 对象，Charge 对象的字段介绍请看 [API 文档]()。第二个返回值是错误信息 error。
 以 alipay 为例展示如何发起支付请求，其他渠道如何发起支付请求详见[关于渠道]()：
 ```go
+// metadata 是 map 类型
 metadata := make(map[string]interface{})
 metadata["color"] = "red"
+
+// extra 是 map 类型,相关取值详见 api 文档
+extra := make(map[string]interface{})
+
+
 /**
  *@param Order_no         商户订单号，商户对订单的唯一标识。必填字段
  *@param App              appid，Ping++ 分配的应用 ID。必填字段
@@ -80,6 +83,7 @@ metadata["color"] = "red"
  *@param Channel          渠道名称，如 alipay,即支付宝手机支付。必填字段
  *@param Currency         币种，目前只支持 cny，即人民币。必填字段
  *@param Client_ip        发起支付请求的 Client 的 IPv4 地址。必填字段
+ *@param Extra            某些渠道所需的额外参数。可选字段
  *@param Subject          商品的标题。必填字段
  *@param Body             商品的描述信息。必填字段
  *@param Time_expire      订单失效事件， 10 位长度的时间戳。可选字段
@@ -94,6 +98,7 @@ params := &pingpp.ChargeParams{
   Channel:     "alipay", 
   Currency:    "cny", 
   Client_ip:   "127.0.0.1", 
+  Extra:       extra,
   Subject:     "Your Subject", 
   Body:        "Your Body", 
   Time_expire: 1410834527 
@@ -344,4 +349,4 @@ signature := r.Header.Get("x-pingplusplus-signature")
 由于某些原因，验证签名的方法并没有集成在 SDK 里，但是我们提供了 Demo ，具体参考[Go SDK Demo](https://github.com/PingPlusPlus/pingpp-go/blob/master/verifyDemo.go)。
 
 
-**当商户 Server 能够正确获得支付凭据并且正确返回给 Client ，而且也完成了对Webhooks 的监听、接收和验证。至此， Server  SDK 的接入已经完成。现在需要去完成 Client SDK 的接入**
+**当商户 Server 能够正确获得支付凭据并且正确返回给 Client ，而且也完成了对 Webhooks 的监听、接收和验证。至此， Server  SDK 的接入已经完成。现在需要去完成 Client SDK 的接入**

@@ -1,5 +1,7 @@
 package main
 
+//该示例只是模拟服务器端，可配合客户端体验完整的支付流程
+
 import (
 	"bytes"
 	"encoding/json"
@@ -11,6 +13,7 @@ import (
 	"net/http"
 	// utils "pingpp/pingpp/utils"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -37,23 +40,23 @@ func bind() {
 }
 
 func pay(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
+	if strings.ToUpper(r.Method) == "GET" {
 		http.NotFound(w, r)
-	} else if r.Method == "POST" {
+	} else if strings.ToUpper(r.Method) == "POST" {
 		var chargeParams pingpp.ChargeParams
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Content-Type", "application/json")
+		defer r.Body.Close()
 		buf := new(bytes.Buffer)
 		buf.ReadFrom(r.Body)
 		json.Unmarshal(buf.Bytes(), &chargeParams)
 		r := rand.New(rand.NewSource(time.Now().UnixNano()))
 		orderno := r.Intn(999999999999999)
-		pingpp.Key = "YOUR-KEY"
+		pingpp.Key = "sk_test_ibbTe5jLGCi5rzfH4OqPW9KC"
 
-		
 		params := &pingpp.ChargeParams{
 			Order_no:  strconv.Itoa(orderno),
-			App:       pingpp.App{Id: "YOUR-APP-ID"},
+			App:       pingpp.App{Id: "app_1Gqj58ynP0mHeX1q"},
 			Amount:    chargeParams.Amount,
 			Channel:   chargeParams.Channel,
 			Currency:  "cny",

@@ -7,14 +7,11 @@ import (
 	"strconv"
 )
 
-// Client is used to invoke /charges APIs.
-
 type Client struct {
 	B   pingpp.Backend
 	Key string
 }
 
-// Get returns the details of a charge.
 func Get(id string) (*pingpp.Event, error) {
 	return getC().Get(id)
 }
@@ -32,7 +29,6 @@ func (c Client) Get(id string) (*pingpp.Event, error) {
 	return eve, err
 }
 
-// List returns a list of charges.
 func List(params *pingpp.EventListParams) *Iter {
 	return getC().List(params)
 }
@@ -69,15 +65,10 @@ func (c Client) List(params *pingpp.EventListParams) *Iter {
 	})}
 }
 
-// Iter is an iterator for lists of Charges.
-// The embedded Iter carries methods with it;
-// see its documentation for details.
 type Iter struct {
 	*pingpp.Iter
 }
 
-// Charge returns the most recent Charge
-// visited by a call to Next.
 func (i *Iter) Event() *pingpp.Event {
 	return i.Current().(*pingpp.Event)
 }
