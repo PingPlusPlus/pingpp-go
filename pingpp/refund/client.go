@@ -6,7 +6,6 @@ import (
 	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"log"
 	"net/url"
-	"strconv"
 )
 
 type Client struct {
