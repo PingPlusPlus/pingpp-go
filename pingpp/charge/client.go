@@ -1,11 +1,11 @@
 package charge
 
 import (
-	"encoding/json"
 	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"log"
 	"net/url"
 	"strconv"
+	"time"
 )
 
 type Client struct {
