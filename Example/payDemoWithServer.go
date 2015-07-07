@@ -49,21 +49,51 @@ func pay(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
 		buf := new(bytes.Buffer)
 		buf.ReadFrom(r.Body)
+
 		json.Unmarshal(buf.Bytes(), &chargeParams)
 		r := rand.New(rand.NewSource(time.Now().UnixNano()))
 		orderno := r.Intn(999999999999999)
+		extra := make(map[string]interface{})
+		switch strings.ToLower(chargeParams.Channel) {
+		case "upacp_wap":
+			extra["result_url"] = "http://www.yourdomain.com/result"
+		case "alipay_wap":
+			extra["cancel_url"] = "http://www.yourdomain.com/cancel"
+			extra["success_url"] = "http://www.yourdomain.com/success"
+		case "bfb_wap":
+			extra["result_url"] = "http://www.yourdomain.com/result"
+			extra["bfb_login"] = false
+		case "yeepay_wap":
+			extra["product_category"] = "1"
+			extra["identity_id"] = "your_identity_id"
+			extra["identity_type"] = 1
+			extra["terminal_type"] = 1
+			extra["terminal_id"] = "1sdf"
+			extra["user_ua"] = "1qwec"
+			extra["result_url"] = "http://www.yourdomain.com/result"
+		case "wx_pub":
+			extra["open_id"] = "your_openid"
+		case "jdpay_wap":
+			extra["success_url"] = "http://www.yourdomain.com/success"
+			extra["fail_url"] = "http://www.yourdomain.com/fail"
+			extra["token"] = "your_token_from_jd"
+		case "wx_pub_qr":
+			extra["product_id"] = "your_productid"
+
+		}
+
 		pingpp.Key = "sk_test_ibbTe5jLGCi5rzfH4OqPW9KC"
 
 		params := &pingpp.ChargeParams{
 			Order_no:  strconv.Itoa(orderno),
 			App:       pingpp.App{Id: "app_1Gqj58ynP0mHeX1q"},
 			Amount:    chargeParams.Amount,
-			Channel:   chargeParams.Channel,
+			Channel:   strings.ToLower(chargeParams.Channel),
 			Currency:  "cny",
 			Client_ip: "127.0.0.1",
 			Subject:   "Your Subject",
 			Body:      "Your Body",
-			Extra:     pingpp.Extra{Open_id: "your open_id"},
+			Extra:     extra,
 		}
 
 		//返回的第一个参数是 charge 对象，你需要将其转换成 json 给客户端，或者客户端接收后转换。

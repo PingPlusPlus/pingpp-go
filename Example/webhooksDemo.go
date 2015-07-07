@@ -2,7 +2,7 @@ package main
 
 import (
 	"bytes"
-	"encoding/json"
+	// "encoding/json"
 	"fmt"
 	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"log"
@@ -25,7 +25,7 @@ func webhook(w http.ResponseWriter, r *http.Request) {
 	if strings.ToUpper(r.Method) == "POST" {
 		buf := new(bytes.Buffer)
 		buf.ReadFrom(r.Body)
-		signature := r.Header.Get("x-pingplusplus-signature")
+		// signature := r.Header.Get("x-pingplusplus-signature")
 		webhook, err := pingpp.ParseWebhooks(buf.Bytes())
 		fmt.Println(webhook.Type)
 		if err != nil {
