@@ -1,3 +1,7 @@
+## 2.1.4
+* 解决 get list 时参数为空会 panic 的问题。
+
+
 ## 2.1.3  
 * 更改 extra 字段为 map，
 * 解决 bool 类型为 false 时 json 不解析的问题
