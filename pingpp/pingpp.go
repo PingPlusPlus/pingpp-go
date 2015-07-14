@@ -13,14 +13,14 @@ import (
 )
 
 const apiBase = "https://api.pingxx.com/v1"
-const apiVersion = "2015-07-05"
+const apiVersion = "2015-07-14"
 
 var AcceptLanguage = "zh-CN"
 
 var Key string
 
 func Version() string {
-	return "2.1.3"
+	return "2.1.4"
 }
 
 const defaultHTTPTimeout = 80 * time.Second
@@ -89,8 +89,6 @@ func (s BackendConfiguration) Call(method, path, key string, form *url.Values, p
 		if form != nil && len(*form) > 0 {
 			data := form.Encode()
 			path += "?" + data
-		} else {
-			panic("url.value is nil")
 		}
 	}
 
@@ -162,7 +160,7 @@ func (s *BackendConfiguration) Do(req *http.Request, v interface{}) error {
 		var errMap map[string]interface{}
 		JsonDecode(resBody, &errMap)
 
-		if e, found := errMap["error"]; !found {
+		if e, ok := errMap["error"]; !ok {
 			err := errors.New(string(resBody))
 			if LogLevel > 0 {
 				log.Printf("Unparsable error returned from Pingpp: %v\n", err)
