@@ -17,6 +17,7 @@ type Refund struct {
 	Order_no     string                 `json:"order_no"`
 	Amount       uint64                 `json:"amount"`
 	Succeed      bool                   `json:"succeed"`
+	Status       string                 `json:"status"`
 	Created      uint64                 `json:"created"`
 	Time_succeed uint64                 `json:"time_succeed"`
 	Description  string                 `json:"description"`
