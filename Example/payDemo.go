@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
+	"github.com/pingplusplus/pingpp-go/pingpp/charge"
 	"log"
 	"math/rand"
-	pingpp "pingpp-go/pingpp"
-	"pingpp-go/pingpp/charge"
 	"strconv"
 	"time"
 )
@@ -15,7 +15,7 @@ func init() {
 	// LogLevel 是 Go SDK 提供的 debug 开关
 	pingpp.LogLevel = 2
 	//设置 API Key
-	pingpp.Key = "sk_live_vjfr90jj1q985KuPO84iP8KO"
+	pingpp.Key = "sk_test_ibbTe5jLGCi5rzfH4OqPW9KC"
 	//获取 SDK 版本
 	fmt.Println("Go SDK Version:", pingpp.Version())
 	//设置错误信息语言，默认是中文
@@ -64,9 +64,9 @@ func ExampleCharge_new() {
 
 	params := &pingpp.ChargeParams{
 		Order_no:  strconv.Itoa(orderno),
-		App:       pingpp.App{Id: "app_LibTW1n1SOq9Pin1"},
+		App:       pingpp.App{Id: "app_1Gqj58ynP0mHeX1q"},
 		Amount:    1000,
-		Channel:   "alipay_wap",
+		Channel:   "alipay",
 		Currency:  "cny",
 		Client_ip: "127.0.0.1",
 		Subject:   "Your Subject",

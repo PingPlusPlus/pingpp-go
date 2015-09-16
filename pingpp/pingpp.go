@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-const apiBase = "https://api.pingpluspl.us/v1"
+const apiBase = "https://api.pingxx.com/v1"
 const apiVersion = "2015-07-23"
 
 var AcceptLanguage = "zh-CN"
@@ -45,7 +45,7 @@ type Backends struct {
 	API Backend
 }
 
-// Loglevel 是 debug 模式开关.
+// loglevel 是 debug 模式开关.
 // 0: no logging
 // 1: errors only
 // 2: errors + informational (default)

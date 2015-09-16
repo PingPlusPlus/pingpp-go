@@ -4,9 +4,9 @@ import (
 	"bytes"
 	// "encoding/json"
 	"fmt"
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"log"
 	"net/http"
-	pingpp "pingpp-go/pingpp"
 	"strings"
 )
 
