@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
-	"github.com/pingplusplus/pingpp-go/pingpp/transfer"
 	"log"
 	"math/rand"
+	pingpp "pingpp-go/pingpp"
+	"pingpp-go/pingpp/transfer"
 	"strconv"
 	"time"
 )

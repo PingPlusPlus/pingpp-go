@@ -3,10 +3,10 @@ package utils
 import (
 	"bytes"
 	"crypto/sha1"
-	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"log"
 	"net/http"
 	"net/url"
+	pingpp "pingpp-go/pingpp"
 )
 
 type Token struct {

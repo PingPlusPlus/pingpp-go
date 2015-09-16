@@ -3,9 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
-	"github.com/pingplusplus/pingpp-go/pingpp/event"
 	"log"
+	pingpp "pingpp-go/pingpp"
+	"pingpp-go/pingpp/event"
 )
 
 func init() {

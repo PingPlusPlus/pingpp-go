@@ -3,9 +3,9 @@ package refund
 
 import (
 	"fmt"
-	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"log"
 	"net/url"
+	pingpp "pingpp-go/pingpp"
 )
 
 type Client struct {
