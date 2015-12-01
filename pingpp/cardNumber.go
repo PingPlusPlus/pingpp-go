@@ -11,5 +11,6 @@ type CardNumber struct {
 }
 
 type CardQueryParams struct {
-	App string
+	App         string `json:"app"`
+	Card_number string `json:"card_number"`
 }

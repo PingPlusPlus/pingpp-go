@@ -86,7 +86,7 @@ func (c Client) Update(cus_id string, params *pingpp.CustomerUpdateParams) (*pin
 	}
 
 	customer := &pingpp.Customer{}
-	errch := c.B.Call("POST", fmt.Sprintf("/customers/%v", cus_id), c.Key, nil, paramsString, customer)
+	errch := c.B.Call("PUT", fmt.Sprintf("/customers/%v", cus_id), c.Key, nil, paramsString, customer)
 	if errch != nil {
 		if pingpp.LogLevel > 0 {
 			log.Printf("%v\n", errch)

@@ -10,9 +10,9 @@ import (
 
 func init() {
 	// LogLevel 是 Go SDK 提供的 debug 开关
-	pingpp.LogLevel = 2
+	pingpp.LogLevel = 4
 	//设置 API Key
-	pingpp.Key = "sk_live_vjfr90jj1q985KuPO84iP8KO"
+	pingpp.Key = "sk_test_zL0abDjXX1mP4qLinL5y5mPG"
 	//获取 SDK 版本
 	fmt.Println("Go SDK Version:", pingpp.Version())
 	//设置错误信息语言，默认是中文
@@ -21,20 +21,10 @@ func init() {
 
 func ExampleCard_new() {
 
-	cus_id := "cus_9K4KS8jLKq50yP"
-
-	// params := make(map[string]interface{})
-	// params["card_number"] = "6222022003008481261"
-	// params["brand"] = "UnionPay"
-	// params["funding"] = "debit"
-	// params["bank"] = "icbc"
-	// params["name"] = "张三"
-	// params["cred_type"] = "ID"
-	// params["cred_number"] = "350583199009153732"
-	// params["phone_number"] = "13045678901"
+	cus_id := "cus_ALeWGZ8lsN9Czk"
 
 	param := &pingpp.CardParams{
-		Source: "tok_u5qrjPjL4yH4zz9WPKjjjvvT",
+		Source: "tok_AMBKETCThoW7nYUBgpnvhwfu",
 	}
 
 	card, err := card.New(cus_id, param)
@@ -49,7 +39,7 @@ func ExampleCard_new() {
 }
 
 func ExampleCard_get() {
-	card, err := card.Get("cus_9K4KS8jLKq50yP", "card_brvbP0rLuPW5G440W5jXjjT4")
+	card, err := card.Get("cus_ALeWGZ8lsN9Czk", "card_ALeWQUNinv0SHJhsCjBbJ29q")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -64,7 +54,7 @@ func ExampleCard_list() {
 	params.Filters.AddFilter("limit", "", "3")
 	//设置是不是只需要之前设置的 limit 这一个查询参数
 	params.Single = true
-	cus_id := "cus_qn5enTSyzPOGfz"
+	cus_id := "cus_ALeWGZ8lsN9Czk"
 	i := card.List(cus_id, params)
 	for i.Next() {
 		c := i.Card()
@@ -75,7 +65,7 @@ func ExampleCard_list() {
 }
 
 func ExampleCard_delete() {
-	card, err := card.Delete("cus_9K4KS8jLKq50yP", "card_brvbP0rLuPW5G440W5jXjjT4")
+	card, err := card.Delete("cus_ALeWGZ8lsN9Czk", "card_ALeWQUNinv0SHJhsCjBbJ29q")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -85,5 +75,5 @@ func ExampleCard_delete() {
 }
 
 func main() {
-	ExampleCard_list()
+	ExampleCard_new()
 }
