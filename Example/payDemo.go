@@ -23,18 +23,22 @@ func init() {
 }
 
 func ExampleCharge_new() {
+	//针对metadata字段，可以在每一个 charge 对象中加入订单的一些详情，如颜色、型号等属性
 	metadata := make(map[string]interface{})
 	metadata["color"] = "red"
+	//metadata["type"] = "shoes"
+	//metadata["size"] = "40"
 	//extra 参数根据渠道不同有区别，下面注释的是一部分的示例
 	extra := make(map[string]interface{})
-	// //upacp_wap
+
+	// upacp_wap
 	// extra["result_url"] = "http://www.yourdomain.com"
 
-	//bfb_wap
+	// bfb_wap
 	// extra["result_url"] = "http://www.yourdomain.com"
 	// extra["bfb_login"] = false
 
-	// //yeepay_wap
+	// yeepay_wap
 	// extra["product_category"] = "1"
 	// extra["identity_id"] = "sadfadsjkfhasuidfhbjdasf"
 	// extra["identity_type"] = 1
@@ -43,11 +47,11 @@ func ExampleCharge_new() {
 	// extra["user_ua"] = "1qwec"
 	// extra["result_url"] = "http://www.yourdomain.com"
 
-	// //alipay_wap
+	// alipay_wap
 	// extra["cancel_url"] = "http://www.yourdomain.com"
 	// extra["success_url"] = "http://www.yourdomain.com"
 
-	// //wx_pub
+	// wx_pub
 	// extra["open_id"] = "sdafdgagfd"
 
 	//jdpay_wap
@@ -55,8 +59,15 @@ func ExampleCharge_new() {
 	// extra["fail_url"] = "http://www.yourdomain.com"
 	// extra["token"] = "dsafadsfasdfadsjuyhfnhujkijunhaf"
 
-	// //wx_pub_qr
+	// wx_pub_qr
 	// extra["product_id"] = "23sf"
+
+	//  cnp
+	//	extra["source"] = "tok_fX1y1KifbPS0DqD4C8HOyH84"
+	//	sms_code := make(map[string]interface{})
+	//	extra["sms_code"] = sms_code
+	//	sms_code["id"] = "sms_av900KPWrL84LqHqv5O44W54"
+	//	sms_code["code"] = "123456"
 
 	//这里是随便设置的随机数作为订单号，仅作示例，该方法可能产生相同订单号，商户请自行生成，不要纠结该方法。
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
