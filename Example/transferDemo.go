@@ -16,6 +16,8 @@ func init() {
 	pingpp.Key = "sk_test_ibbTe5jLGCi5rzfH4OqPW9KC"
 	fmt.Println("Go SDK Version:", pingpp.Version())
 	pingpp.AcceptLanguage = "zh-CN"
+	//设置商户的私钥 记得在Ping++上配置公钥
+	//pingpp.AccountPrivateKey
 }
 
 func ExampleTransfer_new() {

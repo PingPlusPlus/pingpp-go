@@ -2,6 +2,7 @@ package pingpp
 
 import (
 	"bytes"
+	"encoding/base64"
 	"errors"
 	"io"
 	"io/ioutil"
@@ -12,11 +13,13 @@ import (
 	"time"
 )
 
-const apiBase = "https://api.pingxx.com/v1"
+const apiBase = "http://api.pingxx.com/v1"
 const apiVersion = "2015-07-23"
 
 var AcceptLanguage = "zh-CN"
 
+//商户的私钥
+var AccountPrivateKey string
 var Key string
 
 func Version() string {
@@ -122,11 +125,24 @@ func (s *BackendConfiguration) NewRequest(method, path, key, contentType string,
 		return nil, err
 	}
 
+	if strings.ToUpper(method) == "POST" && len(AccountPrivateKey) > 0 {
+		sign, err := GenSign([]byte(params), []byte(AccountPrivateKey))
+		if err != nil {
+			if LogLevel > 0 {
+				log.Printf("Cannot create RSA signature: %v\n", err)
+			}
+			return nil, err
+		}
+		encodeSign := base64.StdEncoding.EncodeToString(sign)
+		req.Header.Add("Pingplusplus-Signature", encodeSign)
+	}
+
 	req.SetBasicAuth(Key, "")
 	req.Header.Add("Pingpluspplus-Version", apiVersion)
 	req.Header.Add("User-Agent", "Pingpp go SDK version:"+Version())
 	req.Header.Add("Content-Type", contentType)
 	req.Header.Add("Accept-Language", AcceptLanguage)
+
 	return req, nil
 }
 

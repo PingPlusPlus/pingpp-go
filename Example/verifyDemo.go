@@ -53,7 +53,7 @@ EsWDR34yF7Dr4h0NyIzQ6UmeKHZoXo+tJ0wOq8gl5uN52uCXSQ==
 
 //验证 Webhook 签名
 func main() {
-	verifyRsaSign()
+	genRsaSign()
 }
 
 //目前只在webhook中使用
