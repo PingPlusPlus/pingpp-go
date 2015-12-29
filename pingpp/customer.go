@@ -11,7 +11,7 @@ type Customer struct {
 	Currency       string                 `json:"currency"`
 	Description    string                 `json:"description"`
 	Metadata       map[string]interface{} `json:"metadata"`
-	Source         *CardList              `json:"source"`
+	Source         *CardList              `json:"sources"`
 	Default_source string                 `json:"default_source"`
 }
 
