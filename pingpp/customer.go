@@ -6,6 +6,7 @@ type Customer struct {
 	Created        int64                  `json:"created"`
 	Livemode       bool                   `json:"livemode"`
 	App            string                 `json:"app"`
+	Name           string                 `json:"name"`
 	Email          string                 `json:"email"`
 	Currency       string                 `json:"currency"`
 	Description    string                 `json:"description"`
