@@ -33,7 +33,9 @@ type Transfer struct {
 	Recipient       string                 `json:"recipient"`
 	Description     string                 `json:"description"`
 	Transaction_no  string                 `json:"transaction_no"`
+	Failure_msg     string                 `json:"failure_msg"`
 	Extra           map[string]interface{} `json:"extra"`
+	Metadata        map[string]interface{} `json:"metadata"`
 }
 
 type TransferList struct {
