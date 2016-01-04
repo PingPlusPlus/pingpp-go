@@ -1,3 +1,9 @@
+/* *
+ * Ping++ Server SDK
+ * 说明：
+ * 以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写, 并非一定要使用该代码。
+ * 该代码仅供学习和研究 Ping++ SDK 使用，只是提供一个参考。
+ */
 package main
 
 import (
@@ -14,6 +20,7 @@ import (
 func init() {
 	pingpp.LogLevel = 2
 	pingpp.Key = "sk_test_ibbTe5jLGCi5rzfH4OqPW9KC"
+
 	fmt.Println("Go SDK Version:", pingpp.Version())
 	pingpp.AcceptLanguage = "zh-CN"
 	//设置商户的私钥 记得在Ping++上配置公钥
@@ -50,7 +57,7 @@ func ExampleTransfer_new() {
 }
 
 func ExampleTransfer_get() {
-	transfer, err := transfer.Get("tr_G084mTu5WHiDyzT4mLivLGKO")
+	transfer, err := transfer.Get("tr_98WLGObXbPKO1avLe5CqH0WH")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -72,5 +79,5 @@ func ExampleTransfer_list() {
 }
 
 func main() {
-	ExampleTransfer_new()
+	ExampleTransfer_get()
 }
