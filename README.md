@@ -9,13 +9,15 @@ pingpp 文件夹里是 SDK 文件
 建议 Go 语言版本 1.4 以上 
 
 ## 安装
-```
-// 导入 pingpp 模块
+
+导入 pingpp 模块
+
 ```go
 go get github.com/pingplusplus/pingpp-go/pingpp
 ```
 
-导入后，在调用的时候需要：
+导入后，在调用的时候需要
+
 ```go
 import (pingpp "github.com/pingplusplus/pingpp-go/pingpp")
 ```
@@ -103,6 +105,7 @@ SDK 提供了 debug 模式。只需要更改 pingpp.go 文件中的 LogLevel 变
 
 ## 版本号
 调用
+
 ```go
 pingpp.Version()
 ```
@@ -110,8 +113,11 @@ pingpp.Version()
 
 ## 中文报错信息
 Ping++ 支持中文和英文两种语言的报错信息。SDK 默认的 Accept-Language 是英文的，如果您想要接收到的错误提示是中文的，只需要设置一下即可：
+
 ```go
 pingpp.AcceptLanguage = "zh-CN"
 ```
 
-**详细信息请参考 [API 文档](https://pingxx.com/document/api?go)。**
+**详细信息请参考 [API 文档](https://pingxx.com/document/api?go)**。
+
+
