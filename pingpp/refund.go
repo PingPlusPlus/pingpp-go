@@ -1,7 +1,7 @@
 package pingpp
 
 type RefundParams struct {
-	Amount      uint64                 `json:"amount"`
+	Amount      uint64                 `json:"amount,omitempty"`
 	Description string                 `json:"description"`
 	Metadata    map[string]interface{} `json:"metadata,omitempty"`
 }

@@ -17,7 +17,7 @@ func init() {
 
 func ExampleRefund_new() {
 	params := &pingpp.RefundParams{
-		Amount:      1,
+		Amount:      1, //可以注释不上传
 		Description: "12345",
 	}
 	re, err := refund.New("ch_id", params) //ch_id 是已付款的订单号
