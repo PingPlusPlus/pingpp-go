@@ -1,0 +1,5 @@
+{
+	"ImportPath": "github.com/pingplusplus/pingpp-go",
+	"GoVersion": "go1.5",
+	"Deps": []
+}

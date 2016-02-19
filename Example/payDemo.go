@@ -7,16 +7,16 @@
 package main
 
 import (
-//"encoding/base64"
+	//"encoding/base64"
 	"encoding/json"
 	"fmt"
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
+	"github.com/pingplusplus/pingpp-go/pingpp/charge"
 	"log"
 	"math/rand"
-	pingpp "pingpp-go/pingpp"
-	"pingpp-go/pingpp/charge"
 	"strconv"
 	"time"
-//"io/ioutil"
+	//"io/ioutil"
 )
 
 func init() {
@@ -131,7 +131,6 @@ func ExampleCharge_new() {
 		Extra:     extra,
 		Metadata:  metadata,
 	}
-
 
 	//返回的第一个参数是 charge 对象，你需要将其转换成 json 给客户端，或者客户端接收后转换。
 	ch, err := charge.New(params)

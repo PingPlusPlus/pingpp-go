@@ -1,6 +1,9 @@
 package pingpp
 
 import (
+	"bytes"
+	"encoding/json"
+
 	"crypto"
 	"crypto/rand"
 	"crypto/rsa"
@@ -8,9 +11,35 @@ import (
 	//"encoding/base64"
 	"encoding/pem"
 	"errors"
-	//"fmt"
-	//"io/ioutil"
 )
+
+// 简单封装了json的Marshal功能
+// pingpp.JsonEncode(param1)
+func JsonEncode(v interface{}) ([]byte, error) {
+	return json.Marshal(&v)
+}
+
+// 简单封装了json的UnMarshal功能
+// Example pingpp.JsonDecode(param1, param2)
+// param1：需要转换成结构体的json数据
+// param2：转换后数据容器
+func JsonDecode(p []byte, v interface{}) error {
+	obj := json.NewDecoder(bytes.NewBuffer(p))
+	obj.UseNumber()
+	return obj.Decode(&v)
+}
+
+// 转换webhooks api请求的body到已定的数据结构
+func ParseWebhooks(webhooks []byte) (*Event, error) {
+	var event Event
+	if webhooks != nil && len(webhooks) > 0 {
+		err := JsonDecode(webhooks, &event)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return &event, nil
+}
 
 //用商户的私钥去生成签名目前在创建订单的时候使用
 func GenSign(data []byte, privateKey []byte) (sign []byte, err error) {

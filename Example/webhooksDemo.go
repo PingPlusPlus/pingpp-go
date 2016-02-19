@@ -8,13 +8,13 @@ package main
 
 import (
 	"bytes"
-// "encoding/json"
+	// "encoding/json"
 	"encoding/base64"
-	"io/ioutil"
 	"fmt"
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
+	"io/ioutil"
 	"log"
 	"net/http"
-	pingpp "pingpp-go/pingpp"
 	"strings"
 )
 

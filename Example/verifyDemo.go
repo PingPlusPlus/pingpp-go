@@ -9,8 +9,8 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"io/ioutil"
-	pingpp "pingpp-go/pingpp"
 )
 
 // 商户的私钥(可以放在变量中或保存到文件中)，还有一个公钥需要上传至Ping++
