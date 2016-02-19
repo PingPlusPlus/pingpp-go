@@ -68,7 +68,6 @@ func (f *Filters) AppendTo(values *url.Values) {
 	}
 }
 
-/* 2016-02-16 当前情况下没有代码调用了该函数
 type Params struct {
 	Exp   []string
 	Meta  map[string]string
@@ -110,4 +109,3 @@ func (p *Params) AppendTo(body *url.Values) {
 		}
 	}
 }
-*/
