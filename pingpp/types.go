@@ -1,11 +1,6 @@
 // ping++ golang sdk 企业转账数据类型定义
 package pingpp
 
-import (
-	"net/url"
-	"strconv"
-)
-
 //应用信息数据类型
 type App struct {
 	Id string `json:"id"`

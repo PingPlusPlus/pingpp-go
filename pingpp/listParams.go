@@ -3,6 +3,7 @@ package pingpp
 import (
 	"fmt"
 	"net/url"
+	"strconv"
 )
 
 const (
