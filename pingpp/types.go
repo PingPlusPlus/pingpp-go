@@ -22,58 +22,6 @@ type ListMeta struct {
 	URL    string `json:"url"`
 }
 
-type Token struct {
-	ID         string                 `json:"id"`
-	Object     string                 `json:"object"`
-	Created    int64                  `json:"created"`
-	Livemode   bool                   `json:"livemode"`
-	Used       bool                   `json:"used"`
-	Time_used  int64                  `json:"time_used"`
-	Attachable bool                   `json:"attachable"`
-	Type       string                 `json:"type"`
-	Card       map[string]interface{} `json:"card"`
-	Sms_code   map[string]interface{} `json:"sms_code"`
-}
-
-type TokenParams struct {
-	Order_no   string      `json:"order_no"`
-	Amount     uint64      `json:"amount"`
-	App        string      `json:"app"`
-	Attachable bool        `json:"attachable"`
-	Card       interface{} `json:"card"`
-}
-
-// 列表查询请求参数
-type ListParams struct {
-	Start, End string
-	Limit      int
-	Filters    Filters
-
-	Single bool
-}
-
-func (p *ListParams) AppendTo(body *url.Values) {
-	if len(p.Filters.f) > 0 {
-		p.Filters.AppendTo(body)
-	}
-
-	if len(p.Start) > 0 {
-		body.Add(startafter, p.Start)
-	}
-
-	if len(p.End) > 0 {
-		body.Add(endbefore, p.End)
-	}
-
-	if p.Limit > 0 {
-		if p.Limit > 100 {
-			p.Limit = 100
-		}
-
-		body.Add("limit", strconv.Itoa(p.Limit))
-	}
-}
-
 /*支付相关数据类型*/
 type (
 	// 支付请求数据类型
@@ -303,10 +251,30 @@ type (
 		Bank     string `json:"bank"`
 		Customer string `json:"customer"`
 	}
-)
 
-/*顾客相关数据类型*/
-type (
+	//查询 Token 对象的请求参数
+	TokenParams struct {
+		Order_no   string      `json:"order_no"`
+		Amount     uint64      `json:"amount"`
+		App        string      `json:"app"`
+		Attachable bool        `json:"attachable"`
+		Card       interface{} `json:"card"`
+	}
+
+	//Token 对象包含card信息
+	Token struct {
+		ID         string                 `json:"id"`
+		Object     string                 `json:"object"`
+		Created    int64                  `json:"created"`
+		Livemode   bool                   `json:"livemode"`
+		Used       bool                   `json:"used"`
+		Time_used  int64                  `json:"time_used"`
+		Attachable bool                   `json:"attachable"`
+		Type       string                 `json:"type"`
+		Card       map[string]interface{} `json:"card"`
+		Sms_code   map[string]interface{} `json:"sms_code"`
+	}
+
 	//创建顾客的请求参数
 	CustomerParams struct {
 		App         string                 `json:"app"`
