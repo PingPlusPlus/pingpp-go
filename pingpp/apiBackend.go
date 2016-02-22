@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-//api相关的后端类型，此类型线程不安全
+//api相关的后端类型
 type ApiBackend struct {
 	Type       SupportedBackend
 	URL        string
