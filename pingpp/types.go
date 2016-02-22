@@ -4,7 +4,7 @@
 //    2.订单退款对象Refund;
 //    3.红包对象RedEnvelope;
 //    4.企业转账对象Transfer;
-//    5.应用内快捷支付对象Card/Customer/Token 相关
+//    5.应用内快捷支付对象Card/Customer/Token;
 package pingpp
 
 //应用信息数据类型
