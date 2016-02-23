@@ -65,7 +65,7 @@ func (s *ApiBackend) NewRequest(method, path, key, contentType string, body io.R
 		return nil, err
 	}
 
-	if strings.ToUpper(method) == "POST" && len(AccountPrivateKey) > 0 {
+	if (strings.ToUpper(method) == "POST" || strings.ToUpper(method) == "PUT") && len(AccountPrivateKey) > 0 {
 		sign, err := GenSign([]byte(params), []byte(AccountPrivateKey))
 		if err != nil {
 			if LogLevel > 0 {
