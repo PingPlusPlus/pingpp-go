@@ -4,7 +4,6 @@
 //    2.订单退款对象Refund;
 //    3.红包对象RedEnvelope;
 //    4.企业转账对象Transfer;
-//    5.应用内快捷支付对象Card/Customer/Token;
 package pingpp
 
 //应用信息数据类型
@@ -219,107 +218,6 @@ type (
 	TransferList struct {
 		ListMeta
 		Values []*Transfer `json:"data"`
-	}
-)
-
-/*应用内快捷支付相关数据类型*/
-type (
-
-	//创建顾客的请求参数
-	CustomerParams struct {
-		App         string                 `json:"app"`
-		Source      interface{}            `json:"source"`
-		Description string                 `json:"description,omitempty"`
-		Email       string                 `json:"email,omitempty"`
-		Metadata    map[string]interface{} `json:"metadata,omitempty"`
-	}
-
-	//更新顾客信息的请求参数
-	CustomerUpdateParams struct {
-		Description    string                 `json:"description,omitempty"`
-		Email          string                 `json:"email,omitempty"`
-		Metadata       map[string]interface{} `json:"metadata,omitempty"`
-		Default_source string                 `json:"default_source,omitempty"`
-	}
-
-	//查询顾客的请求参数
-	CustomerListParams struct {
-		ListParams
-		Created int64
-	}
-
-	//顾客列表数据类型
-	CustomerList struct {
-		ListMeta
-		Values []*Customer `json:"data"`
-	}
-
-	//顾客信息数据类型
-	Customer struct {
-		ID             string                 `json:"id"`
-		Object         string                 `json:"object"`
-		Created        int64                  `json:"created"`
-		Livemode       bool                   `json:"livemode"`
-		App            string                 `json:"app"`
-		Name           string                 `json:"name"`
-		Email          string                 `json:"email"`
-		Currency       string                 `json:"currency"`
-		Description    string                 `json:"description"`
-		Metadata       map[string]interface{} `json:"metadata"`
-		Source         *CardList              `json:"sources"`
-		Default_source string                 `json:"default_source"`
-	}
-
-	//创建 Card 对象的请求参数
-	CardParams struct {
-		Source interface{} `json:"source"`
-	}
-
-	//查询 Card 对象的请求参数
-	CardListParams struct {
-		ListParams
-		Created int64
-	}
-
-	//Card 对象列表数据类型
-	CardList struct {
-		ListMeta
-		Values []*Card `json:"data"`
-	}
-
-	//Card 对象数据类型
-	Card struct {
-		ID       string `json:"id"`
-		Object   string `json:"object"`
-		Created  int64  `json:"created"`
-		Last4    string `json:"last4"`
-		Funding  string `json:"funding"`
-		Brand    string `json:"brand"`
-		Bank     string `json:"bank"`
-		Customer string `json:"customer"`
-	}
-
-	//查询 Token 对象的请求参数
-	TokenParams struct {
-		Order_no   string      `json:"order_no"`
-		Amount     uint64      `json:"amount"`
-		App        string      `json:"app"`
-		Attachable bool        `json:"attachable"`
-		Card       interface{} `json:"card"`
-	}
-
-	//Token 对象包含card信息
-	Token struct {
-		ID         string                 `json:"id"`
-		Object     string                 `json:"object"`
-		Created    int64                  `json:"created"`
-		Livemode   bool                   `json:"livemode"`
-		Used       bool                   `json:"used"`
-		Time_used  int64                  `json:"time_used"`
-		Attachable bool                   `json:"attachable"`
-		Type       string                 `json:"type"`
-		Card       map[string]interface{} `json:"card"`
-		Sms_code   map[string]interface{} `json:"sms_code"`
 	}
 )
 
