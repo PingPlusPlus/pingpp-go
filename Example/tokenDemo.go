@@ -19,39 +19,6 @@ func init() {
 	pingpp.AcceptLanguage = "zh-CN"
 }
 
-func ExampleToken_new() {
-
-	// cus_id := "cus_9K4KS8jLKq50yP"
-
-	params := make(map[string]interface{})
-	params["card_number"] = "6258333366662000"
-	params["brand"] = "UnionPay"
-	params["funding"] = "debit"
-	params["bank"] = "test"
-	params["name"] = "张三"
-	params["cred_type"] = "ID"
-	params["cred_number"] = "310115201510101236"
-	params["phone_number"] = "13045678901"
-
-	param := &pingpp.TokenParams{
-		Card:       params,
-		Order_no:   "yyyuuuiiii",
-		Amount:     1,
-		App:        "app_CyfHGK8eXPuL9uj9",
-		Attachable: true,
-	}
-
-	card, err := token.New(param)
-	if err != nil {
-		errs, _ := json.Marshal(err)
-		fmt.Println(string(errs))
-		log.Fatal(err)
-		return
-	}
-	fmt.Println(card)
-
-}
-
 func ExampleToken_get() {
 	tok, err := token.Get("tok_ALeVGaNi5marUpMu4bapUZSZ")
 	if err != nil {
@@ -63,5 +30,5 @@ func ExampleToken_get() {
 }
 
 func main() {
-	ExampleToken_new()
+	ExampleToken_get()
 }

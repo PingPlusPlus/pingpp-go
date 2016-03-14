@@ -36,6 +36,8 @@ func ExampleCustomer_new() {
 	param := &pingpp.CustomerParams{
 		App:         "app_CyfHGK8eXPuL9uj9",
 		Source:      "tok_ALeWEHQEp1wk9Ebep6a2EhVy",
+		Sms_id:      "sms_BDIQG8JZnQhUN1hAbwYubhP3",
+		Sms_code:    "123222",
 		Description: "create test customer",
 		Email:       "newcustomer@test.com",
 	}

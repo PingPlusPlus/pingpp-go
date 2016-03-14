@@ -229,6 +229,8 @@ type (
 	CustomerParams struct {
 		App         string                 `json:"app"`
 		Source      interface{}            `json:"source"`
+		Sms_id      string                 `json:"sms_id"`
+		Sms_code    string                 `json:"sms_code"`
 		Description string                 `json:"description,omitempty"`
 		Email       string                 `json:"email,omitempty"`
 		Metadata    map[string]interface{} `json:"metadata,omitempty"`
@@ -272,7 +274,9 @@ type (
 
 	//创建 Card 对象的请求参数
 	CardParams struct {
-		Source interface{} `json:"source"`
+		Source   interface{} `json:"source"`
+		Sms_id   string      `json:"sms_id"`
+		Sms_code string      `json:"sms_code"`
 	}
 
 	//查询 Card 对象的请求参数
@@ -304,7 +308,7 @@ type (
 		Order_no   string      `json:"order_no"`
 		Amount     uint64      `json:"amount"`
 		App        string      `json:"app"`
-		Attachable bool        `json:"attachable"`
+		//Attachable bool        `json:"attachable"`
 		Card       interface{} `json:"card"`
 	}
 
@@ -316,7 +320,7 @@ type (
 		Livemode   bool                   `json:"livemode"`
 		Used       bool                   `json:"used"`
 		Time_used  int64                  `json:"time_used"`
-		Attachable bool                   `json:"attachable"`
+		//Attachable bool                   `json:"attachable"`
 		Type       string                 `json:"type"`
 		Card       map[string]interface{} `json:"card"`
 		Sms_code   map[string]interface{} `json:"sms_code"`
