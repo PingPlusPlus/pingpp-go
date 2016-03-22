@@ -23,21 +23,14 @@ func ExampleCustomer_new() {
 
 	// cus_id := "cus_9K4KS8jLKq50yP"
 
-	// params := make(map[string]interface{})
-	// params["card_number"] = "6222022003008481261"
-	// params["brand"] = "UnionPay"
-	// params["funding"] = "debit"
-	// params["bank"] = "icbc"
-	// params["name"] = "张三"
-	// params["cred_type"] = "ID"
-	// params["cred_number"] = "350583199009153732"
-	// params["phone_number"] = "13045678901"
+	sms_code := make(map[string]interface{})
+	sms_code["id"] = "sms_BDIQG8JZnQhUN1hAbwYubhP3"
+	sms_code["code"] = "123222"
 
 	param := &pingpp.CustomerParams{
 		App:         "app_CyfHGK8eXPuL9uj9",
 		Source:      "tok_ALeWEHQEp1wk9Ebep6a2EhVy",
-		Sms_id:      "sms_BDIQG8JZnQhUN1hAbwYubhP3",
-		Sms_code:    "123222",
+		Sms_code:    sms_code,
 		Description: "create test customer",
 		Email:       "newcustomer@test.com",
 	}
