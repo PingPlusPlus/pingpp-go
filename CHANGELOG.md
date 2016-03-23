@@ -9,9 +9,6 @@
 *  Example下的实例更新
 
 ## 2.1.5  
-* Bug 修复 (退款接口的amount参数 非必填)
-
-## 2.1.5  
 * refund 增加 status 字段    
 
 ## 2.1.4
