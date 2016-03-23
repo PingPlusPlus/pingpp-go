@@ -53,10 +53,12 @@ func ExampleCard_new() {
 
 	cus_id := "cus_ALeWGZ8lsN9Czk"
 
+	sms_code := make(map[string]interface{})
+	sms_code["id"] = "sms_BDIQG8JZnQhUN1hAbwYubhP3"
+	sms_code["code"] = "123222"
 	param := &pingpp.CardParams{
 		Source:   "tok_AMBKETCThoW7nYUBgpnvhwfu",
-		Sms_id:   "sms_BDIQG8JZnQhUN1hAbwYubhP3",
-		Sms_code: "123222",
+		Sms_code: sms_code,
 	}
 
 	card, err := card.New(cus_id, param)

@@ -229,8 +229,7 @@ type (
 	CustomerParams struct {
 		App         string                 `json:"app"`
 		Source      interface{}            `json:"source"`
-		Sms_id      string                 `json:"sms_id"`
-		Sms_code    string                 `json:"sms_code"`
+		Sms_code   map[string]interface{} `json:"sms_code"`
 		Description string                 `json:"description,omitempty"`
 		Email       string                 `json:"email,omitempty"`
 		Metadata    map[string]interface{} `json:"metadata,omitempty"`
@@ -275,8 +274,7 @@ type (
 	//创建 Card 对象的请求参数
 	CardParams struct {
 		Source   interface{} `json:"source"`
-		Sms_id   string      `json:"sms_id"`
-		Sms_code string      `json:"sms_code"`
+		Sms_code   map[string]interface{} `json:"sms_code"`
 	}
 
 	//查询 Card 对象的请求参数
