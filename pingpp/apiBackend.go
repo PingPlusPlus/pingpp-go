@@ -78,7 +78,7 @@ func (s *ApiBackend) NewRequest(method, path, key, contentType string, body io.R
 	}
 
 	// 添加Auth参数(获取参见 https://www.pingxx.com/guidance/)满足ping++ api的http BasicAuth验证
-	req.SetBasicAuth(Key, "")
+	req.SetBasicAuth(key, "")
 	req.Header.Add("Pingpluspplus-Version", apiVersion)
 	req.Header.Add("User-Agent", "Pingpp go SDK version:"+Version())
 	req.Header.Add("Content-Type", contentType)
