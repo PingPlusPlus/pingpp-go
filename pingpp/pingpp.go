@@ -45,7 +45,7 @@ type Backend interface {
 
 // 获取当前sdk的版本
 func Version() string {
-	return "2.1.5"
+	return "3.0.3"
 }
 
 /*2016-02-16 当前情况下没有代码调用了该函数
