@@ -101,19 +101,21 @@ type (
 
 	// 付款退款数据类型
 	Refund struct {
-		ID           string                 `json:"id"`
-		Object       string                 `json:"object"`
-		Order_no     string                 `json:"order_no"`
-		Amount       uint64                 `json:"amount"`
-		Succeed      bool                   `json:"succeed"`
-		Status       string                 `json:"status"`
-		Created      uint64                 `json:"created"`
-		Time_succeed uint64                 `json:"time_succeed"`
-		Description  string                 `json:"description"`
-		Failure_code string                 `json:"failure_code"`
-		Failure_msg  string                 `json:"failure_msg"`
-		Metadata     map[string]interface{} `json:"metadata"`
-		Charge_id    string                 `json:"charge"`
+		ID              string                 `json:"id"`
+		Object          string                 `json:"object"`
+		Order_no        string                 `json:"order_no"`
+		Amount          uint64                 `json:"amount"`
+		Succeed         bool                   `json:"succeed"`
+		Status          string                 `json:"status"`
+		Created         uint64                 `json:"created"`
+		Time_succeed    uint64                 `json:"time_succeed"`
+		Description     string                 `json:"description"`
+		Failure_code    string                 `json:"failure_code"`
+		Failure_msg     string                 `json:"failure_msg"`
+		Metadata        map[string]interface{} `json:"metadata"`
+		Charge_id       string                 `json:"charge"`
+		Charge_order_no string                 `json:"charge_order_no"`
+		Transaction_no  string                 `json:"transaction_no"`
 	}
 	// 付款查询结果列表数据类型
 	RefundList struct {
@@ -229,7 +231,7 @@ type (
 	CustomerParams struct {
 		App         string                 `json:"app"`
 		Source      interface{}            `json:"source"`
-		Sms_code   map[string]interface{} `json:"sms_code"`
+		Sms_code    map[string]interface{} `json:"sms_code"`
 		Description string                 `json:"description,omitempty"`
 		Email       string                 `json:"email,omitempty"`
 		Metadata    map[string]interface{} `json:"metadata,omitempty"`
@@ -273,8 +275,8 @@ type (
 
 	//创建 Card 对象的请求参数
 	CardParams struct {
-		Source   interface{} `json:"source"`
-		Sms_code   map[string]interface{} `json:"sms_code"`
+		Source   interface{}            `json:"source"`
+		Sms_code map[string]interface{} `json:"sms_code"`
 	}
 
 	//查询 Card 对象的请求参数
@@ -303,25 +305,25 @@ type (
 
 	//查询 Token 对象的请求参数
 	TokenParams struct {
-		Order_no   string      `json:"order_no"`
-		Amount     uint64      `json:"amount"`
-		App        string      `json:"app"`
+		Order_no string `json:"order_no"`
+		Amount   uint64 `json:"amount"`
+		App      string `json:"app"`
 		//Attachable bool        `json:"attachable"`
-		Card       interface{} `json:"card"`
+		Card interface{} `json:"card"`
 	}
 
 	//Token 对象包含card信息
 	Token struct {
-		ID         string                 `json:"id"`
-		Object     string                 `json:"object"`
-		Created    int64                  `json:"created"`
-		Livemode   bool                   `json:"livemode"`
-		Used       bool                   `json:"used"`
-		Time_used  int64                  `json:"time_used"`
+		ID        string `json:"id"`
+		Object    string `json:"object"`
+		Created   int64  `json:"created"`
+		Livemode  bool   `json:"livemode"`
+		Used      bool   `json:"used"`
+		Time_used int64  `json:"time_used"`
 		//Attachable bool                   `json:"attachable"`
-		Type       string                 `json:"type"`
-		Card       map[string]interface{} `json:"card"`
-		Sms_code   map[string]interface{} `json:"sms_code"`
+		Type     string                 `json:"type"`
+		Card     map[string]interface{} `json:"card"`
+		Sms_code map[string]interface{} `json:"sms_code"`
 	}
 )
 
