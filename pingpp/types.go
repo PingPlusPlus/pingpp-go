@@ -23,6 +23,12 @@ type ListMeta struct {
 	URL    string `json:"url"`
 }
 
+//删除接口返回值
+type DeleteResult struct {
+	Deleted bool   `json:"deleted"`
+	ID      string `json:"id"`
+}
+
 /*支付相关数据类型*/
 type (
 	// 支付请求数据类型
@@ -37,7 +43,7 @@ type (
 		Body        string                 `json:"body"`
 		Extra       map[string]interface{} `json:"extra,omitempty"`
 		Metadata    map[string]interface{} `json:"metadata,omitempty"`
-		Time_expire uint64                 `json:"time_expire,omitempty"`
+		Time_expire int64                  `json:"time_expire,omitempty"`
 		Description string                 `json:"description,omitempty"`
 	}
 	// Charge列表查询请求 数据类型
@@ -364,5 +370,135 @@ type (
 		Summary_to        uint64 `json:"summary_to"`
 		Charges_amount    uint64 `json:"charges_amount"`
 		Charges_count     uint64 `json:"charges_count"`
+	}
+)
+
+//身份认证相关数据结构
+type (
+	IdentificationParams struct {
+		Type string                 `json:"type"`
+		App  string                 `json:"app"`
+		Data map[string]interface{} `json:"data"`
+	}
+	IdentificationResult struct {
+		Type       string                 `json:"type"`
+		App        string                 `json:"app"`
+		ResultCode int                    `json:"result_code"`
+		Message    string                 `json:"message"`
+		Paid       bool                   `json:"paid"`
+		Data       map[string]interface{} `json:"data"`
+	}
+)
+
+type (
+	BatchTransfer struct {
+		Id          string                 `json:"Id"`
+		Object      string                 `json:"object"`
+		App         string                 `json:"app"`
+		Amount      int64                  `json:"amount"`
+		Batch_no    string                 `json:"batch_no"`
+		Channel     string                 `json:"channel"`
+		Currency    string                 `json:"currency"`
+		Created     int64                  `json:"created"`
+		Description string                 `json:"description"`
+		Extra       map[string]interface{} `json:"extra"`
+		Failure_msg string                 `json:"failure_msg"`
+		Fee         int64                  `json:"fee"`
+		Livemode    bool                   `json:"livemode"`
+		Metadata    map[string]interface{} `json:"metadata"`
+		Recipients  []struct {
+			Account     string `json:"account"`
+			Amount      int64  `json:"amount"`
+			Name        string `json:"name"`
+			Description string `json:"description"`
+			Transfer    string `json:"transfer"`
+			Status      string `json:"status"`
+		} `json:"recipients"`
+		Status         string `json:"status"`
+		Time_succeeded int64  `json:"time_succeeded"`
+		Type           string `json:"type"`
+	}
+
+	BatchTransferParams struct {
+		App         string                 `json:"app"`
+		Batch_no    string                 `json:"batch_no"`
+		Channel     string                 `json:"channel"`
+		Amount      int64                  `json:"amount"`
+		Description string                 `json:"description"`
+		Metadata    map[string]interface{} `json:"metadata,omitempty"`
+		Recipients  []struct {
+			Account     string `json:"account"`
+			Amount      int64  `json:"amount"`
+			Name        string `json:"name"`
+			Description string `json:"description,omitempty"`
+		} `json:"recipients"`
+		Currency string `json:"currency,omitempty"`
+		Type     string `json:"type"`
+	}
+
+	BatchTransferlList struct {
+		ListMeta
+		Values []*BatchTransfer `json:"data"`
+	}
+)
+
+type (
+	BatchRefund struct {
+		Id          string                 `json:"id"`
+		App         string                 `json:"app"`
+		Object      string                 `json:"object"`
+		Batch_no    string                 `json:"batch_no"`
+		Created     int64                  `json:"created"`
+		Description string                 `json:"description"`
+		Metadata    map[string]interface{} `json:"metadata"`
+		Charges     []string               `json:"charges"`
+		Refunds     []*Refund              `json:"refunds"`
+		Refund_url  string                 `json:"refund_url"`
+	}
+
+	BatchRefundParams struct {
+		App         string                 `json:"app"`
+		Batch_no    string                 `json:"batch_no"`
+		Charges     string                 `json:"charges"`
+		Description string                 `json:"description,omitempty"`
+		Metadata    map[string]interface{} `json:"metadata"`
+	}
+
+	BatchRefundlList struct {
+		ListMeta
+		Values []*BatchTransfer `json:"data"`
+	}
+)
+
+type (
+	Customs struct {
+		Id             string                 `json:"id"`
+		App            string                 `json:"app"`
+		Object         string                 `json:"object"`
+		Channel        string                 `json:"channel"`
+		Trade_no       string                 `json:"trade_no"`
+		Customs_code   string                 `json:"customs_code"`
+		Amount         int64                  `json:"amount"`
+		Created        int64                  `json:"created"`
+		Time_succeeded int64                  `json:"time_succeeded"`
+		Succeeded      bool                   `json:"succeeded"`
+		Charge         string                 `json:"charge"`
+		Extra          map[string]interface{} `json:"extra"`
+		Failure_code   string                 `json:"failure_code"`
+		Failure_msg    string                 `json:"failure_msg"`
+		Transaction_no string                 `json:"transaction_no"`
+	}
+
+	CustomsParams struct {
+		App              string                 `json:"app"`
+		Channel          string                 `json:"channel"`
+		Trade_no         string                 `json:"trade_no"`
+		Customs_code     string                 `json:"customs_code"`
+		Amount           int64                  `json:"amount"`
+		Charge           string                 `json:"charge"`
+		Transport_amount int64                  `json:"transport_amount"`
+		Is_split         bool                   `json:"is_split"`
+		Sub_order_no     string                 `json:"sub_order_no"`
+		Extra            map[string]interface{} `json:"extra,omitempty"`
 	}
 )

@@ -9,12 +9,13 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
-	"github.com/pingplusplus/pingpp-go/pingpp/transfer"
 	"log"
 	"math/rand"
 	"strconv"
 	"time"
+
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
+	"github.com/pingplusplus/pingpp-go/pingpp/transfer"
 )
 
 func init() {

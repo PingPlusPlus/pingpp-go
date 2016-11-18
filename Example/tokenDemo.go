@@ -3,16 +3,17 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
+
 	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"github.com/pingplusplus/pingpp-go/pingpp/token"
-	"log"
 )
 
 func init() {
 	// LogLevel 是 Go SDK 提供的 debug 开关
 	pingpp.LogLevel = 4
 	//设置 API Key
-	pingpp.Key = "sk_test_zL0abDjXX1mP4qLinL5y5mPG"
+	pingpp.Key = "sk_test_ibbTe5jLGCi5rzfH4OqPW9KC"
 	//获取 SDK 版本
 	fmt.Println("Go SDK Version:", pingpp.Version())
 	//设置错误信息语言，默认是中文

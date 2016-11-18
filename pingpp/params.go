@@ -20,6 +20,10 @@ type ListParams struct {
 	Single bool
 }
 
+type PagingParams struct {
+	Filters Filters
+}
+
 func (p *ListParams) AppendTo(body *url.Values) {
 	if len(p.Filters.f) > 0 {
 		p.Filters.AppendTo(body)

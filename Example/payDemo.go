@@ -10,12 +10,13 @@ import (
 	//"encoding/base64"
 	"encoding/json"
 	"fmt"
-	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
-	"github.com/pingplusplus/pingpp-go/pingpp/charge"
 	"log"
 	"math/rand"
 	"strconv"
 	"time"
+
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
+	"github.com/pingplusplus/pingpp-go/pingpp/charge"
 	//"io/ioutil"
 )
 
@@ -170,5 +171,6 @@ func ExampleCharge_list() {
 }
 
 func main() {
-	ExampleCharge_get()
+	//ExampleCharge_get()
+	ExampleCharge_list()
 }

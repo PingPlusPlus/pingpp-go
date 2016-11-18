@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/base64"
 	"errors"
+	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -23,11 +24,11 @@ type ApiBackend struct {
 // 后端处理请求方法
 func (s ApiBackend) Call(method, path, key string, form *url.Values, params []byte, v interface{}) error {
 	var body io.Reader
-	if strings.ToUpper(method) == "POST" {
+	if strings.ToUpper(method) == "POST" || strings.ToUpper(method) == "PUT" {
 		body = bytes.NewBuffer(params)
 	}
 
-	if strings.ToUpper(method) == "GET" {
+	if strings.ToUpper(method) == "GET" || strings.ToUpper(method) == "DELETE" {
 		if form != nil && len(*form) > 0 {
 			data := form.Encode()
 			path += "?" + data
@@ -64,9 +65,16 @@ func (s *ApiBackend) NewRequest(method, path, key, contentType string, body io.R
 		}
 		return nil, err
 	}
+	var dataToBeSign string
+	if strings.ToUpper(method) == "POST" || strings.ToUpper(method) == "PUT" {
+		dataToBeSign = string(params)
+	}
+	requestTime := fmt.Sprintf("%d", time.Now().Unix())
+	req.Header.Set("Pingplusplus-Request-Timestamp", requestTime)
+	dataToBeSign = dataToBeSign + req.URL.RequestURI() + requestTime
 
-	if (strings.ToUpper(method) == "POST" || strings.ToUpper(method) == "PUT") && len(AccountPrivateKey) > 0 {
-		sign, err := GenSign([]byte(params), []byte(AccountPrivateKey))
+	if len(AccountPrivateKey) > 0 {
+		sign, err := GenSign([]byte(dataToBeSign), []byte(AccountPrivateKey))
 		if err != nil {
 			if LogLevel > 0 {
 				log.Printf("Cannot create RSA signature: %v\n", err)
@@ -90,7 +98,7 @@ func (s *ApiBackend) NewRequest(method, path, key, contentType string, body io.R
 // 处理http请求
 func (s *ApiBackend) Do(req *http.Request, v interface{}) error {
 	if LogLevel > 1 {
-		log.Printf("Requesting %v %v%v\n", req.Method, req.URL.Host, req.URL.Path)
+		log.Printf("Requesting %v %v%v \n", req.Method, req.URL.Host, req.URL.Path)
 	}
 	start := time.Now()
 	res, err := s.HTTPClient.Do(req)
