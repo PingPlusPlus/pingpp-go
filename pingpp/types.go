@@ -391,6 +391,12 @@ type (
 )
 
 type (
+	BatchTransferRecipient struct {
+		Account     string `json:"account"`
+		Amount      int64  `json:"amount"`
+		Name        string `json:"name"`
+		Description string `json:"description"`
+	}
 	BatchTransfer struct {
 		Id          string                 `json:"Id"`
 		Object      string                 `json:"object"`
@@ -407,12 +413,9 @@ type (
 		Livemode    bool                   `json:"livemode"`
 		Metadata    map[string]interface{} `json:"metadata"`
 		Recipients  []struct {
-			Account     string `json:"account"`
-			Amount      int64  `json:"amount"`
-			Name        string `json:"name"`
-			Description string `json:"description"`
-			Transfer    string `json:"transfer"`
-			Status      string `json:"status"`
+			BatchTransferRecipient
+			Transfer string `json:"transfer"`
+			Status   string `json:"status"`
 		} `json:"recipients"`
 		Status         string `json:"status"`
 		Time_succeeded int64  `json:"time_succeeded"`
@@ -420,20 +423,15 @@ type (
 	}
 
 	BatchTransferParams struct {
-		App         string                 `json:"app"`
-		Batch_no    string                 `json:"batch_no"`
-		Channel     string                 `json:"channel"`
-		Amount      int64                  `json:"amount"`
-		Description string                 `json:"description"`
-		Metadata    map[string]interface{} `json:"metadata,omitempty"`
-		Recipients  []struct {
-			Account     string `json:"account"`
-			Amount      int64  `json:"amount"`
-			Name        string `json:"name"`
-			Description string `json:"description,omitempty"`
-		} `json:"recipients"`
-		Currency string `json:"currency,omitempty"`
-		Type     string `json:"type"`
+		App         string                   `json:"app"`
+		Batch_no    string                   `json:"batch_no"`
+		Channel     string                   `json:"channel"`
+		Amount      int64                    `json:"amount"`
+		Description string                   `json:"description"`
+		Metadata    map[string]interface{}   `json:"metadata,omitempty"`
+		Recipients  []BatchTransferRecipient `json:"recipients"`
+		Currency    string                   `json:"currency,omitempty"`
+		Type        string                   `json:"type"`
 	}
 
 	BatchTransferlList struct {
@@ -459,7 +457,7 @@ type (
 	BatchRefundParams struct {
 		App         string                 `json:"app"`
 		Batch_no    string                 `json:"batch_no"`
-		Charges     string                 `json:"charges"`
+		Charges     []string               `json:"charges"`
 		Description string                 `json:"description,omitempty"`
 		Metadata    map[string]interface{} `json:"metadata"`
 	}
