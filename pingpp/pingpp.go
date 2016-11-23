@@ -1,8 +1,12 @@
 package pingpp
 
 import (
+	"bytes"
 	"net/http"
 	"net/url"
+	"os/exec"
+	"runtime"
+	"strings"
 	"time"
 )
 
@@ -34,6 +38,7 @@ var (
 	httpClient        = &http.Client{Timeout: defaultHTTPTimeout}
 	backends          Backends
 	AccountPrivateKey string
+	OsInfo            string
 )
 
 type SupportedBackend string
@@ -45,7 +50,7 @@ type Backend interface {
 
 // 获取当前sdk的版本
 func Version() string {
-	return "3.0.3"
+	return "3.0.4"
 }
 
 /*2016-02-16 当前情况下没有代码调用了该函数
@@ -77,4 +82,30 @@ func SetBackend(backend SupportedBackend, b Backend) {
 	case APIBackend:
 		backends.API = b
 	}
+}
+
+func init() {
+	var uname string
+	switch runtime.GOOS {
+	case "windows":
+		uname = "windows"
+	default:
+		cmd := exec.Command("uname", "-a")
+		cmd.Stdin = strings.NewReader("some input")
+		var out bytes.Buffer
+		var stderr bytes.Buffer
+		cmd.Stdout = &out
+		cmd.Stderr = &stderr
+		cmd.Run()
+		uname = out.String()
+	}
+	m := map[string]interface{}{
+		"lang":             "golang",
+		"lang_version":     runtime.Version(),
+		"bindings_version": Version(),
+		"publisher":        "pingpp",
+		"uname":            uname,
+	}
+	content, _ := JsonEncode(m)
+	OsInfo = string(content)
 }

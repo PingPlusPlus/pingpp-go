@@ -89,6 +89,7 @@ func (s *ApiBackend) NewRequest(method, path, key, contentType string, body io.R
 	req.SetBasicAuth(key, "")
 	req.Header.Add("Pingpluspplus-Version", apiVersion)
 	req.Header.Add("User-Agent", "Pingpp go SDK version:"+Version())
+	req.Header.Add("X-Pingpp-Client-User-Agent", OsInfo)
 	req.Header.Add("Content-Type", contentType)
 	req.Header.Add("Accept-Language", AcceptLanguage)
 

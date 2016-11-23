@@ -1,3 +1,13 @@
+## 3.0.4
+*  添加身份认证功能
+*  更新签名规则
+*  增加批量退款、批量付款接口
+*  增加报关接口
+
+## 3.0.3
+* refund对象增加Charge_order_no、Transaction_no字段
+* ApiBackend.NewRequest函数使用参数key,而不是全局Key
+
 ## 3.0.2
 *  统一无卡的短信(sms_code)参数(card和customer)
 

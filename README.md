@@ -42,7 +42,7 @@ pingpp.Key= "YOUR-KEY"
 charge, err := charge.New(&chargeParams)
 ```
 
-### 查询
+### Charge查询
 ```go
 //查询单个 Charge 对象
 charge, err := charge.Get(ch_id)
@@ -78,7 +78,7 @@ refunds, err := refund.List(ch_id, &refundListParams)
 redenvelope, err := redEnvelope.New(&redEnvelopeParams)
 ```
 
-### 查询
+### 红包查询
 ```go
 //查询单个 RedEnvelope 对象
 redenvelope, err := redEnvelope.Get(red_id)
@@ -89,15 +89,28 @@ redenvelope, err := redEnvelope.Get(red_id)
 redenvelope, err := redEnvelope.List(&redEnvelopeListParams)
 ```
 
-### 查询自定 event
+### event查询
 ```go
-//查询单个 RedEnvelope 对象
-redenvelope, err := event.Get(red_id)
+//查询单个 event 对象
+event, err := event.Get(red_id)
 ```
-### 查询 Event 列表
+
+### 身份认证
 ```go
-//查询 RedEnvelope 列表
-redenvelope, err := event.List(&redEnvelopeListParams)
+//鉴别用户身份证、银行卡信息的真伪
+result, err := identification.New(&identificationParams)
+```
+
+### 批量退款
+```go
+//发起批量退款
+batch_refund, err := batchRefund.New(params)
+```
+
+### 批量企业付款
+```go
+//发起批量企业付款
+ batch_transfer, err := batchTransfer.New(params)
 ```
 
 ## Debug
