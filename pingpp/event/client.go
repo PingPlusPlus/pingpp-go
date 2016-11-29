@@ -1,10 +1,10 @@
 package event
 
 import (
-	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"log"
 	"net/url"
-	"strconv"
+
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 )
 
 type Client struct {
@@ -27,50 +27,6 @@ func (c Client) Get(id string) (*pingpp.Event, error) {
 		}
 	}
 	return eve, err
-}
-
-func List(params *pingpp.EventListParams) *Iter {
-	return getC().List(params)
-}
-
-func (c Client) List(params *pingpp.EventListParams) *Iter {
-	type eventList struct {
-		pingpp.ListMeta
-		Values []*pingpp.Event `json:"data"`
-	}
-
-	var body *url.Values
-	var lp *pingpp.ListParams
-
-	if params != nil {
-		body = &url.Values{}
-
-		if params.Created > 0 {
-			body.Add("created", strconv.FormatInt(params.Created, 10))
-		}
-		params.AppendTo(body)
-		lp = &params.ListParams
-	}
-
-	return &Iter{pingpp.GetIter(lp, body, func(b url.Values) ([]interface{}, pingpp.ListMeta, error) {
-		list := &eventList{}
-		err := c.B.Call("GET", "/events", c.Key, &b, nil, list)
-
-		ret := make([]interface{}, len(list.Values))
-		for i, v := range list.Values {
-			ret[i] = v
-		}
-
-		return ret, list.ListMeta, err
-	})}
-}
-
-type Iter struct {
-	*pingpp.Iter
-}
-
-func (i *Iter) Event() *pingpp.Event {
-	return i.Current().(*pingpp.Event)
 }
 
 func getC() Client {

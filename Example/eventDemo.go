@@ -53,19 +53,6 @@ func ExampleEvent_get() {
 	fmt.Println(eve)
 }
 
-func ExampleEvent_list() {
-	params := &pingpp.EventListParams{}
-	params.Filters.AddFilter("type", "", "charge.succeeded")
-	//设置是不是只需要之前设置的 limit 这一个查询参数
-	params.Single = true
-	i := event.List(params)
-	for i.Next() {
-		c := i.Event()
-		fmt.Println(c)
-	}
-}
-
 func main() {
 	ExampleEvent_get()
-	ExampleEvent_list()
 }
