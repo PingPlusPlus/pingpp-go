@@ -51,12 +51,12 @@ eA3YvHc7ZmRjVnVkxnXjKofrL6jF5A+lXSXnXchrv2ZYI+1pOsIV
 
 func ExampleBatchTransfer_new() {
 	recipients := []pingpp.BatchTransferRecipient{
-		{"account01@alipay.com", 5000, "李狗", "Your description"},
-		{"account01@alipay.com", 5000, "李狗", "Your description"},
+		{Account: "account01@alipay.com", Amount: 5000, Name: "李狗", Description: "Your description"},
+		{Account: "account01@alipay.com", Amount: 5000, Name: "李狗", Description: "Your description"},
 	}
 	params := &pingpp.BatchTransferParams{
 		App:         "app_1Gqj58ynP0mHeX1q",
-		Amount:      8000,
+		Amount:      10000,
 		Batch_no:    "2016101110380007",
 		Channel:     "alipay",
 		Description: "Your description",

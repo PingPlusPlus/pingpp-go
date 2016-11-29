@@ -392,34 +392,34 @@ type (
 
 type (
 	BatchTransferRecipient struct {
-		Account     string `json:"account"`
-		Amount      int64  `json:"amount"`
-		Name        string `json:"name"`
-		Description string `json:"description"`
+		Account        string `json:"account"`
+		Amount         int64  `json:"amount"`
+		Name           string `json:"name"`
+		Description    string `json:"description"`
+		Open_bank      string `json:"open_bank,omitempty"`
+		Open_bank_code int    `json:"open_bank_code,omitempty"`
+		Transfer       string `json:"transfer,omitempty"`
+		Status         string `json:"status,omitempty"`
 	}
 	BatchTransfer struct {
-		Id          string                 `json:"Id"`
-		Object      string                 `json:"object"`
-		App         string                 `json:"app"`
-		Amount      int64                  `json:"amount"`
-		Batch_no    string                 `json:"batch_no"`
-		Channel     string                 `json:"channel"`
-		Currency    string                 `json:"currency"`
-		Created     int64                  `json:"created"`
-		Description string                 `json:"description"`
-		Extra       map[string]interface{} `json:"extra"`
-		Failure_msg string                 `json:"failure_msg"`
-		Fee         int64                  `json:"fee"`
-		Livemode    bool                   `json:"livemode"`
-		Metadata    map[string]interface{} `json:"metadata"`
-		Recipients  []struct {
-			BatchTransferRecipient
-			Transfer string `json:"transfer"`
-			Status   string `json:"status"`
-		} `json:"recipients"`
-		Status         string `json:"status"`
-		Time_succeeded int64  `json:"time_succeeded"`
-		Type           string `json:"type"`
+		Id             string                   `json:"Id"`
+		Object         string                   `json:"object"`
+		App            string                   `json:"app"`
+		Amount         int64                    `json:"amount"`
+		Batch_no       string                   `json:"batch_no"`
+		Channel        string                   `json:"channel"`
+		Currency       string                   `json:"currency"`
+		Created        int64                    `json:"created"`
+		Description    string                   `json:"description"`
+		Extra          map[string]interface{}   `json:"extra"`
+		Failure_msg    string                   `json:"failure_msg"`
+		Fee            int64                    `json:"fee"`
+		Livemode       bool                     `json:"livemode"`
+		Metadata       map[string]interface{}   `json:"metadata"`
+		Recipients     []BatchTransferRecipient `json:"recipients"`
+		Status         string                   `json:"status"`
+		Time_succeeded int64                    `json:"time_succeeded"`
+		Type           string                   `json:"type"`
 	}
 
 	BatchTransferParams struct {
