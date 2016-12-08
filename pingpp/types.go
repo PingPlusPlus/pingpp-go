@@ -348,18 +348,6 @@ type (
 		Request          string `json:"request"`
 	}
 
-	// webhooks 列表查询数据类型
-	EventListParams struct {
-		ListParams
-		Created int64
-	}
-
-	// webhooks 列表数据类型
-	EventList struct {
-		ListMeta
-		Values []*Event `json:"data"`
-	}
-
 	//webhooks 汇总数据
 	Summary struct {
 		Acct_id           string `json:"acct_id,omitempty"`

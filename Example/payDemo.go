@@ -159,6 +159,8 @@ func ExampleCharge_list() {
 
 	params := &pingpp.ChargeListParams{}
 	params.Filters.AddFilter("limit", "", "2")
+	//app[id]是必须参数
+	params.Filters.AddFilter("app[id]", "", "app_1Gqj58ynP0mHeX1q")
 	//设置是不是只需要之前设置的 limit 这一个查询参数
 	params.Single = true
 	i := charge.List(params)
