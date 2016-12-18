@@ -94,9 +94,10 @@ type (
 type (
 	// 退款请求数据类型
 	RefundParams struct {
-		Amount      uint64                 `json:"amount,omitempty"`
-		Description string                 `json:"description"`
-		Metadata    map[string]interface{} `json:"metadata,omitempty"`
+		Amount         uint64                 `json:"amount,omitempty"`
+		Description    string                 `json:"description"`
+		Metadata       map[string]interface{} `json:"metadata,omitempty"`
+		Funding_source string                 `json:"funding_source,omitempty"`
 	}
 
 	// 退款查询请求的数据类型
@@ -122,6 +123,7 @@ type (
 		Charge_id       string                 `json:"charge"`
 		Charge_order_no string                 `json:"charge_order_no"`
 		Transaction_no  string                 `json:"transaction_no"`
+		Funding_source  string                 `json:"funding_source"`
 	}
 	// 付款查询结果列表数据类型
 	RefundList struct {
