@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/PingPlusPlus/pingpp-go/pingpp/customs"
 	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
+	"github.com/pingplusplus/pingpp-go/pingpp/customs"
 )
 
 func init() {

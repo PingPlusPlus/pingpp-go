@@ -460,21 +460,25 @@ type (
 
 type (
 	Customs struct {
-		Id             string                 `json:"id"`
-		App            string                 `json:"app"`
-		Object         string                 `json:"object"`
-		Channel        string                 `json:"channel"`
-		Trade_no       string                 `json:"trade_no"`
-		Customs_code   string                 `json:"customs_code"`
-		Amount         int64                  `json:"amount"`
-		Created        int64                  `json:"created"`
-		Time_succeeded int64                  `json:"time_succeeded"`
-		Succeeded      bool                   `json:"succeeded"`
-		Charge         string                 `json:"charge"`
-		Extra          map[string]interface{} `json:"extra"`
-		Failure_code   string                 `json:"failure_code"`
-		Failure_msg    string                 `json:"failure_msg"`
-		Transaction_no string                 `json:"transaction_no"`
+		Id               string                 `json:"id"`
+		App              string                 `json:"app"`
+		Channel          string                 `json:"channel"`
+		Trade_no         string                 `json:"trade_no"`
+		Customs_code     string                 `json:"customs_code"`
+		Amount           int64                  `json:"amount"`
+		Charge           string                 `json:"charge"`
+		Transport_amount int64                  `json:"transport_amount"`
+		Is_split         bool                   `json:"is_split"`
+		Sub_order_no     string                 `json:"sub_order_no"`
+		Extra            map[string]interface{} `json:"extra"`
+		Object           string                 `json:"object"`
+		Created          int64                  `json:"created"`
+		Time_succeeded   int64                  `json:"time_succeeded"`
+		Status           string                 `json:"status"`
+		Succeeded        bool                   `json:"succeeded"`
+		Failure_code     string                 `json:"failure_code"`
+		Failure_msg      string                 `json:"failure_msg"`
+		Transaction_no   string                 `json:"transaction_no"`
 	}
 
 	CustomsParams struct {
