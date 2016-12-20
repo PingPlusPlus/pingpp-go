@@ -387,7 +387,7 @@ type (
 		Name           string `json:"name"`
 		Description    string `json:"description"`
 		Open_bank      string `json:"open_bank,omitempty"`
-		Open_bank_code int    `json:"open_bank_code,omitempty"`
+		Open_bank_code string `json:"open_bank_code,omitempty"`
 		Transfer       string `json:"transfer,omitempty"`
 		Status         string `json:"status,omitempty"`
 	}
