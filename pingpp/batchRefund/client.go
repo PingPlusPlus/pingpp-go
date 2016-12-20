@@ -53,10 +53,10 @@ func List(params *pingpp.PagingParams) (*pingpp.BatchRefundlList, error) {
 }
 
 func (c Client) List(params *pingpp.PagingParams) (*pingpp.BatchRefundlList, error) {
-	var body *url.Values
-	body = &url.Values{}
-	batchRefundlList := &pingpp.BatchRefundlList{}
+	body := &url.Values{}
+	params.Filters.AppendTo(body)
 
+	batchRefundlList := &pingpp.BatchRefundlList{}
 	err := c.B.Call("GET", "/batch_refunds", c.Key, body, nil, batchRefundlList)
 	if err != nil {
 		if pingpp.LogLevel > 0 {
