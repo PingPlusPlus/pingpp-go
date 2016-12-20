@@ -4,6 +4,7 @@
 *  增加批量退款、批量付款接口
 *  增加报关接口
 *  Refund对象新增funding_source字段
+*  添加transfer更新接口
 
 ## 3.0.3
 * refund对象增加Charge_order_no、Transaction_no字段

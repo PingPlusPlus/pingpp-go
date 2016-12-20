@@ -1,10 +1,11 @@
 package transfer
 
 import (
-	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"log"
 	"net/url"
 	"strconv"
+
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 )
 
 type Client struct {
@@ -29,6 +30,23 @@ func (c Client) New(params *pingpp.TransferParams) (*pingpp.Transfer, error) {
 	}
 	transfer := &pingpp.Transfer{}
 	err := c.B.Call("POST", "/transfers", c.Key, nil, paramsString, transfer)
+	return transfer, err
+}
+
+func Update(id string) (*pingpp.Transfer, error) {
+	return getC().Update(id)
+}
+
+func (c Client) Update(id string) (*pingpp.Transfer, error) {
+	cancelParams := struct {
+		Status string `json:"status"`
+	}{
+		Status: "canceled",
+	}
+
+	paramsString, _ := pingpp.JsonEncode(cancelParams)
+	transfer := &pingpp.Transfer{}
+	err := c.B.Call("PUT", "/transfers/"+id, c.Key, nil, paramsString, transfer)
 	return transfer, err
 }
 

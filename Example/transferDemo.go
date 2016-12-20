@@ -66,6 +66,15 @@ func ExampleTransfer_get() {
 	log.Printf("%v\n", string(restring))
 }
 
+func ExampleTransfer_update() {
+	transfer, err := transfer.Update("tr_98WLGObXbPKO1avLe5CqH0WH")
+	if err != nil {
+		log.Fatal(err)
+	}
+	restring, _ := json.Marshal(transfer)
+	log.Printf("%v\n", string(restring))
+}
+
 func ExampleTransfer_list() {
 	params := &pingpp.TransferListParams{}
 	params.Filters.AddFilter("limit", "", "2")
@@ -80,5 +89,6 @@ func ExampleTransfer_list() {
 }
 
 func main() {
-	ExampleTransfer_get()
+	//ExampleTransfer_get()
+	ExampleTransfer_update()
 }
