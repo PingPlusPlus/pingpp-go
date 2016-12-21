@@ -193,9 +193,10 @@ type (
 		Amount      uint64                 `json:"amount"`
 		Type        string                 `json:"type"`
 		Currency    string                 `json:"currency"`
-		Recipient   string                 `json:"recipient"`
 		Description string                 `json:"description"`
-		Extra       map[string]interface{} `json:"extra"`
+		Recipient   string                 `json:"recipient,omitempty"`
+		Extra       map[string]interface{} `json:"extra,omitempty"`
+		Metadata    map[string]interface{} `json:"metadata,omitempty"`
 	}
 
 	//企业转账列表查询数据类型
