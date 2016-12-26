@@ -99,7 +99,7 @@ func (s *ApiBackend) NewRequest(method, path, key, contentType string, body io.R
 // 处理http请求
 func (s *ApiBackend) Do(req *http.Request, v interface{}) error {
 	if LogLevel > 1 {
-		log.Printf("Requesting %v %v%v \n", req.Method, req.URL.Host, req.URL.Path)
+		log.Printf("Requesting %v %v \n", req.Method, req.URL.String())
 	}
 	start := time.Now()
 	res, err := s.HTTPClient.Do(req)

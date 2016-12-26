@@ -1,11 +1,12 @@
 package charge
 
 import (
-	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	"log"
 	"net/url"
 	"strconv"
 	"time"
+
+	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 )
 
 type Client struct {
@@ -68,11 +69,11 @@ func (c Client) Get(id string) (*pingpp.Charge, error) {
 }
 
 // 查询 charge 列表
-func List(params *pingpp.ChargeListParams) *Iter {
-	return getC().List(params)
+func List(appId string, params *pingpp.ChargeListParams) *Iter {
+	return getC().List(appId, params)
 }
 
-func (c Client) List(params *pingpp.ChargeListParams) *Iter {
+func (c Client) List(appId string, params *pingpp.ChargeListParams) *Iter {
 	type chargeList struct {
 		pingpp.ListMeta
 		Values []*pingpp.Charge `json:"data"`
@@ -81,15 +82,16 @@ func (c Client) List(params *pingpp.ChargeListParams) *Iter {
 	var body *url.Values
 	var lp *pingpp.ListParams
 
-	if params != nil {
-		body = &url.Values{}
-
-		if params.Created > 0 {
-			body.Add("created", strconv.FormatInt(params.Created, 10))
-		}
-		params.AppendTo(body)
-		lp = &params.ListParams
+	if params == nil {
+		params = &pingpp.ChargeListParams{}
 	}
+	params.Filters.AddFilter("app[id]", "", appId)
+	body = &url.Values{}
+	if params.Created > 0 {
+		body.Add("created", strconv.FormatInt(params.Created, 10))
+	}
+	params.AppendTo(body)
+	lp = &params.ListParams
 
 	return &Iter{pingpp.GetIter(lp, body, func(b url.Values) ([]interface{}, pingpp.ListMeta, error) {
 		list := &chargeList{}
