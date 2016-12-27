@@ -1,6 +1,4 @@
 # Pingpp Go SDK
-========
-
 
 ## 简介
 pingpp 文件夹里是 SDK 文件
