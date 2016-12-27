@@ -14,7 +14,7 @@ const (
 	// 当前版本的api地址
 	apiBase = "https://api.pingxx.com/v1"
 	// 当前版本的api生成生成时间
-	apiVersion = "2015-12-27"
+	apiVersion = "2016-12-27"
 	// httpclient等待时间
 	defaultHTTPTimeout                  = 80 * time.Second
 	TotalBackends                       = 1
