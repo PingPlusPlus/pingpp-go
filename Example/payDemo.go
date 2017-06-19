@@ -116,6 +116,26 @@ func ExampleCharge_new() {
 	//	sms_code["id"] = "sms_av900KPWrL84LqHqv5O44W54"
 	//	sms_code["code"] = "123456"
 
+	// isv_qr
+	// 必须，支付具体渠道，目前支持：alipay、wx、bfb。
+	// extra["pay_channel"] = "alipay"
+	// 必须，终端号，要求不同终端此号码不一样，会显示在对账单中，如A01、SH008等。
+	// extra["terminal_id"] = "SH008"
+
+	// isv_scan
+	// 必须，客户端软件中展示的条码值，扫码设备扫描获取。
+	// extra["scan_code"] = "286801346868493272"
+	// 必须，终端号，要求不同终端此号码不一样，会显示在对账单中，如A01、SH008等。
+	// extra["terminal_id"] = "SH008"
+
+	// isv_wap
+	// 必须，支付具体渠道，目前支持：alipay、wx。
+	// extra["pay_channel"] = "alipay"
+	// 必须，前台通知地址，支付成功或失败后，需要跳转到的地址URL。
+	// extra["result_url"] = "https://www.example.com/payment-result"
+	// 必须，终端号，如没有终端概念，可使用00000001。
+	// extra["terminal_id"] = "00000001"
+
 	//这里是随便设置的随机数作为订单号，仅作示例，该方法可能产生相同订单号，商户请自行生成，不要纠结该方法。
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	orderno := r.Intn(999999999999999)
@@ -143,6 +163,15 @@ func ExampleCharge_new() {
 	}
 	fmt.Println(ch)
 
+}
+
+func ExampleCharge_reverse() {
+	ch, err := charge.Reverse("ch_bTyjfTnzHCaHOyjbzP4mHmX1")
+	if err != nil {
+		log.Fatal(err)
+	}
+	chstring, _ := json.Marshal(ch)
+	log.Printf("%v\n", string(chstring))
 }
 
 func ExampleCharge_get() {

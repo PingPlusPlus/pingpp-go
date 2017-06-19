@@ -50,6 +50,24 @@ func (c Client) New(params *pingpp.ChargeParams) (*pingpp.Charge, error) {
 
 }
 
+// 撤销charge，此接口仅接受线下 isv_scan、isv_wap、isv_qr 渠道的订单调用
+func Reverse(id string) (*pingpp.Charge, error) {
+	return getC().Reverse(id)
+}
+
+func (c Client) Reverse(id string) (*pingpp.Charge, error) {
+	var body *url.Values
+	body = &url.Values{}
+	charge := &pingpp.Charge{}
+	err := c.B.Call("POST", "/charges/"+id+"/reverse", c.Key, body, nil, charge)
+	if err != nil {
+		if pingpp.LogLevel > 0 {
+			log.Printf("Reverse Charge error: %v\n", err)
+		}
+	}
+	return charge, err
+}
+
 //查询指定 charge 对象
 func Get(id string) (*pingpp.Charge, error) {
 	return getC().Get(id)
