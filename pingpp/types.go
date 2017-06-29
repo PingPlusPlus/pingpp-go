@@ -60,6 +60,7 @@ type (
 		Livemode        bool                   `json:"livemode"`
 		Paid            bool                   `json:"paid"`
 		Refunded        bool                   `json:"refunded"`
+		Reversed        bool                   `json:"reversed"`
 		App             string                 `json:"app"`
 		Channel         string                 `json:"channel"`
 		Order_no        string                 `json:"order_no"`
