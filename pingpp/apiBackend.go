@@ -101,7 +101,9 @@ func (s *ApiBackend) Do(req *http.Request, v interface{}) error {
 	if LogLevel > 1 {
 		log.Printf("Requesting %v %v \n", req.Method, req.URL.String())
 	}
+	retryTimes := 1
 	start := time.Now()
+retry:
 	res, err := s.HTTPClient.Do(req)
 
 	if LogLevel > 0 {
@@ -113,6 +115,10 @@ func (s *ApiBackend) Do(req *http.Request, v interface{}) error {
 			log.Printf("Request to Pingpp failed: %v\n", err)
 		}
 		return err
+	}
+	if res.StatusCode == 502 && retryTimes >= 1 {
+		retryTimes = retryTimes - 1
+		goto retry
 	}
 	defer res.Body.Close()
 

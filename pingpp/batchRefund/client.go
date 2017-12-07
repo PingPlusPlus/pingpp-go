@@ -17,6 +17,11 @@ func getC() Client {
 	return Client{pingpp.GetBackend(pingpp.APIBackend), pingpp.Key}
 }
 
+/*
+* 创建批量退款
+* @param params BatchRefundParams
+* @return BatchRefund
+ */
 func New(params *pingpp.BatchRefundParams) (*pingpp.BatchRefund, error) {
 	return getC().New(params)
 }
@@ -33,6 +38,11 @@ func (c Client) New(params *pingpp.BatchRefundParams) (*pingpp.BatchRefund, erro
 	return batchRefund, err
 }
 
+/*
+* 查询批量退款
+* @param Id string
+* @return BatchRefund
+ */
 func Get(Id string) (*pingpp.BatchRefund, error) {
 	return getC().Get(Id)
 }
@@ -48,6 +58,11 @@ func (c Client) Get(Id string) (*pingpp.BatchRefund, error) {
 	return batchRefund, err
 }
 
+/*
+* 查询批量退款列表
+* @param params PagingParams
+* @return BatchRefundlList
+ */
 func List(params *pingpp.PagingParams) (*pingpp.BatchRefundlList, error) {
 	return getC().List(params)
 }
