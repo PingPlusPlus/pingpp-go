@@ -1,3 +1,10 @@
+## 3.2.1
+
+**新增**
+1. 新增 charge 渠道demo alipay_scan、wx_pub_scan、cb_alipay、cb_wx、cb_wx_pub、cb_wx_pub_qr、cb_wx_pub_scan
+
+**修改**
+
 ## 3.2.0
 
 **新增**

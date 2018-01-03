@@ -704,20 +704,21 @@ type (
 
 type (
 	Coupon struct {
-		ID              string                 `json:"id"`
-		Object          string                 `json:"object"`
-		App             string                 `json:"app"`
-		Actual_amount   *int64                 `json:"actual_amount"`
-		Coupon_template map[string]interface{} `json:"coupon_template"`
-		Created         int64                  `json:"created"`
-		Livemode        bool                   `json:"livemode"`
-		Metadata        map[string]interface{} `json:"metadata"`
-		Order           string                 `json:"order"`
-		Redeemed        bool                   `json:"redeemed"`
-		Time_end        *int64                 `json:"time_end"`
-		Time_start      *int64                 `json:"time_start"`
-		User            string                 `json:"user"`
-		Valid           bool                   `json:"valid"`
+		ID                  string                 `json:"id"`
+		Object              string                 `json:"object"`
+		App                 string                 `json:"app"`
+		Actual_amount       *int64                 `json:"actual_amount"`
+		Coupon_template     map[string]interface{} `json:"coupon_template"`
+		Created             int64                  `json:"created"`
+		Livemode            bool                   `json:"livemode"`
+		Metadata            map[string]interface{} `json:"metadata"`
+		UserTimesCirculated int                    `json:"user_times_circulated"`
+		Order               string                 `json:"order"`
+		Redeemed            bool                   `json:"redeemed"`
+		Time_end            *int64                 `json:"time_end"`
+		Time_start          *int64                 `json:"time_start"`
+		User                string                 `json:"user"`
+		Valid               bool                   `json:"valid"`
 	}
 
 	CouponParams struct {
@@ -773,6 +774,7 @@ type (
 		Charge_amount   *int64                 `json:"charge_amount,omitempty"`
 		Channel         string                 `json:"channel,omitempty"`
 		Extra           map[string]interface{} `json:"extra,omitempty"`
+		TimeExpire      int64                  `json:"time_expire,omitempty"` // 时间戳
 		Charge_order_no string                 `json:"charge_order_no,omitempty"`
 	}
 
@@ -807,7 +809,6 @@ type (
 		ReceiptApp        string                 `json:"receipt_app"`
 		ServiceApp        string                 `json:"service_app"`
 		AvailableMethods  []string               `json:"available_methods"`
-		UserFrom          string                 `json:"user_from"`
 		Description       string                 `json:"description"`
 		Metadata          map[string]interface{} `json:"metadata"`
 	}
