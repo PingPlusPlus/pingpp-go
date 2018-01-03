@@ -3,7 +3,7 @@
 **新增**
 1. 新增 charge 渠道demo alipay_scan、wx_pub_scan、cb_alipay、cb_wx、cb_wx_pub、cb_wx_pub_qr、cb_wx_pub_scan
 2. coupon 增加字段 `user_times_circulated`, order pay接口增加请求参数 `time_expire`,order 对象去除字段 `user_from`
-3. token,customer,cord接口下线
+3. token,customer,card接口下线
 
 **修改**
 
