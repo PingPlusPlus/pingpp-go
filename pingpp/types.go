@@ -318,6 +318,22 @@ type (
 		Customer string `json:"customer"`
 	}
 
+	// CardInfoParams 创建 CardInfo 对象的请求参数
+	CardInfoParams struct {
+		App         string `json:"app"`          // ping++ app
+		BankAccount string `json:"bank_account"` // 银行卡号
+	}
+
+	// CardInfo 对象数据类型
+	CardInfo struct {
+		App             string   `json:"app"`              // ping++ app
+		CardBin         string   `json:"card_bin"`         // 卡bin信息
+		CardType        int      `json:"card_type"`        // 银行卡号类型，0：借记卡；1：存折；2：信用卡；3：准贷记卡；4：其他。jdpay 不支持 1：存折
+		OpenBankCode    string   `json:"open_bank_code"`   // 机构联行号
+		OpenBank        string   `json:"open_bank"`        // 所属银行名称
+		SupportChannels []string `json:"support_channels"` // 支持的出款渠道名称列表。可能包含的值有 "unionpay"、"unionpay_gz"、"allinpay"、"jdpay"
+	}
+
 	//查询 Token 对象的请求参数
 	TokenParams struct {
 		Order_no string `json:"order_no"`
