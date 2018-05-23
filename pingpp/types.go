@@ -415,6 +415,9 @@ type (
 		AppID     string `json:"app_id"`     // 微信小程序应用唯一标识
 		AppSecret string `json:"app_secret"` // 微信小程序应用密钥（注意保密）
 		Code      string `json:"code"`       // 授权code, 登录时获取的 code
+
+		ErrCode int    `json:"errcode"`
+		ErrMsg  string `json:"errmsg"`
 	}
 	// Openid 返回了小程序用户信息
 	Openid struct {
