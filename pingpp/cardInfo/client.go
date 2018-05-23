@@ -30,6 +30,7 @@ func (c Client) New(params *pingpp.CardInfoParams) (*pingpp.CardInfo, error) {
 		if pingpp.LogLevel > 0 {
 			log.Printf("CardInfoParams Marshall Errors is : %q\n", err)
 		}
+		return nil, err
 	}
 	if pingpp.LogLevel > 2 {
 		log.Printf("params of cardInfo request to pingpp is :\n %v\n ", string(paramsString))
@@ -46,5 +47,5 @@ func (c Client) New(params *pingpp.CardInfoParams) (*pingpp.CardInfo, error) {
 	if pingpp.LogLevel > 2 {
 		log.Println("CardInfo completed in ", time.Since(start))
 	}
-	return cardInfo, errch
+	return cardInfo, nil
 }

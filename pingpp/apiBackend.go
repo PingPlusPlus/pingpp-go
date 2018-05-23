@@ -14,14 +14,14 @@ import (
 	"time"
 )
 
-//api相关的后端类型
+// ApiBackend api相关的后端类型
 type ApiBackend struct {
 	Type       SupportedBackend
 	URL        string
 	HTTPClient *http.Client
 }
 
-// 后端处理请求方法
+// Call 后端处理请求方法
 func (s ApiBackend) Call(method, path, key string, form *url.Values, params []byte, v interface{}) error {
 	var body io.Reader
 	if strings.ToUpper(method) == "POST" || strings.ToUpper(method) == "PUT" {
@@ -48,7 +48,7 @@ func (s ApiBackend) Call(method, path, key string, form *url.Values, params []by
 	return nil
 }
 
-// 建立http请求对象
+// NewRequest 建立http请求对象
 func (s *ApiBackend) NewRequest(method, path, key, contentType string, body io.Reader, params []byte) (*http.Request, error) {
 	if !strings.HasPrefix(path, "/") {
 		path = "/" + path
@@ -96,7 +96,7 @@ func (s *ApiBackend) NewRequest(method, path, key, contentType string, body io.R
 	return req, nil
 }
 
-// 处理http请求
+// Do 处理 http 请求
 func (s *ApiBackend) Do(req *http.Request, v interface{}) error {
 	if LogLevel > 1 {
 		log.Printf("Requesting %v %v \n", req.Method, req.URL.String())
@@ -116,11 +116,11 @@ retry:
 		}
 		return err
 	}
+	defer res.Body.Close()
 	if res.StatusCode == 502 && retryTimes >= 1 {
 		retryTimes = retryTimes - 1
 		goto retry
 	}
-	defer res.Body.Close()
 
 	resBody, err := ioutil.ReadAll(res.Body)
 	if err != nil {

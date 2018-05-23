@@ -356,6 +356,19 @@ type (
 		Card     map[string]interface{} `json:"card"`
 		Sms_code map[string]interface{} `json:"sms_code"`
 	}
+
+	// OpenidParams 对象包含了查询小程序 openid 信息
+	OpenidParams struct {
+		AppID     string `json:"app_id"`     // 微信小程序应用唯一标识
+		AppSecret string `json:"app_secret"` // 微信小程序应用密钥（注意保密）
+		Code      string `json:"code"`       // 授权code, 登录时获取的 code
+	}
+	// Openid 返回了小程序用户信息
+	Openid struct {
+		ID         string `json:"openid"`      // 用户唯一标识
+		SessionKey string `json:"session_key"` // 会话密钥
+		Unionid    string `json:"unionid"`     // 同主体的公众号的唯一用户 id
+	}
 )
 
 /*webhooks 相关数据类型*/
