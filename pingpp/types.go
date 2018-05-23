@@ -357,6 +357,59 @@ type (
 		Sms_code map[string]interface{} `json:"sms_code"`
 	}
 
+	// AgreementParams 请求签约对象参数
+	AgreementParams struct {
+		// App ID
+		App string `json:"app"`
+		// ContractNo 签约协议号
+		ContractNo string `json:"contract_no"`
+		// Channel 签约渠道
+		Channel string `json:"channel"`
+		// Extra 附加信息
+		Extra map[string]interface{} `json:"extra,omitempty"`
+		// Metadata 元数据
+		Metadata map[string]interface{} `json:"metadata,omitempty"`
+	}
+	AgreementUpdateParams struct {
+		// Status 状态
+		Status string `json:"status,omitempty"`
+	}
+	// Agreement 签约对象
+	Agreement struct {
+		// ID 签约对象ID
+		ID string `json:"id"`
+		// Object 值为 agreement。
+		Object string `json:"object"`
+		// Livemode 是否是 live 模式。
+		Livemode bool `json:"livemode"`
+		// App APP_ID
+		App string `json:"app"`
+		// Created 创建时间，用 Unix 时间戳表示。
+		Created int `json:"created"`
+		// Channel 签约渠道
+		Channel string `json:"channel"`
+		// ContractNo [商户]签约协议号。
+		ContractNo string `json:"contract_no"`
+		// ContractID 渠道签约ID
+		ContractID string `json:"contract_id"`
+		// Credential 签约渠道凭证
+		Credential map[string]interface{} `json:"credential"`
+		// Status 签约状态 (created:待签约 ,succeeded:签约成功, canceled:已解约 )
+		Status string `json:"status"`
+		// TimeSucceed 签约成功时间，用 Unix 时间戳表示。
+		TimeSucceed int `json:"time_succeed"`
+		// TimeCanceled 解约成功时间,用 Unix 时间戳表示。
+		TimeCanceled int `json:"time_canceled"`
+		// FailureCode 签约错误码，详见 错误 中的错误码描述。
+		FailureCode string `json:"failure_code"`
+		// FailureMsg 签约错误消息的描述。
+		FailureMsg string `json:"failure_msg"`
+		// Extra 附加参数
+		Extra map[string]interface{} `json:"extra"`
+		// Metadata metadata 元数据
+		Metadata map[string]interface{} `json:"metadata"`
+	}
+
 	// OpenidParams 对象包含了查询小程序 openid 信息
 	OpenidParams struct {
 		AppID     string `json:"app_id"`     // 微信小程序应用唯一标识
