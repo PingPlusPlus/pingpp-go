@@ -84,12 +84,12 @@ func (c Client) List(app, status string, params *pingpp.PagingParams) ([]pingpp.
 // @param agreementID string
 // @param params AgreementUpdateParams
 // @return Agreement
-func Update(agreementID string, params pingpp.AgreementUpdateParams) (*pingpp.Agreement, error) {
+func Update(agreementID string, params *pingpp.AgreementUpdateParams) (*pingpp.Agreement, error) {
 	return getC().Update(agreementID, params)
 }
 
 // Update 更新子商户对象
-func (c Client) Update(agreementID string, params pingpp.AgreementUpdateParams) (*pingpp.Agreement, error) {
+func (c Client) Update(agreementID string, params *pingpp.AgreementUpdateParams) (*pingpp.Agreement, error) {
 	paramsString, _ := pingpp.JsonEncode(params)
 	if pingpp.LogLevel > 2 {
 		log.Printf("params of update Agreement  to pingpp is :\n %v\n ", string(paramsString))

@@ -416,14 +416,15 @@ type (
 		AppSecret string `json:"app_secret"` // 微信小程序应用密钥（注意保密）
 		Code      string `json:"code"`       // 授权code, 登录时获取的 code
 
-		ErrCode int    `json:"errcode"`
-		ErrMsg  string `json:"errmsg"`
 	}
 	// Openid 返回了小程序用户信息
 	Openid struct {
-		ID         string `json:"openid"`      // 用户唯一标识
-		SessionKey string `json:"session_key"` // 会话密钥
-		Unionid    string `json:"unionid"`     // 同主体的公众号的唯一用户 id
+		ID         string `json:"openid,omitempty"`      // 用户唯一标识
+		SessionKey string `json:"session_key,omitempty"` // 会话密钥
+		Unionid    string `json:"unionid,omitempty"`     // 同主体的公众号的唯一用户 id
+
+		ErrCode int    `json:"errcode,omitempty"`
+		ErrMsg  string `json:"errmsg,omitempty"`
 	}
 )
 
