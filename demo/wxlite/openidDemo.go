@@ -8,7 +8,7 @@ package wxlite
  */
 
 import (
-	"pingpp-go/demo/common"
+	"github.com/pingplusplus/pingpp-go/demo/common"
 
 	pingpp "github.com/pingplusplus/pingpp-go/pingpp"
 	wxlite "github.com/pingplusplus/pingpp-go/pingpp/wxlite"
@@ -19,6 +19,9 @@ var Demo = new(wxliteDemo)
 
 // wxliteDemo 签约示例
 type wxliteDemo struct{}
+
+func (c *wxliteDemo) Setup(app string) {
+}
 
 // New 创建签约对象 agreement
 func (c *wxliteDemo) GetOpenid() (*pingpp.Openid, error) {

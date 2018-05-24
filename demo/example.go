@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/pingplusplus/pingpp-go/demo/charge"
+	"github.com/pingplusplus/pingpp-go/demo/wxlite"
 	"github.com/pingplusplus/pingpp-go/pingpp"
 )
 
@@ -63,7 +63,7 @@ func main() {
 	// demo.Use(batch_withdraw.Demo)
 	// demo.Use(card.Demo)
 	// demo.Use(channel.Demo)
-	demo.Use(charge.Demo)
+	// demo.Use(charge.Demo)
 	// demo.Use(coupon.Demo)
 	// demo.Use(coupon.TmplDemo)
 	// demo.Use(customer.Demo)
@@ -86,6 +86,7 @@ func main() {
 	// demo.Use(verify.Demo)
 	// demo.Use(withdrawal.Demo)
 	// demo.Use(agreement.Demo)
+	demo.Use(wxlite.Demo)
 
 	// demo.Use(webhookDemo) //http server只能单独测试，别Use其他demo
 	// demo.Use(payServerDemo) //http server只能单独测试，别Use其他demo
