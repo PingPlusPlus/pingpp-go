@@ -1,4 +1,4 @@
-package app
+package agreement
 
 import (
 	"fmt"
