@@ -410,6 +410,11 @@ type (
 		Metadata map[string]interface{} `json:"metadata"`
 	}
 
+	AgreementList struct {
+		ListMeta
+		Values []*Agreement `json:"data"`
+	}
+
 	// OpenidParams 对象包含了查询小程序 openid 信息
 	OpenidParams struct {
 		AppID     string `json:"app_id"`     // 微信小程序应用唯一标识

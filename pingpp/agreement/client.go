@@ -63,19 +63,19 @@ func (c Client) Get(agreementID string) (*pingpp.Agreement, error) {
 // @param status string
 // @param params PagingParams
 // @return AgreementList
-func List(app, status string, params *pingpp.PagingParams) ([]pingpp.Agreement, error) {
+func List(app, status string, params *pingpp.PagingParams) (*pingpp.AgreementList, error) {
 	return getC().List(app, status, params)
 }
 
 // List 查询签约对象列表
-func (c Client) List(app, status string, params *pingpp.PagingParams) ([]pingpp.Agreement, error) {
+func (c Client) List(app, status string, params *pingpp.PagingParams) (*pingpp.AgreementList, error) {
 	body := &url.Values{}
 	params.Filters.AppendTo(body)
 	body.Add("app", app)
 	if status != "" && status != "*" {
 		body.Add("status", status)
 	}
-	agreements := []pingpp.Agreement{}
+	agreements := &pingpp.AgreementList{}
 	err := c.B.Call("GET", "/agreements", c.Key, body, nil, &agreements)
 	return agreements, err
 }

@@ -46,7 +46,7 @@ func (c *AgreementDemo) Get() (*pingpp.Agreement, error) {
 }
 
 // List 查询签约对象列表
-func (c *AgreementDemo) List() ([]pingpp.Agreement, error) {
+func (c *AgreementDemo) List() (*pingpp.AgreementList, error) {
 	params := &pingpp.PagingParams{}
 	params.Filters.AddFilter("per_page", "", "3")
 	return agreement.List(c.demoAppID, "*", params)
@@ -57,7 +57,7 @@ func (c *AgreementDemo) Update() (*pingpp.Agreement, error) {
 	params := &pingpp.AgreementUpdateParams{
 		Status: "canceled",
 	}
-	return agreement.Update(c.demoAgreementID, *params)
+	return agreement.Update(c.demoAgreementID, params)
 }
 
 // Run 运行
