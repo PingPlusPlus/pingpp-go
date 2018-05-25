@@ -396,8 +396,8 @@ type (
 		Credential map[string]interface{} `json:"credential"`
 		// Status 签约状态 (created:待签约 ,succeeded:签约成功, canceled:已解约 )
 		Status string `json:"status"`
-		// TimeSucceed 签约成功时间，用 Unix 时间戳表示。
-		TimeSucceed int `json:"time_succeeded"`
+		// TimeSucceeded 签约成功时间，用 Unix 时间戳表示。
+		TimeSucceeded int `json:"time_succeeded"`
 		// TimeCanceled 解约成功时间,用 Unix 时间戳表示。
 		TimeCanceled int `json:"time_canceled"`
 		// FailureCode 签约错误码，详见 错误 中的错误码描述。
