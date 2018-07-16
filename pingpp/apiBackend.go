@@ -103,73 +103,76 @@ func (s *ApiBackend) Do(req *http.Request, v interface{}) error {
 	}
 	retryTimes := 1
 	start := time.Now()
-retry:
-	res, err := s.HTTPClient.Do(req)
 
-	if LogLevel > 0 {
-		log.Printf("Request to pingpp completed in %v\n", time.Since(start))
-	}
-
+	reqBody, err := ioutil.ReadAll(req.Body)
 	if err != nil {
-		if LogLevel > 0 {
-			log.Printf("Request to Pingpp failed: %v\n", err)
-		}
 		return err
 	}
-	defer res.Body.Close()
-	if res.StatusCode == 502 && retryTimes >= 1 {
-		retryTimes = retryTimes - 1
-		goto retry
-	}
-
-	resBody, err := ioutil.ReadAll(res.Body)
-	if err != nil {
+	for i := 0; i <= retryTimes; i++ {
+		req.Body = ioutil.NopCloser(bytes.NewBuffer(reqBody))
+		res, err := s.HTTPClient.Do(req)
 		if LogLevel > 0 {
-			log.Printf("Cannot parse Pingpp response: %v\n", err)
+			log.Printf("Request to pingpp completed in %v\n", time.Since(start))
 		}
-		return err
-	}
-
-	if res.StatusCode >= 400 {
-		var errMap map[string]interface{}
-		JsonDecode(resBody, &errMap)
-
-		if e, ok := errMap["error"]; !ok {
-			err := errors.New(string(resBody))
+		if err != nil {
 			if LogLevel > 0 {
-				log.Printf("Unparsable error returned from Pingpp: %v\n", err)
-			}
-			return err
-		} else {
-			root := e.(map[string]interface{})
-			err := &Error{
-				Type:           ErrorType(root["type"].(string)),
-				Msg:            root["message"].(string),
-				HTTPStatusCode: res.StatusCode,
-			}
-
-			if code, found := root["code"]; found {
-				err.Code = ErrorCode(code.(string))
-			}
-
-			if param, found := root["param"]; found {
-				err.Param = param.(string)
-			}
-
-			if LogLevel > 0 {
-				log.Printf("Error encountered from Pingpp: %v\n", err)
+				log.Printf("Request to Pingpp failed: %v\n", err)
 			}
 			return err
 		}
-	}
+		defer res.Body.Close()
+		if res.StatusCode == 502 {
+			continue
+		}
 
-	if LogLevel > 2 {
-		log.Printf("resBody from pingpp API: \n%v\n", string(resBody))
-	}
+		resBody, err := ioutil.ReadAll(res.Body)
+		if err != nil {
+			if LogLevel > 0 {
+				log.Printf("Cannot parse Pingpp response: %v\n", err)
+			}
+			return err
+		}
 
-	if v != nil {
-		return JsonDecode(resBody, v)
-	}
+		if res.StatusCode >= 400 {
+			var errMap map[string]interface{}
+			JsonDecode(resBody, &errMap)
 
+			if e, ok := errMap["error"]; !ok {
+				err := errors.New(string(resBody))
+				if LogLevel > 0 {
+					log.Printf("Unparsable error returned from Pingpp: %v\n", err)
+				}
+				return err
+			} else {
+				root := e.(map[string]interface{})
+				err := &Error{
+					Type:           ErrorType(root["type"].(string)),
+					Msg:            root["message"].(string),
+					HTTPStatusCode: res.StatusCode,
+				}
+
+				if code, found := root["code"]; found {
+					err.Code = ErrorCode(code.(string))
+				}
+
+				if param, found := root["param"]; found {
+					err.Param = param.(string)
+				}
+
+				if LogLevel > 0 {
+					log.Printf("Error encountered from Pingpp: %v\n", err)
+				}
+				return err
+			}
+		}
+
+		if LogLevel > 2 {
+			log.Printf("resBody from pingpp API: \n%v\n", string(resBody))
+		}
+
+		if v != nil {
+			return JsonDecode(resBody, v)
+		}
+	}
 	return nil
 }
