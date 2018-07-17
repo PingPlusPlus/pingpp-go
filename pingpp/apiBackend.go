@@ -108,6 +108,7 @@ func (s *ApiBackend) Do(req *http.Request, v interface{}) error {
 	if err != nil {
 		return err
 	}
+
 	for i := 0; i <= retryTimes; i++ {
 		req.Body = ioutil.NopCloser(bytes.NewBuffer(reqBody))
 		res, err := s.HTTPClient.Do(req)
@@ -173,6 +174,7 @@ func (s *ApiBackend) Do(req *http.Request, v interface{}) error {
 		if v != nil {
 			return JsonDecode(resBody, v)
 		}
+		return nil
 	}
 	return nil
 }
