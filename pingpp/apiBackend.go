@@ -104,9 +104,13 @@ func (s *ApiBackend) Do(req *http.Request, v interface{}) error {
 	retryTimes := 1
 	start := time.Now()
 
-	reqBody, err := ioutil.ReadAll(req.Body)
-	if err != nil {
-		return err
+	var reqBody []byte
+	var err error
+	if req.Body != nil {
+		reqBody, err = ioutil.ReadAll(req.Body)
+		if err != nil {
+			return err
+		}
 	}
 
 	for i := 0; i <= retryTimes; i++ {
