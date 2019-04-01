@@ -39,19 +39,19 @@ type Wx_pub struct {
 }
 
 /**
- * 用于获取授权 code 的 URL 地址，此地址用于用户身份鉴权，获取用户身份信息，同时重定向到 $redirect_url
+ * 用于获取授权 code 的 URL 地址，此地址用于用户身份鉴权，获取用户身份信息，同时重定向到 $redirect_uri
  * @param $app_id 微信公众号应用唯一标识
- * @param $redirect_url 授权后重定向的回调链接地址，重定向后此地址将带有授权code参数，
+ * @param $redirect_uri 授权后重定向的回调链接地址，重定向后此地址将带有授权code参数，
  *                      该地址的域名需在微信公众号平台上进行设置，
  *                      步骤为：登陆微信公众号平台 => 开发者中心 => 网页授权获取用户基本信息 => 修改
  * @param bool $more_info FALSE 不弹出授权页面,直接跳转,这个只能拿到用户 openid
  *                        TRUE 弹出授权页面,这个可以通过 openid 拿到昵称、性别、所在地，
  * @return string 用于获取授权 code 的 URL 地址
  */
-func CreateOauthUrlForCode(app_id string, redirect_url string, more_info bool) (request_url string) {
+func CreateOauthUrlForCode(app_id string, redirect_uri string, more_info bool) (request_url string) {
 	body := url.Values{}
 	body.Add("appid", app_id)
-	body.Add("redirect_url", redirect_url)
+	body.Add("redirect_uri", redirect_uri)
 	body.Add("response_type", "code")
 	if more_info == true {
 		body.Add("scope", "snsapi_userinfo")
