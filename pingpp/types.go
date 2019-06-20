@@ -1,4 +1,4 @@
-// ping++ golang sdk 数据类型定义
+// Package pingpp ping++ golang sdk 数据类型定义
 // types涵盖了以下数据格式
 //    1.支付订单对象Charge;
 //    2.订单退款对象Refund;
@@ -7,23 +7,24 @@
 //    5.应用内快捷支付对象Card/Customer/Token;
 package pingpp
 
-//应用信息数据类型
+// App 应用信息数据类型
 type App struct {
 	Id string `json:"id"`
 }
 
+// Data 数据对象
 type Data struct {
 	Object map[string]interface{} `json:"object"`
 }
 
-// 数据列表元数据类型
+// ListMeta 数据列表元数据类型
 type ListMeta struct {
 	Object string `json:"object"`
 	More   bool   `json:"has_more"`
 	URL    string `json:"url"`
 }
 
-//删除接口返回值
+// DeleteResult 删除接口返回值
 type DeleteResult struct {
 	Deleted bool   `json:"deleted"`
 	ID      string `json:"id"`
@@ -31,7 +32,7 @@ type DeleteResult struct {
 
 /*支付相关数据类型*/
 type (
-	// 支付请求数据类型
+	// ChargeParams 支付请求数据类型
 	ChargeParams struct {
 		Order_no    string                 `json:"order_no"`
 		App         App                    `json:"app"`
@@ -46,13 +47,13 @@ type (
 		Time_expire int64                  `json:"time_expire,omitempty"`
 		Description string                 `json:"description,omitempty"`
 	}
-	// Charge列表查询请求 数据类型
+	// ChargeListParams 列表查询请求 数据类型
 	ChargeListParams struct {
 		ListParams
 		Created int64
 	}
 
-	// Charge数据类型
+	// Charge 数据类型
 	Charge struct {
 		ID              string                 `json:"id"`
 		Object          string                 `json:"object"`
@@ -84,7 +85,7 @@ type (
 		Description     string                 `json:"description"`
 	}
 
-	// Charge列表数据类型
+	// ChargeList 列表数据类型
 	ChargeList struct {
 		ListMeta
 		Values []*Charge `json:"data"`
@@ -93,7 +94,7 @@ type (
 
 /*退款数据类型*/
 type (
-	// 退款请求数据类型
+	// RefundParams 退款请求数据类型
 	RefundParams struct {
 		Amount         uint64                 `json:"amount,omitempty"`
 		Description    string                 `json:"description"`
@@ -101,13 +102,13 @@ type (
 		Funding_source string                 `json:"funding_source,omitempty"`
 	}
 
-	// 退款查询请求的数据类型
+	// RefundListParams 退款查询请求的数据类型
 	RefundListParams struct {
 		ListParams
 		Charge string
 	}
 
-	// 付款退款数据类型
+	// Refund 付款退款数据类型
 	Refund struct {
 		ID              string                 `json:"id"`
 		Object          string                 `json:"object"`
@@ -127,7 +128,7 @@ type (
 		Funding_source  string                 `json:"funding_source,omitempty"`
 		Extra           map[string]interface{} `json:"extra"`
 	}
-	// 付款查询结果列表数据类型
+	// RefundList 付款查询结果列表数据类型
 	RefundList struct {
 		ListMeta
 		Values []*Refund `json:"data"`
@@ -136,7 +137,7 @@ type (
 
 /*红包请求数据类型*/
 type (
-	// 红包请求的数据类型
+	// RedEnvelopeParams 红包请求的数据类型
 	RedEnvelopeParams struct {
 		App         App                    `json:"app"`
 		Channel     string                 `json:"channel"`
@@ -155,7 +156,7 @@ type (
 		Created int64
 	}
 
-	// 红包数据类型
+	// RedEnvelope 红包数据类型
 	RedEnvelope struct {
 		Id             string                 `json:"id"`
 		Object         string                 `json:"object"`
@@ -180,7 +181,7 @@ type (
 		Metadata       map[string]interface{} `json:"metadata"`
 	}
 
-	// 红包查询结果列表数据类型
+	// RedEnvelopeList 红包查询结果列表数据类型
 	RedEnvelopeList struct {
 		ListMeta
 		Values []*RedEnvelope `json:"data"`
@@ -189,7 +190,7 @@ type (
 
 /*企业转账*/
 type (
-	// 企业转账请求数据类型
+	// TransferParams 企业转账请求数据类型
 	TransferParams struct {
 		App         App                    `json:"app"`
 		Channel     string                 `json:"channel"`
@@ -203,13 +204,13 @@ type (
 		Metadata    map[string]interface{} `json:"metadata,omitempty"`
 	}
 
-	//企业转账列表查询数据类型
+	// TransferListParams 企业转账列表查询数据类型
 	TransferListParams struct {
 		ListParams
 		Created int64
 	}
 
-	// 企业转账数据类型
+	// Transfer 企业转账数据类型
 	Transfer struct {
 		Id              string                 `json:"id"`
 		Object          string                 `json:"object"`
@@ -232,7 +233,7 @@ type (
 		Extra           map[string]interface{} `json:"extra"`
 		Metadata        map[string]interface{} `json:"metadata"`
 	}
-	// 企业转账列表数据类型
+	// TransferList 企业转账列表数据类型
 	TransferList struct {
 		ListMeta
 		Values []*Transfer `json:"data"`
@@ -242,7 +243,7 @@ type (
 /*应用内快捷支付相关数据类型*/
 type (
 
-	//创建顾客的请求参数
+	// CustomerParams 创建顾客的请求参数
 	CustomerParams struct {
 		App         string                 `json:"app"`
 		Source      interface{}            `json:"source"`
@@ -252,7 +253,7 @@ type (
 		Metadata    map[string]interface{} `json:"metadata,omitempty"`
 	}
 
-	//更新顾客信息的请求参数
+	// CustomerUpdateParams 更新顾客信息的请求参数
 	CustomerUpdateParams struct {
 		Description    string                 `json:"description,omitempty"`
 		Email          string                 `json:"email,omitempty"`
@@ -260,19 +261,19 @@ type (
 		Default_source string                 `json:"default_source,omitempty"`
 	}
 
-	//查询顾客的请求参数
+	// CustomerListParams 查询顾客的请求参数
 	CustomerListParams struct {
 		ListParams
 		Created int64
 	}
 
-	//顾客列表数据类型
+	// CustomerList 顾客列表数据类型
 	CustomerList struct {
 		ListMeta
 		Values []*Customer `json:"data"`
 	}
 
-	//顾客信息数据类型
+	// Customer 顾客信息数据类型
 	Customer struct {
 		ID             string                 `json:"id"`
 		Object         string                 `json:"object"`
@@ -288,25 +289,25 @@ type (
 		Default_source string                 `json:"default_source"`
 	}
 
-	//创建 Card 对象的请求参数
+	// CardParams 创建 Card 对象的请求参数
 	CardParams struct {
 		Source   interface{}            `json:"source"`
 		Sms_code map[string]interface{} `json:"sms_code"`
 	}
 
-	//查询 Card 对象的请求参数
+	// CardListParams 查询 Card 对象的请求参数
 	CardListParams struct {
 		ListParams
 		Created int64
 	}
 
-	//Card 对象列表数据类型
+	// CardList Card 对象列表数据类型
 	CardList struct {
 		ListMeta
 		Values []*Card `json:"data"`
 	}
 
-	//Card 对象数据类型
+	// Card 对象数据类型
 	Card struct {
 		ID       string `json:"id"`
 		Object   string `json:"object"`
@@ -334,7 +335,7 @@ type (
 		SupportChannels []string `json:"support_channels"` // 支持的出款渠道名称列表。可能包含的值有 "unionpay"、"unionpay_gz"、"allinpay"、"jdpay"
 	}
 
-	//查询 Token 对象的请求参数
+	// TokenParams 查询 Token 对象的请求参数
 	TokenParams struct {
 		Order_no string `json:"order_no"`
 		Amount   uint64 `json:"amount"`
@@ -343,7 +344,7 @@ type (
 		Card interface{} `json:"card"`
 	}
 
-	//Token 对象包含card信息
+	// Token 对象包含card信息
 	Token struct {
 		ID        string `json:"id"`
 		Object    string `json:"object"`
@@ -436,7 +437,7 @@ type (
 /*webhooks 相关数据类型*/
 type (
 
-	// webhooks 反馈数据类型
+	// Event webhooks 反馈数据类型
 	Event struct {
 		Id               string `json:"id"`
 		Created          int64  `json:"created"`
@@ -448,7 +449,7 @@ type (
 		Request          string `json:"request"`
 	}
 
-	//webhooks 汇总数据
+	// Summary webhooks 汇总数据
 	Summary struct {
 		Acct_id           string `json:"acct_id,omitempty"`
 		App_id            string `json:"app_id,omitempty"`
@@ -668,13 +669,13 @@ type (
 		ForceCheck   bool   `json:"force_check,omitempty"`
 	}
 
-	//结算账户列表
+	// SettleAccountList 结算账户列表
 	SettleAccountList struct {
 		ListMeta
 		Values []*SettleAccount `json:"data"`
 	}
 
-	//用户列表
+	// UserList 用户列表
 	UserList struct {
 		ListMeta
 		Values []*User `json:"data"`
@@ -712,7 +713,7 @@ type (
 		ParentApp   string                 `json:"parent_app,omitempty"`
 	}
 
-	//只商户列表
+	// SubAppList 商户列表
 	SubAppList struct {
 		ListMeta
 		Values []*SubApp `json:"data"`
@@ -786,7 +787,7 @@ type (
 		Metadata map[string]interface{} `json:"metadata,omitempty"`
 	}
 
-	//优惠券模板列表
+	// CouponTmplList 优惠券模板列表
 	CouponTmplList struct {
 		ListMeta
 		Values []*CouponTmpl `json:"data"`
@@ -826,7 +827,7 @@ type (
 		Metadata map[string]interface{} `json:"metadata"`
 	}
 
-	//优惠券列表
+	// CouponList 优惠券列表
 	CouponList struct {
 		ListMeta
 		Values []*Coupon `json:"data"`
@@ -835,7 +836,7 @@ type (
 
 //Order相关的数据结构
 type (
-	// 创建Order请求数据类型
+	// OrderCreateParams 创建Order请求数据类型
 	OrderCreateParams struct {
 		App               string                 `json:"app"`
 		Uid               string                 `json:"uid,omitempty"`
@@ -855,12 +856,12 @@ type (
 		RoyaltyUsers      []RoyaltyUser          `json:"royalty_users,omitempty"`
 		RoyaltyTemplate   string                 `json:"royalty_template,omitempty"`
 	}
-	//分润用户
+	// RoyaltyUser 分润用户
 	RoyaltyUser struct {
 		User   string `json:"user"`
 		Amount int    `json:"amount"`
 	}
-	//订单支付请求参数
+	// OrderPayParams 订单支付请求参数
 	OrderPayParams struct {
 		Charge_amount   *int64                 `json:"charge_amount,omitempty"`
 		Channel         string                 `json:"channel,omitempty"`
@@ -869,7 +870,7 @@ type (
 		Charge_order_no string                 `json:"charge_order_no,omitempty"`
 	}
 
-	// Order数据类型
+	// Order 数据类型
 	Order struct {
 		ID                string                 `json:"id"`
 		Object            string                 `json:"object"`
@@ -904,13 +905,13 @@ type (
 		Metadata          map[string]interface{} `json:"metadata"`
 	}
 
-	// Order列表数据类型
+	// OrderList Order 列表数据类型
 	OrderList struct {
 		ListMeta
 		Values []*Order `json:"data"`
 	}
 
-	// Recharge数据类型
+	// Recharge 数据类型
 	Recharge struct {
 		ID                 string                 `json:"id"`
 		Object             string                 `json:"object"`
@@ -926,18 +927,18 @@ type (
 		UserFee            int                    `json:"user_fee"`
 		Charge             Charge                 `json:"charge"`
 		BalanceBonus       BalanceBonus           `json:"balance_bonus"`
-		BalanceTransaction BalanceTransaction     `json:"balance_transaction"`
+		BalanceTransaction string                 `json:"balance_transaction"`
 		Description        string                 `json:"description"`
 		Metadata           map[string]interface{} `json:"metadata"`
 	}
 
-	// Recharge列表数据类型
+	// RechargeList Recharge 列表数据类型
 	RechargeList struct {
 		ListMeta
 		Values []*Recharge `json:"data"`
 	}
 
-	// 充值退款请求参数
+	// RechargeRefundParams 充值退款请求参数
 	RechargeRefundParams struct {
 		Description    string                 `json:"description,omitempty"`
 		Metadata       map[string]interface{} `json:"metadata,omitempty"`
@@ -946,7 +947,7 @@ type (
 )
 
 type (
-	//订单退款请求参数
+	// OrderRefundParams 订单退款请求参数
 	OrderRefundParams struct {
 		Charge         string                 `json:"charge,omitempty"`
 		Charge_amount  *int64                 `json:"charge_amount,omitempty"`
@@ -956,12 +957,12 @@ type (
 		Funding_source string                 `json:"funding_source,omitempty"`
 		RoyaltyUsers   []RoyaltyRefundUser    `json:"royalty_users,omitempty"`
 	}
-	//分润用户
+	// RoyaltyRefundUser 分润用户
 	RoyaltyRefundUser struct {
 		User   string `json:"user"`
 		Amount int    `json:"amount_refunded"`
 	}
-	//订单退款对象
+	// OrderRefund 订单退款对象
 	OrderRefund struct {
 		ID                  string                 `json:"id"`
 		Object              string                 `json:"object"`
@@ -984,7 +985,7 @@ type (
 		Extra               map[string]interface{} `json:"extra"`
 		Refund_mode         string                 `json:"refund_mode"`
 	}
-	//订单退款列表
+	// OrderRefundList 订单退款列表
 	OrderRefundList struct {
 		ListMeta
 		Values []*OrderRefund `json:"data"`
@@ -1021,7 +1022,7 @@ type (
 		Description string                 `json:"description,omitempty"`
 		Metadata    map[string]interface{} `json:"metadata,omitempty"`
 	}
-	// 分润列表数据类型
+	// RoyaltyList 分润列表数据类型
 	RoyaltyList struct {
 		ListMeta
 		Values []*Royalty `json:"data"`
@@ -1393,5 +1394,145 @@ type (
 	BatchWithdrawalList struct {
 		ListMeta
 		Values []*BatchWithdrawal `json:"data"`
+	}
+)
+
+// splitProfit 分账
+type (
+
+	// SplitProfit 分账（split_profit）对象说明
+	SplitProfit struct {
+		ID            string                 `json:"id"`             // split_profit 对象 ID，由 Ping++ 生成。
+		Object        string                 `json:"object"`         // 值为 `split_profit`。
+		Livemode      bool                   `json:"livemode"`       // 是否是 live 模式。
+		App           string                 `json:"app"`            // App ID。
+		Charge        string                 `json:"charge"`         // Ping++ 交易成功的 charge ID
+		Channel       string                 `json:"channel"`        // 分账使用的第三方支付渠道(暂时只支持微信境内支付渠道)。
+		OrderNo       string                 `json:"order_no"`       // 分账商户订单号
+		Type          string                 `json:"type"`           // 分账类型: `split_normal` 为普通分账,`split_return` 为完结分账
+		Recipients    []SplitProfitRecipient `json:"recipients"`     // 分账接收方列表,详细请参见 [分账接收列表（recipients）说明](#分账接收列表（recipients）说明)
+		Created       int                    `json:"created"`        // 创建时间，用 Unix 时间戳表示。
+		TransactionNo string                 `json:"transaction_no"` // 分账渠道流水号
+		FailureCode   string                 `json:"failure_code"`   // 错误码
+		FailureMsg    string                 `json:"failure_msg"`    // 错误信息
+		Extra         map[string]interface{} `json:"extra"`          // 渠道额外请求参数信息
+		Metadata      map[string]interface{} `json:"metadata"`       // metadata 元数据。
+	}
+
+	// SplitProfitList 分账列表
+	SplitProfitList struct {
+		ListMeta
+		Values []*SplitProfit `json:"data"`
+	}
+
+	// SplitProfitRecipient 分账接收列表（recipients）说明
+	SplitProfitRecipient struct {
+		SplitReceiver string `json:"split_receiver"` // 分账接收方ID
+		Amount        int    `json:"amount"`         // 分账金额
+		Currency      string `json:"currency"`       // 货币币种
+		Name          string `json:"name"`           // 分账接收方姓名，如果商家传递该字段则 Pingxx 需校验 name 与 split_receiver 是否对应
+		Description   string `json:"description"`    // 分账描述
+		Status        string `json:"status"`         // 分账单状态，`pending`:待分账、`succeeded`:分账成功 、`adjust`:分账失败待调账 、`returned`:已转回分账方、`closed`:已关闭、`failed`:分账失败
+		TimeFinished  int    `json:"time_finished"`  // 分账完成时间
+	}
+
+	// SplitProfitRecipientParams 分账接收列表请求参数（recipients）说明
+	SplitProfitRecipientParams struct {
+		SplitReceiver string `json:"split_receiver"` // 19,-,无,分账接收方ID,type 为`split_normal` 时必须填写;`type` 为`split_return` 时不支持该参数
+		Amount        int    `json:"amount"`         // -,required,无,分账金额
+		Name          string `json:"name,omitempty"` // [1~1024],optional,无,分账接收方姓名，如果商家传递该字段则 Pingxx 需校验 name 与 split_receiver 是否对应,type 为`split_normal` 时必须填写;`type` 为`split_return` 时不支持该参数
+		Description   string `json:"description"`    // [1~80],required,无,分账描述（不支持特殊字符 `&` ）
+	}
+
+	// SplitProfitParams 请求创建分账参数
+	SplitProfitParams struct {
+		App        string                       `json:"app"`                // 20,required,无,App ID。
+		Charge     string                       `json:"charge"`             // 27,required,无,Ping++ 交易成功的 charge ID
+		OrderNo    string                       `json:"order_no"`           // [1~64],required,无,分账单号，由商家自行生成，规则参照微信分账参数规则
+		Type       string                       `json:"type"`               // -,required,无,分账类型: `split_normal` 为普通分账,`split_return` 为完结分账
+		Recipients []SplitProfitRecipientParams `json:"recipients"`         // -,required,无,分账接收列表，类型为数组。每一个元素的具体规则参考分账接收列表请求参数（recipients）说明。
+		Metadata   map[string]interface{}       `json:"metadata,omitempty"` // -,optional,无,元数据
+	}
+)
+
+// splitTransaction 分账明细
+type (
+
+	// ProfitTransaction 分账明细 profit_transaction
+	ProfitTransaction struct {
+		ID            string `json:"id"`             // profit_transaction 对象 ID，由 Ping++ 生成。
+		Object        string `json:"object"`         // 值为 `profit_transaction`。
+		Livemode      bool   `json:"livemode"`       // 是否是 live 模式。
+		App           string `json:"app"`            // App ID。
+		Amount        int    `json:"amount"`         // 分账金额
+		Currency      string `json:"currency"`       // 货币币种
+		Name          string `json:"name"`           // 分账接收方名称
+		Status        string `json:"status"`         // 分账明细状态
+		Description   string `json:"description"`    // 分账描述信息
+		SplitReceiver string `json:"split_receiver"` // 分账接收方ID
+		SplitProfit   string `json:"split_profit"`   // 分账对象ID
+		Created       int    `json:"created"`        // 创建时间，用 Unix 时间戳表示。
+		TimeFinished  *int   `json:"time_finished"`  // 分账成功结束时间
+		FailureMsg    string `json:"failure_msg"`    // 错误信息
+	}
+
+	// ProfitTransactionList 分账明细列表
+	ProfitTransactionList struct {
+		ListMeta
+		Values []*ProfitTransaction `json:"data"`
+	}
+)
+
+// splitReceiver 分账接收方
+type (
+
+	// SplitReceiver 分账接收方（`split_receiver`）对象说明
+	SplitReceiver struct {
+		ID       string                 `json:"id"`       // split_receiver 对象 ID，由 Ping++ 生成。
+		Object   string                 `json:"object"`   // 值为 `split_receiver`。
+		Created  int                    `json:"created"`  // 创建时间，用 Unix 时间戳表示。
+		Livemode bool                   `json:"livemode"` // 是否是 live 模式。
+		App      string                 `json:"app"`      // App ID。
+		Channel  string                 `json:"channel"`  // 添加分账接收方使用的第三方支付渠道(暂时只支持微信境内支付渠道)。
+		Type     string                 `json:"type"`     // 分账接收方类型
+		Account  string                 `json:"account"`  // 分账接收方帐号
+		Name     string                 `json:"name"`     // 分账接收方全称
+		Extra    map[string]interface{} `json:"extra"`    // 渠道额外请求参数信息
+		Metadata map[string]interface{} `json:"metadata"` // metadata 元数据。
+	}
+
+	// SplitReceiverList 分账接收方列表
+	SplitReceiverList struct {
+		ListMeta
+		Values []*SplitReceiver `json:"data"`
+	}
+
+	// SplitReceiverParams 添加分账接收方参数
+	SplitReceiverParams struct {
+		App      string                 `json:"app"`                // 20,required,无,App ID。
+		Type     string                 `json:"type"`               // [1~32],required,无,分账接收方类型
+		Account  string                 `json:"account"`            // [1~64],required,无,分账接收方帐号
+		Name     string                 `json:"name,omitempty"`     // [1~1024],optional,无,分账接收方全称:type=MERCHANT_ID 时，是商户全称（必传）,type=PERSONAL_WECHATID 时，是个人姓名（必传）,type=PERSONAL_OPENID 时，是个人姓名（选传，传则校验）,type=PERSONAL_SUB_OPENID 时，是个人姓名（选传，传则校验）
+		Channel  string                 `json:"channel"`            // [`wx`、`wx_lite`、`wx_pub`、`wx_wap`、`wx_pub_qr`、`wx_pub_scan`],required,无,暂时只支持微信渠道
+		Metadata map[string]interface{} `json:"metadata,omitempty"` // -,optional,无,metadata 元数据。
+	}
+)
+
+// subBank 开户支行
+type (
+
+	// SubBank 开户支行
+	SubBank struct {
+		Object      string `json:"object"`        // 值为 `sub_bank`。
+		SubBank     string `json:"sub_bank"`      // 开户支行名称
+		SubBankCode string `json:"sub_bank_code"` // 开户支付行号
+		Prov        string `json:"prov"`          // 省份
+		City        string `json:"city"`          // 城市
+	}
+
+	// SubBankList 开户支行列表
+	SubBankList struct {
+		ListMeta
+		Values []*SubBank `json:"data"`
 	}
 )
