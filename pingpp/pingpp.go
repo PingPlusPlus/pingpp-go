@@ -14,7 +14,7 @@ const (
 	// 当前版本的api地址
 	apiBase = "https://api.pingxx.com/v1"
 	// 当前版本的api生成生成时间
-	apiVersion = "2017-06-30"
+	apiVersion = "2022-02-22"
 	// httpclient等待时间
 	defaultHTTPTimeout                  = 80 * time.Second
 	TotalBackends                       = 1
@@ -50,7 +50,7 @@ type Backend interface {
 
 // 获取当前sdk的版本
 func Version() string {
-	return "3.2.1"
+	return "3.2.5"
 }
 
 /*2016-02-16 当前情况下没有代码调用了该函数

@@ -870,6 +870,23 @@ type (
 		Charge_order_no string                 `json:"charge_order_no,omitempty"`
 	}
 
+	//OrderUpdateParams 取消/更新 Order 对象参数
+	OrderUpdateParams struct {
+		Status            string                 `json:"status,omitempty"`
+		User              string                 `json:"user,omitempty"`
+		Amount            *int64                 `json:"amount,omitempty"`
+		Subject           string                 `json:"subject,omitempty"`
+		Body              string                 `json:"body,omitempty"`
+		Description       string                 `json:"description,omitempty"`
+		TimeExpire        int64                  `json:"time_expire,omitempty"`
+		Metadata          map[string]interface{} `json:"metadata,omitempty"`
+		ReceiptApp        string                 `json:"receipt_app,omitempty"`
+		ServiceApp        string                 `json:"service_app,omitempty"`
+		RoyaltyUsers      []RoyaltyUser          `json:"royalty_users,omitempty"`
+		RoyaltyTemplate   string                 `json:"royalty_template,omitempty"`
+		BalanceSettlement map[string]interface{} `json:"extra,omitempty"`
+	}
+
 	// Order 数据类型
 	Order struct {
 		ID                string                 `json:"id"`
