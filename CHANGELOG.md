@@ -3,6 +3,7 @@
 **新增**
 
 1. 取消/更新 Order
+2. 修复 `Transfer` 结构体 `time_transferred` 参数拼写问题
 
 ---
 

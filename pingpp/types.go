@@ -216,7 +216,7 @@ type (
 		Object          string                 `json:"object"`
 		Type            string                 `json:"type"`
 		Created         int64                  `json:"created"`
-		Time_transfered int64                  `json:"time_transfered"`
+		Time_transfered int64                  `json:"time_transferred"`
 		Livemode        bool                   `json:"livemode"`
 		Status          string                 `json:"status"`
 		App             string                 `json:"app"`
