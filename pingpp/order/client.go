@@ -124,6 +124,28 @@ func (c Client) ChargeList(orderID string, params *pingpp.PagingParams) (*pingpp
 	return chargeList, err
 }
 
+func Update(id string, params *pingpp.OrderUpdateParams) (*pingpp.Order, error) {
+	return getC().Update(id, params)
+}
+
+// Update 取消/更新 Order 对象
+func (c Client) Update(id string, params *pingpp.OrderUpdateParams) (*pingpp.Order, error) {
+	paramsString, errs := pingpp.JsonEncode(params)
+	if errs != nil {
+		if pingpp.LogLevel > 0 {
+			log.Printf("OrderUpdateParams Marshall Errors is : %q/n", errs)
+		}
+		return nil, errs
+	}
+	if pingpp.LogLevel > 2 {
+		log.Printf("params of update order is :\n %v\n ", string(paramsString))
+	}
+
+	order := &pingpp.Order{}
+	err := c.B.Call("PUT", fmt.Sprintf("/orders/%s", id), c.Key, nil, paramsString, order)
+	return order, err
+}
+
 func getC() Client {
 	return Client{pingpp.GetBackend(pingpp.APIBackend), pingpp.Key}
 }

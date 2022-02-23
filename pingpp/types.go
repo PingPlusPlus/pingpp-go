@@ -216,7 +216,7 @@ type (
 		Object          string                 `json:"object"`
 		Type            string                 `json:"type"`
 		Created         int64                  `json:"created"`
-		Time_transfered int64                  `json:"time_transfered"`
+		Time_transfered int64                  `json:"time_transferred"`
 		Livemode        bool                   `json:"livemode"`
 		Status          string                 `json:"status"`
 		App             string                 `json:"app"`
@@ -868,6 +868,23 @@ type (
 		Extra           map[string]interface{} `json:"extra,omitempty"`
 		TimeExpire      int64                  `json:"time_expire,omitempty"` // 时间戳
 		Charge_order_no string                 `json:"charge_order_no,omitempty"`
+	}
+
+	//OrderUpdateParams 取消/更新 Order 对象参数
+	OrderUpdateParams struct {
+		Status            string                 `json:"status,omitempty"`
+		User              string                 `json:"user,omitempty"`
+		Amount            *int64                 `json:"amount,omitempty"`
+		Subject           string                 `json:"subject,omitempty"`
+		Body              string                 `json:"body,omitempty"`
+		Description       string                 `json:"description,omitempty"`
+		TimeExpire        int64                  `json:"time_expire,omitempty"`
+		Metadata          map[string]interface{} `json:"metadata,omitempty"`
+		ReceiptApp        string                 `json:"receipt_app,omitempty"`
+		ServiceApp        string                 `json:"service_app,omitempty"`
+		RoyaltyUsers      []RoyaltyUser          `json:"royalty_users,omitempty"`
+		RoyaltyTemplate   string                 `json:"royalty_template,omitempty"`
+		BalanceSettlement map[string]interface{} `json:"extra,omitempty"`
 	}
 
 	// Order 数据类型

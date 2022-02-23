@@ -48,7 +48,7 @@ func (c *OrderDemo) New() (*pingpp.Order, error) {
 		App:               "app_1Gqj58ynP0mHeX1q",
 		Uid:               "1477895856250",
 		Merchant_order_no: strconv.Itoa(orderno),
-		Amount:            1,
+		Amount:            20,
 		Currency:          "cny",
 		Client_ip:         "127.0.0.1",
 		Subject:           "Go SDK Subject",
@@ -117,10 +117,20 @@ func (c *OrderDemo) ChargeList() (*pingpp.ChargeList, error) {
 	return order.ChargeList(c.demoOrderID, params)
 }
 
+// Update 商品订单更新
+func (c *OrderDemo) Update() (*pingpp.Order, error) {
+	orderUpdateParams := &pingpp.OrderUpdateParams{
+		Status: "canceled",
+		User:   c.demoUser,
+	}
+	return order.Update(c.demoOrderID, orderUpdateParams)
+}
+
 func (c *OrderDemo) Run() {
 	order, err := c.New()
 	c.demoOrderID = order.ID
 	common.Response(order, err)
+	common.Response(c.Update())
 	common.Response(c.Pay())
 	common.Response(c.Get())
 	common.Response(c.List())
