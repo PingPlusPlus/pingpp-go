@@ -50,7 +50,19 @@ func (c Client) Update(id string) (*pingpp.Transfer, error) {
 	return transfer, err
 }
 
-// Get returns the details of a redenvelope.
+// Reverse Transfer
+func (c Client) Reverse(id string) (*pingpp.Transfer, error) {
+	transfer := &pingpp.Transfer{}
+
+	err := c.B.Call("POST", "/transfers/"+id+"/reverse", c.Key, nil, nil, transfer)
+	return transfer, err
+}
+
+func Reverse(id string) (*pingpp.Transfer, error) {
+	return getC().Reverse(id)
+}
+
+// Get returns the details of a transfer.
 func Get(id string) (*pingpp.Transfer, error) {
 	return getC().Get(id)
 }

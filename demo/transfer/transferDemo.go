@@ -54,8 +54,8 @@ func (c *TransferDemo) Get() (*pingpp.Transfer, error) {
 }
 
 // 取消 Transfer
-func (c *TransferDemo) Update() (*pingpp.Transfer, error) {
-	return transfer.Update("tr_98WLGObXbPKO1avLe5CqH0WH")
+func (c *TransferDemo) Reverse() (*pingpp.Transfer, error) {
+	return transfer.Reverse("tr_130250408515698647040014")
 }
 
 func (c *TransferDemo) List() *transfer.Iter {
@@ -69,6 +69,6 @@ func (c *TransferDemo) List() *transfer.Iter {
 func (c *TransferDemo) Run() {
 	c.New()
 	c.Get()
-	c.Update()
 	c.List()
+	c.Reverse()
 }
